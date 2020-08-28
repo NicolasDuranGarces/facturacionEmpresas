@@ -1,101 +1,79 @@
 package com.eam.IngSoft1.domain;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 
 /**
- * The persistent class for the vendedor database table.
+ * The persistent class for the bodega database table.
  * 
  */
 @Entity
-@NamedQuery(name="Vendedor.findAll", query="SELECT v FROM Vendedor v")
-public class Vendedor implements Serializable {
+@NamedQuery(name="Bodega.findAll", query="SELECT b FROM Bodega b")
+public class Bodega implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int DNI_vendedor;
+	@Column(name="id_bodega")
+	private int idBodega;
 
-	private String apellido;
+	@Column(name="nombre_bodega")
+	private String nombreBodega;
 
-	private String direccion;
+	private String ubicacion;
 
-	private String nombre;
+	//bi-directional many-to-one association to Producto
+	@OneToMany(mappedBy="bodega")
+	private List<Producto> productos;
 
-	private int telefono;
-
-	//bi-directional many-to-one association to Despachopedido
-	@OneToMany(mappedBy="vendedor")
-	private List<Despachopedido> despachopedidos;
-
-	public Vendedor() {
+	public Bodega() {
 	}
 
-	public int getDNI_vendedor() {
-		return this.DNI_vendedor;
+	public int getIdBodega() {
+		return this.idBodega;
 	}
 
-	public void setDNI_vendedor(int DNI_vendedor) {
-		this.DNI_vendedor = DNI_vendedor;
+	public void setIdBodega(int idBodega) {
+		this.idBodega = idBodega;
 	}
 
-	public String getApellido() {
-		return this.apellido;
+	public String getNombreBodega() {
+		return this.nombreBodega;
 	}
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setNombreBodega(String nombreBodega) {
+		this.nombreBodega = nombreBodega;
 	}
 
-	public String getDireccion() {
-		return this.direccion;
+	public String getUbicacion() {
+		return this.ubicacion;
 	}
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+	public void setUbicacion(String ubicacion) {
+		this.ubicacion = ubicacion;
 	}
 
-	public String getNombre() {
-		return this.nombre;
+	public List<Producto> getProductos() {
+		return this.productos;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
 	}
 
-	public int getTelefono() {
-		return this.telefono;
+	public Producto addProducto(Producto producto) {
+		getProductos().add(producto);
+		producto.setBodega(this);
+
+		return producto;
 	}
 
-	public void setTelefono(int telefono) {
-		this.telefono = telefono;
-	}
+	public Producto removeProducto(Producto producto) {
+		getProductos().remove(producto);
+		producto.setBodega(null);
 
-	public List<Despachopedido> getDespachopedidos() {
-		return this.despachopedidos;
-	}
-
-	public void setDespachopedidos(List<Despachopedido> despachopedidos) {
-		this.despachopedidos = despachopedidos;
-	}
-
-	public Despachopedido addDespachopedido(Despachopedido despachopedido) {
-		getDespachopedidos().add(despachopedido);
-		despachopedido.setVendedor(this);
-
-		return despachopedido;
-	}
-
-	public Despachopedido removeDespachopedido(Despachopedido despachopedido) {
-		getDespachopedidos().remove(despachopedido);
-		despachopedido.setVendedor(null);
-
-		return despachopedido;
+		return producto;
 	}
 
 }

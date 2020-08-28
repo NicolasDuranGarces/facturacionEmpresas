@@ -1,5 +1,4 @@
-package modelo;
-
+package com.eam.IngSoft1.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
