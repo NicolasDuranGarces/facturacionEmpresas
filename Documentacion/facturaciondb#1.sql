@@ -64,7 +64,7 @@ CREATE TABLE `cliente` (
 -- Estructura de tabla para la tabla `datallesfactura`
 --
 
-CREATE TABLE `datallesfactura` (
+CREATE TABLE `datallefactura` (
   `id_detalleFactura` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
@@ -119,8 +119,9 @@ CREATE TABLE `producto` (
   `id_producto` int(11) NOT NULL,
   `nombre_producto` varchar(20) NOT NULL,
   `imagen` varchar(100) NOT NULL,
-  `existente` int(11) NOT NULL,
   `valor_unitario` int(11) NOT NULL,
+  `cantidad_actual` int(11) NOT NULL,
+  `minimo_inventario` int(11) NOT NULL,
   `id_categoriaProducto` int(11) NOT NULL,
   `id_bodega` int(11) NOT NULL,
   `id_proveedor` int(11) NOT NULL
