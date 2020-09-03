@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-08-2020 a las 05:10:21
+-- Tiempo de generación: 03-09-2020 a las 17:00:42
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.2.33
 
@@ -101,12 +101,25 @@ CREATE TABLE `factura` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `imagenproducto`
+--
+
+CREATE TABLE `imagenproducto` (
+  `id_imagen` int(11) NOT NULL,
+  `url` varchar(100) NOT NULL,
+  `id_producto` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `producto`
 --
 
 CREATE TABLE `producto` (
   `id_producto` int(11) NOT NULL,
   `nombre_producto` varchar(20) NOT NULL,
+  `imagen` varchar(100) NOT NULL,
   `existente` int(11) NOT NULL,
   `valor_unitario` int(11) NOT NULL,
   `id_categoriaProducto` int(11) NOT NULL,
@@ -187,6 +200,13 @@ ALTER TABLE `factura`
   ADD KEY `factura_detalle` (`id_detalleFactura`);
 
 --
+-- Indices de la tabla `imagenproducto`
+--
+ALTER TABLE `imagenproducto`
+  ADD PRIMARY KEY (`id_imagen`),
+  ADD KEY `imagen_producto` (`id_producto`);
+
+--
 -- Indices de la tabla `producto`
 --
 ALTER TABLE `producto`
@@ -241,6 +261,12 @@ ALTER TABLE `factura`
   MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `imagenproducto`
+--
+ALTER TABLE `imagenproducto`
+  MODIFY `id_imagen` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
@@ -281,6 +307,12 @@ ALTER TABLE `despachopedido`
 ALTER TABLE `factura`
   ADD CONSTRAINT `factura_despacho` FOREIGN KEY (`id_despachoPedido`) REFERENCES `despachopedido` (`id_despachoPedido`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `factura_detalle` FOREIGN KEY (`id_detalleFactura`) REFERENCES `datallesfactura` (`id_detalleFactura`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `imagenproducto`
+--
+ALTER TABLE `imagenproducto`
+  ADD CONSTRAINT `imagen_producto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `producto`
