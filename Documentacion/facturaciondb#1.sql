@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-09-2020 a las 17:00:42
+-- Tiempo de generación: 03-09-2020 a las 17:54:56
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.2.33
 
@@ -41,8 +41,7 @@ CREATE TABLE `bodega` (
 
 CREATE TABLE `categoriaproducto` (
   `id_categoriaProducto` int(11) NOT NULL,
-  `nombre_categoria` varchar(20) NOT NULL,
-  `id_proveedor` int(11) NOT NULL
+  `nombre_categoria` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -123,7 +122,8 @@ CREATE TABLE `producto` (
   `existente` int(11) NOT NULL,
   `valor_unitario` int(11) NOT NULL,
   `id_categoriaProducto` int(11) NOT NULL,
-  `id_bodega` int(11) NOT NULL
+  `id_bodega` int(11) NOT NULL,
+  `id_proveedor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -167,8 +167,7 @@ ALTER TABLE `bodega`
 -- Indices de la tabla `categoriaproducto`
 --
 ALTER TABLE `categoriaproducto`
-  ADD PRIMARY KEY (`id_categoriaProducto`),
-  ADD KEY `categoria_proveedor` (`id_proveedor`);
+  ADD PRIMARY KEY (`id_categoriaProducto`);
 
 --
 -- Indices de la tabla `cliente`
@@ -212,7 +211,8 @@ ALTER TABLE `imagenproducto`
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`id_producto`),
   ADD KEY `producto_categoria` (`id_categoriaProducto`),
-  ADD KEY `producto_bodega` (`id_bodega`);
+  ADD KEY `producto_bodega` (`id_bodega`),
+  ADD KEY `producto_proveedor` (`id_proveedor`);
 
 --
 -- Indices de la tabla `proveedor`
@@ -283,12 +283,6 @@ ALTER TABLE `proveedor`
 --
 
 --
--- Filtros para la tabla `categoriaproducto`
---
-ALTER TABLE `categoriaproducto`
-  ADD CONSTRAINT `categoria_proveedor` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id_proveedor`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `datallesfactura`
 --
 ALTER TABLE `datallesfactura`
@@ -319,7 +313,8 @@ ALTER TABLE `imagenproducto`
 --
 ALTER TABLE `producto`
   ADD CONSTRAINT `producto_bodega` FOREIGN KEY (`id_bodega`) REFERENCES `bodega` (`id_bodega`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `producto_categoria` FOREIGN KEY (`id_categoriaProducto`) REFERENCES `categoriaproducto` (`id_categoriaProducto`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `producto_categoria` FOREIGN KEY (`id_categoriaProducto`) REFERENCES `categoriaproducto` (`id_categoriaProducto`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `producto_proveedor` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id_proveedor`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
