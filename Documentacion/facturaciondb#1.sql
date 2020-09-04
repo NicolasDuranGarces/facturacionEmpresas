@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-09-2020 a las 17:54:56
+-- Tiempo de generación: 04-09-2020 a las 03:16:51
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.2.33
 
@@ -61,19 +61,6 @@ CREATE TABLE `cliente` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `datallesfactura`
---
-
-CREATE TABLE `datallefactura` (
-  `id_detalleFactura` int(11) NOT NULL,
-  `id_producto` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL,
-  `total` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `despachopedido`
 --
 
@@ -87,14 +74,27 @@ CREATE TABLE `despachopedido` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `detallefactura`
+--
+
+CREATE TABLE `detallefactura` (
+  `id_detalleFactura` int(11) NOT NULL,
+  `id_factura` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `cantidadProducto` int(11) NOT NULL,
+  `valorTotal` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `factura`
 --
 
 CREATE TABLE `factura` (
   `id_factura` int(11) NOT NULL,
   `id_despachoPedido` int(11) NOT NULL,
-  `precio_total` int(11) NOT NULL,
-  `id_detalleFactura` int(11) NOT NULL
+  `precio_total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -118,9 +118,8 @@ CREATE TABLE `imagenproducto` (
 CREATE TABLE `producto` (
   `id_producto` int(11) NOT NULL,
   `nombre_producto` varchar(20) NOT NULL,
-  `imagen` varchar(100) NOT NULL,
-  `valor_unitario` int(11) NOT NULL,
   `cantidad_actual` int(11) NOT NULL,
+  `valor_unitario` int(11) NOT NULL,
   `minimo_inventario` int(11) NOT NULL,
   `id_categoriaProducto` int(11) NOT NULL,
   `id_bodega` int(11) NOT NULL,
@@ -177,13 +176,6 @@ ALTER TABLE `cliente`
   ADD PRIMARY KEY (`DNI`);
 
 --
--- Indices de la tabla `datallesfactura`
---
-ALTER TABLE `datallesfactura`
-  ADD PRIMARY KEY (`id_detalleFactura`),
-  ADD KEY `detallesFactura_producto` (`id_producto`);
-
---
 -- Indices de la tabla `despachopedido`
 --
 ALTER TABLE `despachopedido`
@@ -192,12 +184,19 @@ ALTER TABLE `despachopedido`
   ADD KEY `despacho_vendedor` (`DNI_vendedor`);
 
 --
+-- Indices de la tabla `detallefactura`
+--
+ALTER TABLE `detallefactura`
+  ADD PRIMARY KEY (`id_detalleFactura`),
+  ADD KEY `detalle_factura` (`id_factura`),
+  ADD KEY `detalle_producto` (`id_producto`);
+
+--
 -- Indices de la tabla `factura`
 --
 ALTER TABLE `factura`
   ADD PRIMARY KEY (`id_factura`),
-  ADD KEY `factura_despacho` (`id_despachoPedido`),
-  ADD KEY `factura_detalle` (`id_detalleFactura`);
+  ADD KEY `factura_despacho` (`id_despachoPedido`);
 
 --
 -- Indices de la tabla `imagenproducto`
@@ -244,16 +243,16 @@ ALTER TABLE `categoriaproducto`
   MODIFY `id_categoriaProducto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `datallesfactura`
---
-ALTER TABLE `datallesfactura`
-  MODIFY `id_detalleFactura` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `despachopedido`
 --
 ALTER TABLE `despachopedido`
   MODIFY `id_despachoPedido` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `detallefactura`
+--
+ALTER TABLE `detallefactura`
+  MODIFY `id_detalleFactura` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
@@ -284,12 +283,6 @@ ALTER TABLE `proveedor`
 --
 
 --
--- Filtros para la tabla `datallesfactura`
---
-ALTER TABLE `datallesfactura`
-  ADD CONSTRAINT `detallesFactura_producto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `despachopedido`
 --
 ALTER TABLE `despachopedido`
@@ -297,11 +290,17 @@ ALTER TABLE `despachopedido`
   ADD CONSTRAINT `despacho_vendedor` FOREIGN KEY (`DNI_vendedor`) REFERENCES `vendedor` (`DNI_vendedor`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `detallefactura`
+--
+ALTER TABLE `detallefactura`
+  ADD CONSTRAINT `detalle_factura` FOREIGN KEY (`id_factura`) REFERENCES `factura` (`id_factura`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `detalle_producto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`);
+
+--
 -- Filtros para la tabla `factura`
 --
 ALTER TABLE `factura`
-  ADD CONSTRAINT `factura_despacho` FOREIGN KEY (`id_despachoPedido`) REFERENCES `despachopedido` (`id_despachoPedido`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `factura_detalle` FOREIGN KEY (`id_detalleFactura`) REFERENCES `datallesfactura` (`id_detalleFactura`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `factura_despacho` FOREIGN KEY (`id_despachoPedido`) REFERENCES `despachopedido` (`id_despachoPedido`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `imagenproducto`
