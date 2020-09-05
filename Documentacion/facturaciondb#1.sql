@@ -94,7 +94,7 @@ CREATE TABLE `detallefactura` (
 
 CREATE TABLE `factura` (
   `id_factura` int(11) NOT NULL,
-  `id_despachoPedido` int(11) NOT NULL,
+  `id_pedido` int(11) NOT NULL,
   `precio_total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
