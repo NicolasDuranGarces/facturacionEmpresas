@@ -225,7 +225,7 @@ ALTER TABLE `proveedor`
 -- Indices de la tabla `vendedor`
 --
 ALTER TABLE `empleado`
-  ADD PRIMARY KEY (`DNI_empleado);
+  ADD PRIMARY KEY (`DNI_empleado`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -233,7 +233,7 @@ ALTER TABLE `empleado`
 
 --
 -- AUTO_INCREMENT de la tabla `bodega`
---
+
 ALTER TABLE `bodega`
   MODIFY `id_bodega` int(11) NOT NULL AUTO_INCREMENT;
 
