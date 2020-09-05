@@ -148,7 +148,7 @@ CREATE TABLE `proveedor` (
 --
 
 CREATE TABLE `empleado` (
-  `empleado` int(11) NOT NULL,
+  `DNI_empleado` int(11) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `apellido` varchar(20) NOT NULL,
   `telefono` int(11) NOT NULL,
@@ -222,7 +222,7 @@ ALTER TABLE `proveedor`
   ADD PRIMARY KEY (`id_proveedor`);
 
 --
--- Indices de la tabla `vendedor`
+-- Indices de la tabla `empleado`
 --
 ALTER TABLE `empleado`
   ADD PRIMARY KEY (`DNI_empleado`);
