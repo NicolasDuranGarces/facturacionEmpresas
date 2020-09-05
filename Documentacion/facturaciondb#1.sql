@@ -61,12 +61,13 @@ CREATE TABLE `cliente` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `despachopedido`
+-- Estructura de tabla para la tabla `pedido`
 --
 
-CREATE TABLE `despachopedido` (
-  `id_despachoPedido` int(11) NOT NULL,
+CREATE TABLE `pedido` (
+  `id_pedido` int(11) NOT NULL,
   `fecha_pedido` date NOT NULL,
+  `despachado` boolean NOT NULL,
   `DNI_cliente` int(11) NOT NULL,
   `DNI_vendedor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -117,6 +118,7 @@ CREATE TABLE `imagenproducto` (
 
 CREATE TABLE `producto` (
   `id_producto` int(11) NOT NULL,
+  `marca` varchar(20) NOT NULL,
   `nombre_producto` varchar(20) NOT NULL,
   `cantidad_actual` int(11) NOT NULL,
   `valor_unitario` int(11) NOT NULL,
@@ -142,11 +144,11 @@ CREATE TABLE `proveedor` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `vendedor`
+-- Estructura de tabla para la tabla `empleado`
 --
 
-CREATE TABLE `vendedor` (
-  `DNI_vendedor` int(11) NOT NULL,
+CREATE TABLE `empleado` (
+  `empleado` int(11) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `apellido` varchar(20) NOT NULL,
   `telefono` int(11) NOT NULL,
@@ -178,10 +180,9 @@ ALTER TABLE `cliente`
 --
 -- Indices de la tabla `despachopedido`
 --
-ALTER TABLE `despachopedido`
-  ADD PRIMARY KEY (`id_despachoPedido`),
-  ADD KEY `despacho_cliente` (`DNI_cliente`),
-  ADD KEY `despacho_vendedor` (`DNI_vendedor`);
+ALTER TABLE `pedido`
+  ADD PRIMARY KEY (`id_pedido`),
+  ADD KEY `pedido_cliente` (`DNI_cliente`);
 
 --
 -- Indices de la tabla `detallefactura`
@@ -196,7 +197,7 @@ ALTER TABLE `detallefactura`
 --
 ALTER TABLE `factura`
   ADD PRIMARY KEY (`id_factura`),
-  ADD KEY `factura_despacho` (`id_despachoPedido`);
+  ADD KEY `factura_pedido` (`id_pedido`);
 
 --
 -- Indices de la tabla `imagenproducto`
@@ -223,8 +224,8 @@ ALTER TABLE `proveedor`
 --
 -- Indices de la tabla `vendedor`
 --
-ALTER TABLE `vendedor`
-  ADD PRIMARY KEY (`DNI_vendedor`);
+ALTER TABLE `empleado`
+  ADD PRIMARY KEY (`DNI_empleado);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -243,10 +244,10 @@ ALTER TABLE `categoriaproducto`
   MODIFY `id_categoriaProducto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `despachopedido`
+-- AUTO_INCREMENT de la tabla `pedido`
 --
-ALTER TABLE `despachopedido`
-  MODIFY `id_despachoPedido` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `pedido`
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `detallefactura`
@@ -283,11 +284,10 @@ ALTER TABLE `proveedor`
 --
 
 --
--- Filtros para la tabla `despachopedido`
+-- Filtros para la tabla `pedido`
 --
-ALTER TABLE `despachopedido`
-  ADD CONSTRAINT `despacho_cliente` FOREIGN KEY (`DNI_cliente`) REFERENCES `cliente` (`DNI`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `despacho_vendedor` FOREIGN KEY (`DNI_vendedor`) REFERENCES `vendedor` (`DNI_vendedor`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `pedido`
+  ADD CONSTRAINT `pedido_cliente` FOREIGN KEY (`DNI_cliente`) REFERENCES `cliente` (`DNI`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `detallefactura`
@@ -300,7 +300,7 @@ ALTER TABLE `detallefactura`
 -- Filtros para la tabla `factura`
 --
 ALTER TABLE `factura`
-  ADD CONSTRAINT `factura_despacho` FOREIGN KEY (`id_despachoPedido`) REFERENCES `despachopedido` (`id_despachoPedido`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `factura_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `despachopedido` (`id_pedido`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `imagenproducto`
