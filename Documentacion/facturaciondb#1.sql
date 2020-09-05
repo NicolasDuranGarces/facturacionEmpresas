@@ -300,7 +300,7 @@ ALTER TABLE `detallefactura`
 -- Filtros para la tabla `factura`
 --
 ALTER TABLE `factura`
-  ADD CONSTRAINT `factura_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `despachopedido` (`id_pedido`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `factura_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id_pedido`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `imagenproducto`
