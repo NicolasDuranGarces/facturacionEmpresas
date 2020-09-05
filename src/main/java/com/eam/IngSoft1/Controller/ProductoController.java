@@ -30,7 +30,7 @@ public class ProductoController {
     }
     
     @PostMapping("/addproducto")
-    public String addCategoria(Producto producto, BindingResult result, Model model) {
+    public String addProducto(Producto producto, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "addProducto";
         }
@@ -44,7 +44,7 @@ public class ProductoController {
     @GetMapping("/editProducto/{idProducto}")
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String showUpdateForm(@PathVariable("idProducto") int idProducto, Model model) {
-    	Producto producto = repositorioProducto.findById(idProducto).orElseThrow(() -> new IllegalArgumentException("Invalido categoria idCategoria:" + idProducto));
+    	Producto producto = repositorioProducto.findById(idProducto).orElseThrow(() -> new IllegalArgumentException("Invalido Producto id:" + idProducto));
         model.addAttribute("producto", producto);
         return "updateCategoria";
     }
