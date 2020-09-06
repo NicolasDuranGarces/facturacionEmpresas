@@ -76,20 +76,20 @@
     <!-- Inicio del Cuerpo de la Pagina -->
 
     <div class="container my-5">
-            <h2 class="mb-5" th:text="#{addCategoria.title}">New Categoria</h2>
+            <h2 class="mb-5" >New Categoria</h2>
             <div class="row">
                 <div class="col-md-6">
                     <form action="#" th:action="@{/addcategoria}" th:object="${categoriaproducto}" method="post">
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="nombre" class="col-form-label" th:text="#{categoriaproducto.name}">Nombre de la Categoria</label>
+                                <label for="nombre" class="col-form-label" >Nombre de la Categoria</label>
                                 <input type="text" th:field="*{nombreCategoria}" class="form-control" id="nombreCategoria" placeholder="..." required="required">
                                 <span th:if="${#fields.hasErrors('nombreCategoria')}" th:errors="*{nombreCategoria}" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mt-5">
-                                <input type="submit" class="btn btn-primary" th:value="#{addCategoria-btn-add}">
+                                <input type="submit" class="btn btn-primary" >
                             </div>
                         </div>    
                     </form>
