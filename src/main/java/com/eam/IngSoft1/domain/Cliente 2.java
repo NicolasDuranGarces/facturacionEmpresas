@@ -2,9 +2,6 @@ package com.eam.IngSoft1.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import lombok.Data;
-
 import java.util.List;
 
 
@@ -13,7 +10,6 @@ import java.util.List;
  * 
  */
 @Entity
-@Data
 @NamedQuery(name="Cliente.findAll", query="SELECT c FROM Cliente c")
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -33,7 +29,56 @@ public class Cliente implements Serializable {
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos;
 
-	
+	public Cliente() {
+	}
+
+	public int getDni() {
+		return this.dni;
+	}
+
+	public void setDni(int dni) {
+		this.dni = dni;
+	}
+
+	public String getApellido() {
+		return this.apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public String getDireccion() {
+		return this.direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public int getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
+	public List<Pedido> getPedidos() {
+		return this.pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
 
 	public Pedido addPedido(Pedido pedido) {
 		getPedidos().add(pedido);
@@ -42,7 +87,6 @@ public class Cliente implements Serializable {
 		return pedido;
 	}
 
-	
 	public Pedido removePedido(Pedido pedido) {
 		getPedidos().remove(pedido);
 		pedido.setCliente(null);

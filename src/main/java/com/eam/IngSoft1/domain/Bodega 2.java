@@ -2,9 +2,6 @@ package com.eam.IngSoft1.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import lombok.Data;
-
 import java.util.List;
 
 
@@ -13,13 +10,11 @@ import java.util.List;
  * 
  */
 @Entity
-@Data
 @NamedQuery(name="Bodega.findAll", query="SELECT b FROM Bodega b")
 public class Bodega implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_bodega")
 	private int idBodega;
 
@@ -32,7 +27,40 @@ public class Bodega implements Serializable {
 	@OneToMany(mappedBy="bodega")
 	private List<Producto> productos;
 
-	
+	public Bodega() {
+	}
+
+	public int getIdBodega() {
+		return this.idBodega;
+	}
+
+	public void setIdBodega(int idBodega) {
+		this.idBodega = idBodega;
+	}
+
+	public String getNombreBodega() {
+		return this.nombreBodega;
+	}
+
+	public void setNombreBodega(String nombreBodega) {
+		this.nombreBodega = nombreBodega;
+	}
+
+	public String getUbicacion() {
+		return this.ubicacion;
+	}
+
+	public void setUbicacion(String ubicacion) {
+		this.ubicacion = ubicacion;
+	}
+
+	public List<Producto> getProductos() {
+		return this.productos;
+	}
+
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
+	}
 
 	public Producto addProducto(Producto producto) {
 		getProductos().add(producto);
