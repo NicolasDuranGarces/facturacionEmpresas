@@ -1,6 +1,8 @@
 package com.eam.IngSoft1.Controller;
 
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,8 +31,8 @@ public class CategoriaController {
         return "Categoria/addCategoria";
     }
     
-    @PostMapping("Categoria/addcategoria")
-    public String addCategoria(Categoriaproducto categoriaProducto, BindingResult result, Model model) {
+    @PostMapping("/addcategoria")
+    public String addCategoria(@Valid Categoriaproducto categoriaProducto, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "Categoria/addCategoria";
         }

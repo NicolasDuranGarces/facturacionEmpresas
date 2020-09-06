@@ -75,20 +75,28 @@
     <br>
     <!-- Inicio del Cuerpo de la Pagina -->
 
-    <div class="container">
-        <form th:action="@{/addcategoria}" th:object="${Categoriaproducto}" method="post">
-
-            <div class="form-group">
-                <label for="exampleInputPassword1" th:text="#{Categoriaproducto.nombreCategoria}">Nombre de la Categoria</label>
-                <input type="" class="form-control" th:field="*{nombreCategoria}" id="exampleInputPassword1" placeholder="Nombre Categoria" required="required">
-                <span th:if="${#fields.hasErrors('nombreCategoria')}" th:errors="*{nombreCategoria}" class="text-danger"></span>
-                <small id="emailHelp" class="form-text text-muted">Esta Categoria Sera asignada a cualquier producto con caracteristicas similares</small>
-
+    <div class="container my-5">
+            <h2 class="mb-5" th:text="#{addCategoria.title}">New Categoria</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <form action="#" th:action="@{/addcategoria}" th:object="${categoriaproducto}" method="post">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="nombre" class="col-form-label" th:text="#{categoriaproducto.name}">Nombre de la Categoria</label>
+                                <input type="text" th:field="*{nombreCategoria}" class="form-control" id="nombreCategoria" placeholder="..." required="required">
+                                <span th:if="${#fields.hasErrors('nombreCategoria')}" th:errors="*{nombreCategoria}" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt-5">
+                                <input type="submit" class="btn btn-primary" th:value="#{addCategoria-btn-add}">
+                            </div>
+                        </div>    
+                    </form>
+                </div>
             </div>
+        </div>
 
-            <button type="submit" class="btn btn-primary" th:value="#{add-categoria-btn-add}">Registar Categoria</button>
-        </form>
-    </div>
 
 
     <!-- Fin del Cuerpo de la Pagina -->

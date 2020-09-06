@@ -14,64 +14,7 @@
 
 <body>
 	<!-- Menu para Todas las Vistas de Administrador-->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#">Facturacion Empresas /
-			Administrador </a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link mx-3" href="#">Inicio
-						<span class="sr-only">(current)</span>
-				</a></li>
-
-				<!-- Inicio de Desplegable de Categorias-->
-				<li class="nav-item dropdown mx-3"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Categoria </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" th:href="@{/listadoCategorias}">Listar
-							Categorias</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" th:href="@{/ingresoCategoria}">Registro
-							Categorias</a>
-					</div></li>
-				<!-- Fin de Desplegable de Categorias-->
-
-				<!-- Inicio de Desplegable de Productos-->
-				<li class="nav-item dropdown mx-3"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Producto </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" th:href="@{/listadoProducto}">Listar Productos</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" th:href="@{/ingresoProducto}">Registro de Productos</a>
-					</div></li>
-				<!-- Fin de Desplegable de Productos-->
-
-				<!-- Inicio de Desplegable de Proveedores-->
-				<li class="nav-item dropdown mx-3"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Proveedor </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" th:href="@{/listadoProveedores}">Listar Proveedores</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" th:href="@{/ingresoProveedor}">Registro de Proveedores</a>
-					</div></li>
-				<!-- Fin de Desplegable de Proveedores-->
-
-			</ul>
-
-		</div>
-	</nav>
+	<div th:replace="Componentes/Navbar :: nav"></div>
 	<!--Fin del Menu de Administrador-->
 	<!-- Inicio del Cuerpo de la Pagina -->
 
