@@ -1,5 +1,7 @@
 package com.eam.IngSoft1.Controller;
 
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +11,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.cloudinary.utils.ObjectUtils;
 import com.eam.IngSoft1.IRepository.ICategoriaRepository;
 import com.eam.IngSoft1.IRepository.IProductoRepository;
 import com.eam.IngSoft1.IRepository.IProveedorRepository;
 import com.eam.IngSoft1.domain.Producto;
+import com.eam.IngSoft1.config.CloudinaryConfig;
 
 
 
@@ -28,6 +34,8 @@ public class ProductoController {
 		this.categoriaRepository = categoriaRepository;
 		this.proveedorRepository = proveedorRepository;
 	}
+	@Autowired
+    private CloudinaryConfig cloudc;
 	
 	
 	//Metodo Para Crear Producto
@@ -40,14 +48,27 @@ public class ProductoController {
     }
     
     @PostMapping("/addproducto")
-    public String addProducto(@Valid Producto producto, BindingResult result, Model model) {
+    public String addProducto(@Valid Producto producto, BindingResult result, Model model,@RequestParam("file") MultipartFile file) {
         if (result.hasErrors()) {
+        	
             return "Producto/addProducto";
         }
+        
+        try {
+        	Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
+            System.out.println(uploadResult.get("url").toString());
+            producto.setUrlFoto(uploadResult.get("url").toString());	
+        } catch (Exception e) {
+        	System.out.println(e.getMessage());
+        }
+        
         repositorioProducto.save(producto);
         model.addAttribute("productos", repositorioProducto.findAll());
         return "redirect:/listadoProducto";
     }
+      
+    
+    
     
     
     //Metodo Para Actualizar Producto
@@ -61,20 +82,30 @@ public class ProductoController {
     
     
     @PostMapping("/updateProducto/{idProducto}")
-    public String updateProducto(@PathVariable("idProducto") int idProducto,  Producto producto, BindingResult result, Model model) {
+    public String updateProducto(@PathVariable("idProducto") int idProducto,  Producto producto, BindingResult result, Model model ,@RequestParam("file") MultipartFile file, @RequestParam("cambioUrl") boolean cambioUrl) {
         if (result.hasErrors()) {
         	producto.setIdProducto(idProducto);
+        	model.addAttribute("categoriaproductos",categoriaRepository.findAll());
+        	model.addAttribute("proveedores",proveedorRepository.findAll());
             return "Producto/updateProducto";
         }
+        
+        if (cambioUrl) {
+			try {
+	            Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
+	            System.out.println(uploadResult.get("url").toString());
+	            producto.setUrlFoto(uploadResult.get("url").toString());	
+	        } catch (Exception e) {
+	        	System.out.println(e.getMessage());
+	        }
+		}
         
         repositorioProducto.save(producto);
         model.addAttribute("productos", repositorioProducto.findAll());
         return "redirect:/listadoProducto";
     }
     
-    
-   
-    
+        
     
     //Metodo para Eliminar Producto
     @GetMapping("/deleteProducto/{idProducto}")
@@ -95,4 +126,6 @@ public class ProductoController {
   		model.addAttribute("productos", repositorioProducto.findAll());
         return "Categoria/listadoProducto";
   	}
+  	
+  
 }
