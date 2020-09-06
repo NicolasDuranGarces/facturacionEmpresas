@@ -1,30 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.3
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 04-09-2020 a las 03:16:51
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.2.33
+-- Host: localhost:8889
+-- Generation Time: Sep 06, 2020 at 03:13 AM
+-- Server version: 5.7.26
+-- PHP Version: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
--- Base de datos: `facturaciondb`
+-- Database: `facturaciondb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `bodega`
+-- Table structure for table `bodega`
 --
 
 CREATE TABLE `bodega` (
@@ -36,7 +29,7 @@ CREATE TABLE `bodega` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categoriaproducto`
+-- Table structure for table `categoriaproducto`
 --
 
 CREATE TABLE `categoriaproducto` (
@@ -47,7 +40,7 @@ CREATE TABLE `categoriaproducto` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cliente`
+-- Table structure for table `cliente`
 --
 
 CREATE TABLE `cliente` (
@@ -61,21 +54,7 @@ CREATE TABLE `cliente` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pedido`
---
-
-CREATE TABLE `pedido` (
-  `id_pedido` int(11) NOT NULL,
-  `fecha_pedido` date NOT NULL,
-  `despachado` boolean NOT NULL,
-  `DNI_cliente` int(11) NOT NULL,
-  `DNI_vendedor` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `detallefactura`
+-- Table structure for table `detallefactura`
 --
 
 CREATE TABLE `detallefactura` (
@@ -89,7 +68,21 @@ CREATE TABLE `detallefactura` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `factura`
+-- Table structure for table `empleado`
+--
+
+CREATE TABLE `empleado` (
+  `DNI_empleado` int(11) NOT NULL,
+  `nombre` varchar(20) NOT NULL,
+  `apellido` varchar(20) NOT NULL,
+  `telefono` int(11) NOT NULL,
+  `direccion` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `factura`
 --
 
 CREATE TABLE `factura` (
@@ -101,19 +94,21 @@ CREATE TABLE `factura` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `imagenproducto`
+-- Table structure for table `pedido`
 --
 
-CREATE TABLE `imagenproducto` (
-  `id_imagen` int(11) NOT NULL,
-  `url` varchar(100) NOT NULL,
-  `id_producto` int(11) NOT NULL
+CREATE TABLE `pedido` (
+  `id_pedido` int(11) NOT NULL,
+  `fecha_pedido` date NOT NULL,
+  `despachado` tinyint(1) NOT NULL,
+  `DNI_cliente` int(11) NOT NULL,
+  `DNI_vendedor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `producto`
+-- Table structure for table `producto`
 --
 
 CREATE TABLE `producto` (
@@ -125,13 +120,14 @@ CREATE TABLE `producto` (
   `minimo_inventario` int(11) NOT NULL,
   `id_categoriaProducto` int(11) NOT NULL,
   `id_bodega` int(11) NOT NULL,
-  `id_proveedor` int(11) NOT NULL
+  `id_proveedor` int(11) NOT NULL,
+  `urlFoto` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `proveedor`
+-- Table structure for table `proveedor`
 --
 
 CREATE TABLE `proveedor` (
@@ -141,51 +137,32 @@ CREATE TABLE `proveedor` (
   `direccion` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `empleado`
---
-
-CREATE TABLE `empleado` (
-  `DNI_empleado` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `apellido` varchar(20) NOT NULL,
-  `telefono` int(11) NOT NULL,
-  `direccion` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `bodega`
+-- Indexes for table `bodega`
 --
 ALTER TABLE `bodega`
   ADD PRIMARY KEY (`id_bodega`);
 
 --
--- Indices de la tabla `categoriaproducto`
+-- Indexes for table `categoriaproducto`
 --
 ALTER TABLE `categoriaproducto`
-  ADD PRIMARY KEY (`id_categoriaProducto`);
+  ADD PRIMARY KEY (`id_categoriaProducto`),
+  ADD UNIQUE KEY `nombreUnico` (`nombre_categoria`);
 
 --
--- Indices de la tabla `cliente`
+-- Indexes for table `cliente`
 --
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`DNI`);
 
 --
--- Indices de la tabla `despachopedido`
---
-ALTER TABLE `pedido`
-  ADD PRIMARY KEY (`id_pedido`),
-  ADD KEY `pedido_cliente` (`DNI_cliente`);
-
---
--- Indices de la tabla `detallefactura`
+-- Indexes for table `detallefactura`
 --
 ALTER TABLE `detallefactura`
   ADD PRIMARY KEY (`id_detalleFactura`),
@@ -193,21 +170,27 @@ ALTER TABLE `detallefactura`
   ADD KEY `detalle_producto` (`id_producto`);
 
 --
--- Indices de la tabla `factura`
+-- Indexes for table `empleado`
+--
+ALTER TABLE `empleado`
+  ADD PRIMARY KEY (`DNI_empleado`);
+
+--
+-- Indexes for table `factura`
 --
 ALTER TABLE `factura`
   ADD PRIMARY KEY (`id_factura`),
   ADD KEY `factura_pedido` (`id_pedido`);
 
 --
--- Indices de la tabla `imagenproducto`
+-- Indexes for table `pedido`
 --
-ALTER TABLE `imagenproducto`
-  ADD PRIMARY KEY (`id_imagen`),
-  ADD KEY `imagen_producto` (`id_producto`);
+ALTER TABLE `pedido`
+  ADD PRIMARY KEY (`id_pedido`),
+  ADD KEY `pedido_cliente` (`DNI_cliente`);
 
 --
--- Indices de la tabla `producto`
+-- Indexes for table `producto`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`id_producto`),
@@ -216,107 +199,84 @@ ALTER TABLE `producto`
   ADD KEY `producto_proveedor` (`id_proveedor`);
 
 --
--- Indices de la tabla `proveedor`
+-- Indexes for table `proveedor`
 --
 ALTER TABLE `proveedor`
   ADD PRIMARY KEY (`id_proveedor`);
 
 --
--- Indices de la tabla `empleado`
---
-ALTER TABLE `empleado`
-  ADD PRIMARY KEY (`DNI_empleado`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `bodega`
-
+-- AUTO_INCREMENT for table `bodega`
+--
 ALTER TABLE `bodega`
   MODIFY `id_bodega` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `categoriaproducto`
+-- AUTO_INCREMENT for table `categoriaproducto`
 --
 ALTER TABLE `categoriaproducto`
   MODIFY `id_categoriaProducto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `pedido`
---
-ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `detallefactura`
+-- AUTO_INCREMENT for table `detallefactura`
 --
 ALTER TABLE `detallefactura`
   MODIFY `id_detalleFactura` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `factura`
+-- AUTO_INCREMENT for table `factura`
 --
 ALTER TABLE `factura`
   MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `imagenproducto`
+-- AUTO_INCREMENT for table `pedido`
 --
-ALTER TABLE `imagenproducto`
-  MODIFY `id_imagen` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `pedido`
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `producto`
+-- AUTO_INCREMENT for table `producto`
 --
 ALTER TABLE `producto`
   MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `proveedor`
+-- AUTO_INCREMENT for table `proveedor`
 --
 ALTER TABLE `proveedor`
   MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `pedido`
---
-ALTER TABLE `pedido`
-  ADD CONSTRAINT `pedido_cliente` FOREIGN KEY (`DNI_cliente`) REFERENCES `cliente` (`DNI`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `detallefactura`
+-- Constraints for table `detallefactura`
 --
 ALTER TABLE `detallefactura`
   ADD CONSTRAINT `detalle_factura` FOREIGN KEY (`id_factura`) REFERENCES `factura` (`id_factura`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `detalle_producto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`);
 
 --
--- Filtros para la tabla `factura`
+-- Constraints for table `factura`
 --
 ALTER TABLE `factura`
   ADD CONSTRAINT `factura_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id_pedido`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `imagenproducto`
+-- Constraints for table `pedido`
 --
-ALTER TABLE `imagenproducto`
-  ADD CONSTRAINT `imagen_producto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `pedido`
+  ADD CONSTRAINT `pedido_cliente` FOREIGN KEY (`DNI_cliente`) REFERENCES `cliente` (`DNI`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `producto`
+-- Constraints for table `producto`
 --
 ALTER TABLE `producto`
   ADD CONSTRAINT `producto_bodega` FOREIGN KEY (`id_bodega`) REFERENCES `bodega` (`id_bodega`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `producto_categoria` FOREIGN KEY (`id_categoriaProducto`) REFERENCES `categoriaproducto` (`id_categoriaProducto`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `producto_proveedor` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id_proveedor`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
