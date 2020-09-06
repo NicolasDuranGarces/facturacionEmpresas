@@ -26,7 +26,7 @@ public class CategoriaController {
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/ingresoCategoria")
     public String showSignUpForm(Categoriaproducto categoriaProducto) {
-        return "Categoria/addCategoria";
+        return "addCategoria";
     }
     
     @PostMapping("/addcategoria")
