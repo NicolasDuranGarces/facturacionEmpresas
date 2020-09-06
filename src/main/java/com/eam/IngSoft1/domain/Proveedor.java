@@ -2,9 +2,6 @@ package com.eam.IngSoft1.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import lombok.Data;
-
 import java.util.List;
 
 
@@ -13,13 +10,12 @@ import java.util.List;
  * 
  */
 @Entity
-@Data
 @NamedQuery(name="Proveedor.findAll", query="SELECT p FROM Proveedor p")
 public class Proveedor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_proveedor")
 	private int idProveedor;
 
@@ -33,6 +29,49 @@ public class Proveedor implements Serializable {
 	//bi-directional many-to-one association to Producto
 	@OneToMany(mappedBy="proveedor")
 	private List<Producto> productos;
+
+	public Proveedor() {
+	}
+
+	public int getIdProveedor() {
+		return this.idProveedor;
+	}
+
+	public void setIdProveedor(int idProveedor) {
+		this.idProveedor = idProveedor;
+	}
+
+	public String getDireccion() {
+		return this.direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getNombreProvedor() {
+		return this.nombreProvedor;
+	}
+
+	public void setNombreProvedor(String nombreProvedor) {
+		this.nombreProvedor = nombreProvedor;
+	}
+
+	public int getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
+	public List<Producto> getProductos() {
+		return this.productos;
+	}
+
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
+	}
 
 	public Producto addProducto(Producto producto) {
 		getProductos().add(producto);

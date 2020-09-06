@@ -25,44 +25,42 @@ public class CategoriaController {
 	//Metodo Para Crear Categorias
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/ingresoCategoria")
-    public String showSignUpForm(Categoriaproducto categoria) {
-        return "addCategoria";
+    public String showSignUpForm(Categoriaproducto categoriaProducto) {
+        return "Categoria/addCategoria";
     }
     
     @PostMapping("/addcategoria")
-    public String addCategoria(Categoriaproducto categoria, BindingResult result, Model model) {
+    public String addCategoria(Categoriaproducto categoriaProducto, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "addCategoria";
+            return "Categoria/addCategoria";
         }
-        repositorioCategoria.save(categoria);
-        model.addAttribute("categorias", repositorioCategoria.findAll());
-        return "redirect:/listadoCategoria";
+        repositorioCategoria.save(categoriaProducto);
+        model.addAttribute("categoriaProductos", repositorioCategoria.findAll());
+        return "redirect:/Categoria/listadoCategoria";
     }
-    
-    
     
     
     
     //Metodo Para Actualizar Categoria
-    @GetMapping("/editCategoria/{Id_categoriaProducto}")
+    @GetMapping("/editCategoria/{id_categoriaProducto}")
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String showUpdateForm(@PathVariable("Id_categoriaProducto") int idCategoria, Model model) {
-    	Categoriaproducto categoria = repositorioCategoria.findById(idCategoria).orElseThrow(() -> new IllegalArgumentException("Invalido categoria idCategoria:" + idCategoria));
-        model.addAttribute("categoria", categoria);
-        return "updateCategoria";
+    public String showUpdateForm(@PathVariable("id_categoriaProducto") int idCategoria, Model model) {
+    	Categoriaproducto categoriaProducto = repositorioCategoria.findById(idCategoria).orElseThrow(() -> new IllegalArgumentException("Invalido categoria idCategoria:" + idCategoria));
+        model.addAttribute("categoriaProducto", categoriaProducto);
+        return "Categoria/updateCategoria";
     }
     
     
-    @PostMapping("/updateCategoria/{Id_categoriaProducto}")
-    public String updateCategoria(@PathVariable("Id_categoriaProducto") int idCategoria,  Categoriaproducto categoria, BindingResult result, Model model) {
+    @PostMapping("/updateCategoria/{id_categoriaProducto}")
+    public String updateCategoria(@PathVariable("id_categoriaProducto") int idCategoria,  Categoriaproducto categoriaProducto, BindingResult result, Model model) {
         if (result.hasErrors()) {
-        	categoria.setId_categoriaProducto(idCategoria);
-            return "updateCategoria";
+        	categoriaProducto.setId_categoriaProducto(idCategoria);
+            return "Categoria/updateCategoria";
         }
         
-        repositorioCategoria.save(categoria);
-        model.addAttribute("categorias", repositorioCategoria.findAll());
-        return "redirect:/listadoCategoria";
+        repositorioCategoria.save(categoriaProducto);
+        model.addAttribute("categoriaProductos", repositorioCategoria.findAll());
+        return "redirect:/Categoria/listadoCategoria";
     }
     
     
@@ -70,23 +68,22 @@ public class CategoriaController {
     
     
     //Metodo para Eliminar Categorias
-    @GetMapping("/deleteCategoria/{idCategoria}")
+    @GetMapping("/deleteCategoria/{id_categoriaProducto}")
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String deleteCategoria(@PathVariable("Id_categoriaProducto") int idCategoria, Model model) {
-    	Categoriaproducto categoria = repositorioCategoria.findById(idCategoria).orElseThrow(() -> new IllegalArgumentException("Invalido categoria idCategoria:" + idCategoria));
-        repositorioCategoria.delete(categoria);
-        model.addAttribute("categorias", repositorioCategoria.findAll());
-        return "redirect:/listadoCategoria";
+    public String deleteCategoria(@PathVariable("id_categoriaProducto") int idCategoria, Model model) {
+    	Categoriaproducto categoriaProducto = repositorioCategoria.findById(idCategoria).orElseThrow(() -> new IllegalArgumentException("Invalido categoria idCategoria:" + idCategoria));
+        repositorioCategoria.delete(categoriaProducto);
+        model.addAttribute("categoriaProductos", repositorioCategoria.findAll());
+        return "redirect:/Categoria/listadoCategoria";
     }
-    
     
     
     //Listado de Categorias
   	@GetMapping("/listadoCategorias")
   	//@PreAuthorize("hasRole('ROLE_ADMIN')")
   	public String list(Categoriaproducto categoria, Model model) {
-  		model.addAttribute("categorias", repositorioCategoria.findAll());
-        return "listadoCategoria";
+  		model.addAttribute("Categoriaproductos", repositorioCategoria.findAll());
+        return "Categoria/listadoCategoria";
   	}
 
 }
