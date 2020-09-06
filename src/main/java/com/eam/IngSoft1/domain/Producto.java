@@ -15,6 +15,7 @@ public class Producto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_producto")
 	private int idProducto;
 
@@ -29,16 +30,15 @@ public class Producto implements Serializable {
 	@Column(name="nombre_producto")
 	private String nombreProducto;
 
+	@Lob
+	private String urlFoto;
+
 	@Column(name="valor_unitario")
 	private int valorUnitario;
 
 	//bi-directional many-to-one association to Detallefactura
 	@OneToMany(mappedBy="producto")
 	private List<Detallefactura> detallefacturas;
-
-	//bi-directional many-to-one association to Imagenproducto
-	@OneToMany(mappedBy="producto")
-	private List<Imagenproducto> imagenproductos;
 
 	//bi-directional many-to-one association to Bodega
 	@ManyToOne
@@ -98,6 +98,14 @@ public class Producto implements Serializable {
 		this.nombreProducto = nombreProducto;
 	}
 
+	public String getUrlFoto() {
+		return this.urlFoto;
+	}
+
+	public void setUrlFoto(String urlFoto) {
+		this.urlFoto = urlFoto;
+	}
+
 	public int getValorUnitario() {
 		return this.valorUnitario;
 	}
@@ -126,28 +134,6 @@ public class Producto implements Serializable {
 		detallefactura.setProducto(null);
 
 		return detallefactura;
-	}
-
-	public List<Imagenproducto> getImagenproductos() {
-		return this.imagenproductos;
-	}
-
-	public void setImagenproductos(List<Imagenproducto> imagenproductos) {
-		this.imagenproductos = imagenproductos;
-	}
-
-	public Imagenproducto addImagenproducto(Imagenproducto imagenproducto) {
-		getImagenproductos().add(imagenproducto);
-		imagenproducto.setProducto(this);
-
-		return imagenproducto;
-	}
-
-	public Imagenproducto removeImagenproducto(Imagenproducto imagenproducto) {
-		getImagenproductos().remove(imagenproducto);
-		imagenproducto.setProducto(null);
-
-		return imagenproducto;
 	}
 
 	public Bodega getBodega() {
