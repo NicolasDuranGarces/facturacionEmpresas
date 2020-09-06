@@ -46,12 +46,12 @@ public class ProductoController {
     public String showUpdateForm(@PathVariable("idProducto") int idProducto, Model model) {
     	Producto producto = repositorioProducto.findById(idProducto).orElseThrow(() -> new IllegalArgumentException("Invalido Producto id:" + idProducto));
         model.addAttribute("producto", producto);
-        return "updateCategoria";
+        return "updateProducto";
     }
     
     
     @PostMapping("/updateProducto/{idProducto}")
-    public String updateCategoria(@PathVariable("idProducto") int idProducto,  Producto producto, BindingResult result, Model model) {
+    public String updateProducto(@PathVariable("idProducto") int idProducto,  Producto producto, BindingResult result, Model model) {
         if (result.hasErrors()) {
         	producto.setIdProducto(idProducto);
             return "updateProducto";
@@ -69,16 +69,16 @@ public class ProductoController {
     //Metodo para Eliminar Producto
     @GetMapping("/deleteProducto/{idProducto}")
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String deleteCategoria(@PathVariable("idProducto") int idProducto, Model model) {
-    	Producto producto = repositorioProducto.findById(idProducto).orElseThrow(() -> new IllegalArgumentException("Invalido categoria idCategoria:" + idProducto));
+    public String deleteProducto(@PathVariable("idProducto") int idProducto, Model model) {
+    	Producto producto = repositorioProducto.findById(idProducto).orElseThrow(() -> new IllegalArgumentException("Invalido Producto id:" + idProducto));
         repositorioProducto.delete(producto);
-        model.addAttribute("categorias", repositorioProducto.findAll());
+        model.addAttribute("productos", repositorioProducto.findAll());
         return "redirect:/listadoProducto";
     }
     
     
     
-    //Listado de Categorias
+    //Listado de Producto
   	@GetMapping("/listadoProducto")
   	//@PreAuthorize("hasRole('ROLE_ADMIN')")
   	public String list(Producto producto, Model model) {
