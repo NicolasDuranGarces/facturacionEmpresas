@@ -2,6 +2,9 @@ package com.eam.IngSoft1.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import lombok.Data;
+
 import java.util.List;
 
 
@@ -10,12 +13,13 @@ import java.util.List;
  * 
  */
 @Entity
+@Data
 @NamedQuery(name="Producto.findAll", query="SELECT p FROM Producto p")
 public class Producto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_producto")
 	private int idProducto;
 
@@ -55,74 +59,6 @@ public class Producto implements Serializable {
 	@JoinColumn(name="id_proveedor")
 	private Proveedor proveedor;
 
-	
-	
-	public Producto() {
-	}
-
-	public int getIdProducto() {
-		return this.idProducto;
-	}
-
-	public void setIdProducto(int idProducto) {
-		this.idProducto = idProducto;
-	}
-
-	public int getCantidadActual() {
-		return this.cantidadActual;
-	}
-
-	public void setCantidadActual(int cantidadActual) {
-		this.cantidadActual = cantidadActual;
-	}
-
-	public String getMarca() {
-		return this.marca;
-	}
-
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
-	public int getMinimoInventario() {
-		return this.minimoInventario;
-	}
-
-	public void setMinimoInventario(int minimoInventario) {
-		this.minimoInventario = minimoInventario;
-	}
-
-	public String getNombreProducto() {
-		return this.nombreProducto;
-	}
-
-	public void setNombreProducto(String nombreProducto) {
-		this.nombreProducto = nombreProducto;
-	}
-
-	public String getUrlFoto() {
-		return this.urlFoto;
-	}
-
-	public void setUrlFoto(String urlFoto) {
-		this.urlFoto = urlFoto;
-	}
-
-	public int getValorUnitario() {
-		return this.valorUnitario;
-	}
-
-	public void setValorUnitario(int valorUnitario) {
-		this.valorUnitario = valorUnitario;
-	}
-
-	public List<Detallefactura> getDetallefacturas() {
-		return this.detallefacturas;
-	}
-
-	public void setDetallefacturas(List<Detallefactura> detallefacturas) {
-		this.detallefacturas = detallefacturas;
-	}
 
 	public Detallefactura addDetallefactura(Detallefactura detallefactura) {
 		getDetallefacturas().add(detallefactura);
@@ -138,28 +74,6 @@ public class Producto implements Serializable {
 		return detallefactura;
 	}
 
-	public Bodega getBodega() {
-		return this.bodega;
-	}
 
-	public void setBodega(Bodega bodega) {
-		this.bodega = bodega;
-	}
-
-	public Categoriaproducto getCategoriaproducto() {
-		return this.categoriaproducto;
-	}
-
-	public void setCategoriaproducto(Categoriaproducto categoriaproducto) {
-		this.categoriaproducto = categoriaproducto;
-	}
-
-	public Proveedor getProveedor() {
-		return this.proveedor;
-	}
-
-	public void setProveedor(Proveedor proveedor) {
-		this.proveedor = proveedor;
-	}
 
 }
