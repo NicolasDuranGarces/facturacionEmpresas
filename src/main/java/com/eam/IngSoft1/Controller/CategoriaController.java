@@ -38,7 +38,7 @@ public class CategoriaController {
         }
         repositorioCategoria.save(categoriaProducto);
         model.addAttribute("categoriaProductos", repositorioCategoria.findAll());
-        return "redirect:/Categoria/listadoCategoria";
+        return "redirect:/listadoCategorias";
     }
     
     
@@ -62,11 +62,8 @@ public class CategoriaController {
         
         repositorioCategoria.save(categoriaProducto);
         model.addAttribute("categoriaProductos", repositorioCategoria.findAll());
-        return "redirect:/Categoria/listadoCategoria";
+        return "redirect:/listadoCategorias";
     }
-    
-    
-    
     
     
     //Metodo para Eliminar Categorias
@@ -76,12 +73,12 @@ public class CategoriaController {
     	Categoriaproducto categoriaProducto = repositorioCategoria.findById(idCategoria).orElseThrow(() -> new IllegalArgumentException("Invalido categoria idCategoria:" + idCategoria));
         repositorioCategoria.delete(categoriaProducto);
         model.addAttribute("categoriaProductos", repositorioCategoria.findAll());
-        return "redirect:/Categoria/listadoCategoria";
+        return "redirect:/listadoCategorias";
     }
     
     
     //Listado de Categorias
-  	@GetMapping("listadoCategorias")
+  	@GetMapping("/listadoCategorias")
   	//@PreAuthorize("hasRole('ROLE_ADMIN')")
   	public String list(Categoriaproducto categoriaProducto, Model model) {
   		model.addAttribute("Categoriaproductos", repositorioCategoria.findAll());

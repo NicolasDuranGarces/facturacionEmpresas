@@ -5,68 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <title>Index Admin</title>
 </head>
 
 <body>
     <!-- Menu para Todas las Vistas de Administrador-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Facturacion Empresas / Administrador </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link mx-3" href="#">Inicio <span class="sr-only">(current)</span></a>
-                </li>
-
-                <!-- Inicio de Desplegable de Categorias-->
-                <li class="nav-item dropdown mx-3">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Categoria
-              </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" th:href="@{/listadoCategorias}">Listar Categorias</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" th:href="@{/ingresoCategoria}">Registro Categorias</a>
-                    </div>
-                </li>
-                <!-- Fin de Desplegable de Categorias-->
-
-                <!-- Inicio de Desplegable de Productos-->
-                <li class="nav-item dropdown mx-3">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Producto
-              </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" th:href="@{/listadoProducto}">Listar Productos</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" th:href="@{/ingresoProducto}">Registro de Productos</a>
-                    </div>
-                </li>
-                <!-- Fin de Desplegable de Productos-->
-
-                <!-- Inicio de Desplegable de Proveedores-->
-                <li class="nav-item dropdown mx-3">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Proveedor
-              </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" th:href="@{/listadoProveedores}">Listar Proveedores</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" th:href="@{/ingresoProveedor}">Registro de Proveedores</a>
-                    </div>
-                </li>
-                <!-- Fin de Desplegable de Proveedores-->
-
-            </ul>
-
-        </div>
-    </nav>
+    <div th:replace="Componentes/Navbar :: nav"></div>
     <!--Fin del Menu de Administrador-->
+    <!-- Inicio del Cuerpo de la Pagina -->
 
     <br>
     <div class="container">
@@ -76,39 +24,59 @@
     <!-- Inicio del Cuerpo de la Pagina -->
 
     <div class="container">
-        <form th:action="@{/updateCategoria/{id_categoriaProducto}(id_categoriaProducto=${Categoriaproducto.id_categoriaProducto})}" th:object="${Categoriaproducto}" method="post">
+         <form action="#" th:action="@{/updateCategoria/{id_categoriaProducto}(id_categoriaProducto=${categoriaProducto.id_categoriaProducto})}" th:object="${categoriaProducto}" method="post">
 
-            <div class="form-group">
-                <label for="exampleInputPassword1" th:text="#{Categoriaproducto.nombreCategoria}">Nombre de la Categoria</label>
-                <input type="" class="form-control" th:field="*{nombreCategoria}" id="exampleInputPassword1" placeholder="Nombre Categoria" required="required">
-                <span th:if="${#fields.hasErrors('nombreCategoria')}" th:errors="*{nombreCategoria}" class="text-danger"></span>
-                <small id="emailHelp" class="form-text text-muted">Esta Categoria Sera asignada a cualquier producto con caracteristicas similares</small>
-            </div>
+            <div class="form-group col-md-6">
+                <label for="nombreCategoria" class="col-form-label">Nombre de la
+                    Categoria</label> <input type="text" th:field="*{nombreCategoria}" class="form-control"
+                    id="nombreCategoria" placeholder="..." required="required"> <span th:if="${#fields.hasErrors('nombreCategoria')}"
+					th:errors="*{nombreCategoria}" class="text-danger"></span>
+			</div>
 
-            <button type="submit" class="btn btn-primary" th:value="#{update-categoria-btn-update}">Actualizar Categoria</button>
-        </form>
-    </div>
-
-
-    <!-- Fin del Cuerpo de la Pagina -->
-    <br>
-    <!-- Inicio del Footer -->
-
-    <br><br><br><br><br><br><br><br>
-
-    <footer id="sticky-footer" class="py-4 bg-dark text-white-50" style="flex-shrink: none;">
-        <div class="container text-center">
-            <small> &copy; Derechos Reservados : <a href="www.github.com/papugarces">Papu</a>-<a href="">Jose Miguel</a>-<a href="">Sebastian Hidalgo</a></small>
-        </div>
-    </footer>
+			<button type="submit" class="btn btn-primary"
+				th:value="#{updateCategoria-btn-update}">Actualizar
+				Categoria</button>
+		</form>
+	</div>
 
 
-    <!-- Fin del Footer -->
-    <!-- Scripts de JS de bootstrap  -->
-    <!-- (Orden) jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	<!-- Fin del Cuerpo de la Pagina -->
+	<br>
+	<!-- Inicio del Footer -->
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<footer id="sticky-footer" class="py-4 bg-dark text-white-50"
+		style="flex-shrink: none;">
+		<div class="container text-center">
+			<small> &copy; Derechos Reservados : <a
+				href="www.github.com/papugarces">Papu</a>-<a href="">Jose Miguel</a>-<a
+				href="">Sebastian Hidalgo</a></small>
+		</div>
+	</footer>
+
+
+	<!-- Fin del Footer -->
+	<!-- Scripts de JS de bootstrap  -->
+	<!-- (Orden) jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+		crossorigin="anonymous"></script>
 
 </body>
 

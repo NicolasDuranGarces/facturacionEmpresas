@@ -1,5 +1,7 @@
 package com.eam.IngSoft1.Controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,17 +29,17 @@ public class ProveedorController {
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/ingresoProveedor")
     public String showSignUpForm(Proveedor proveedor) {
-        return "Categoria/addProveedor";
+        return "Proveedor/addProveedor";
     }
     
-    @PostMapping("Categoria/addproveedor")
-    public String addProveedor(Proveedor proveedor, BindingResult result, Model model) {
+    @PostMapping("/addproveedor")
+    public String addProveedor(@Valid Proveedor proveedor, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "Categoria/addProveedor";
+            return "Proveedor/addProveedor";
         }
         repositorioProveedor.save(proveedor);
         model.addAttribute("proveedores", repositorioProveedor.findAll());
-        return "redirect:/Categoria/listadoProveedor";
+        return "redirect:/listadoProveedores";
     }
     
     
@@ -47,20 +49,20 @@ public class ProveedorController {
     public String showUpdateForm(@PathVariable("idProveedor") int idProveedor, Model model) {
     	Proveedor proveedor = repositorioProveedor.findById(idProveedor).orElseThrow(() -> new IllegalArgumentException("Invalido Proveedor id:" + idProveedor));
         model.addAttribute("proveedor", proveedor);
-        return "Categoria/updateProveedor";
+        return "Proveedor/updateProveedor";
     }
     
     
-    @PostMapping("Categoria/updateProveedor/{idProveedor}")
+    @PostMapping("/updateProveedor/{idProveedor}")
     public String updateProveedor(@PathVariable("idProveedor") int idProveedor,  Proveedor proveedor, BindingResult result, Model model) {
         if (result.hasErrors()) {
         	proveedor.setIdProveedor(idProveedor);
-            return "Categoria/updateProveedor";
+            return "Proveedor/updateProveedor";
         }
         
         repositorioProveedor.save(proveedor);
         model.addAttribute("proveedores", repositorioProveedor.findAll());
-        return "redirect:/Categoria/listadoProveedores";
+        return "redirect:/listadoProveedores";
     }
     
     
@@ -73,8 +75,8 @@ public class ProveedorController {
     public String deleteProveedor(@PathVariable("idProveedor") int idProveedor, Model model) {
     	Proveedor proveedor = repositorioProveedor.findById(idProveedor).orElseThrow(() -> new IllegalArgumentException("Invalido Proveedor id:" + idProveedor));
         repositorioProveedor.delete(proveedor);
-        model.addAttribute("proveedor", repositorioProveedor.findAll());
-        return "redirect:/Categoria/listadoProveedor";
+        model.addAttribute("proveedores", repositorioProveedor.findAll());
+        return "redirect:/listadoProveedores";
     }
     
     
@@ -83,8 +85,8 @@ public class ProveedorController {
   	@GetMapping("/listadoProveedores")
   	//@PreAuthorize("hasRole('ROLE_ADMIN')")
   	public String list(Proveedor proveedor, Model model) {
-  		model.addAttribute("proveedor", repositorioProveedor.findAll());
-        return "Categoria/listadoProveedor";
+  		model.addAttribute("proveedores", repositorioProveedor.findAll());
+        return "/Proveedor/listadoProveedor";
   	}
 
 }
