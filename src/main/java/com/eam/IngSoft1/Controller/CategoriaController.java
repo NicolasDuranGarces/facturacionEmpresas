@@ -29,7 +29,7 @@ public class CategoriaController {
         return "Categoria/addCategoria";
     }
     
-    @PostMapping("/addcategoria")
+    @PostMapping("Categoria/addcategoria")
     public String addCategoria(Categoriaproducto categoriaProducto, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "Categoria/addCategoria";
@@ -79,9 +79,9 @@ public class CategoriaController {
     
     
     //Listado de Categorias
-  	@GetMapping("/listadoCategorias")
+  	@GetMapping("listadoCategorias")
   	//@PreAuthorize("hasRole('ROLE_ADMIN')")
-  	public String list(Categoriaproducto categoria, Model model) {
+  	public String list(Categoriaproducto categoriaProducto, Model model) {
   		model.addAttribute("Categoriaproductos", repositorioCategoria.findAll());
         return "Categoria/listadoCategoria";
   	}

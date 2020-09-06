@@ -26,17 +26,17 @@ public class ProductoController {
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/ingresoProducto")
     public String showSignUpForm(Producto producto) {
-        return "addProducto";
+        return "Categoria/addProducto";
     }
     
     @PostMapping("/addproducto")
     public String addProducto(Producto producto, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "addProducto";
+            return "Categoria/addProducto";
         }
         repositorioProducto.save(producto);
         model.addAttribute("productos", repositorioProducto.findAll());
-        return "redirect:/listadoProducto";
+        return "redirect:/Categoria/listadoProducto";
     }
     
     
@@ -46,20 +46,20 @@ public class ProductoController {
     public String showUpdateForm(@PathVariable("idProducto") int idProducto, Model model) {
     	Producto producto = repositorioProducto.findById(idProducto).orElseThrow(() -> new IllegalArgumentException("Invalido Producto id:" + idProducto));
         model.addAttribute("producto", producto);
-        return "updateProducto";
+        return "Categoria/updateProducto";
     }
     
     
-    @PostMapping("/updateProducto/{idProducto}")
+    @PostMapping("Categoria/updateProducto/{idProducto}")
     public String updateProducto(@PathVariable("idProducto") int idProducto,  Producto producto, BindingResult result, Model model) {
         if (result.hasErrors()) {
         	producto.setIdProducto(idProducto);
-            return "updateProducto";
+            return "Categoria/updateProducto";
         }
         
         repositorioProducto.save(producto);
         model.addAttribute("productos", repositorioProducto.findAll());
-        return "redirect:/listadoProducto";
+        return "redirect:/Categoria/listadoProducto";
     }
     
     
@@ -73,7 +73,7 @@ public class ProductoController {
     	Producto producto = repositorioProducto.findById(idProducto).orElseThrow(() -> new IllegalArgumentException("Invalido Producto id:" + idProducto));
         repositorioProducto.delete(producto);
         model.addAttribute("productos", repositorioProducto.findAll());
-        return "redirect:/listadoProducto";
+        return "redirect:/Categoria/listadoProducto";
     }
     
     
@@ -83,6 +83,6 @@ public class ProductoController {
   	//@PreAuthorize("hasRole('ROLE_ADMIN')")
   	public String list(Producto producto, Model model) {
   		model.addAttribute("productos", repositorioProducto.findAll());
-        return "listadoProducto";
+        return "Categoria/listadoProducto";
   	}
 }

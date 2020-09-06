@@ -27,17 +27,17 @@ public class ProveedorController {
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/ingresoProveedor")
     public String showSignUpForm(Proveedor proveedor) {
-        return "addProveedor";
+        return "Categoria/addProveedor";
     }
     
-    @PostMapping("/addproveedor")
+    @PostMapping("Categoria/addproveedor")
     public String addProveedor(Proveedor proveedor, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "addProveedor";
+            return "Categoria/addProveedor";
         }
         repositorioProveedor.save(proveedor);
         model.addAttribute("proveedores", repositorioProveedor.findAll());
-        return "redirect:/listadoProveedor";
+        return "redirect:/Categoria/listadoProveedor";
     }
     
     
@@ -47,20 +47,20 @@ public class ProveedorController {
     public String showUpdateForm(@PathVariable("idProveedor") int idProveedor, Model model) {
     	Proveedor proveedor = repositorioProveedor.findById(idProveedor).orElseThrow(() -> new IllegalArgumentException("Invalido Proveedor id:" + idProveedor));
         model.addAttribute("proveedor", proveedor);
-        return "updateProveedor";
+        return "Categoria/updateProveedor";
     }
     
     
-    @PostMapping("/updateProveedor/{idProveedor}")
+    @PostMapping("Categoria/updateProveedor/{idProveedor}")
     public String updateProveedor(@PathVariable("idProveedor") int idProveedor,  Proveedor proveedor, BindingResult result, Model model) {
         if (result.hasErrors()) {
         	proveedor.setIdProveedor(idProveedor);
-            return "updateProveedor";
+            return "Categoria/updateProveedor";
         }
         
         repositorioProveedor.save(proveedor);
         model.addAttribute("proveedores", repositorioProveedor.findAll());
-        return "redirect:/listadoProveedores";
+        return "redirect:/Categoria/listadoProveedores";
     }
     
     
@@ -74,7 +74,7 @@ public class ProveedorController {
     	Proveedor proveedor = repositorioProveedor.findById(idProveedor).orElseThrow(() -> new IllegalArgumentException("Invalido Proveedor id:" + idProveedor));
         repositorioProveedor.delete(proveedor);
         model.addAttribute("proveedor", repositorioProveedor.findAll());
-        return "redirect:/listadoProveedor";
+        return "redirect:/Categoria/listadoProveedor";
     }
     
     
@@ -84,7 +84,7 @@ public class ProveedorController {
   	//@PreAuthorize("hasRole('ROLE_ADMIN')")
   	public String list(Proveedor proveedor, Model model) {
   		model.addAttribute("proveedor", repositorioProveedor.findAll());
-        return "listadoProveedor";
+        return "Categoria/listadoProveedor";
   	}
 
 }
