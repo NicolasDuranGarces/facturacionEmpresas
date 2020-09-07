@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.utils.ObjectUtils;
+import com.eam.IngSoft1.IRepository.IBodegaRepository;
 import com.eam.IngSoft1.IRepository.ICategoriaRepository;
 import com.eam.IngSoft1.IRepository.IProductoRepository;
 import com.eam.IngSoft1.IRepository.IProveedorRepository;
@@ -28,11 +29,14 @@ public class ProductoController {
 	private final IProductoRepository repositorioProducto;
 	private final ICategoriaRepository categoriaRepository;
 	private final IProveedorRepository proveedorRepository;
+	private final IBodegaRepository bodegaRepository;
 	@Autowired
-	public ProductoController(IProductoRepository repositorioProducto,ICategoriaRepository categoriaRepository,IProveedorRepository proveedorRepository) {
+	public ProductoController(IProductoRepository repositorioProducto,ICategoriaRepository categoriaRepository,IProveedorRepository proveedorRepository,
+			IBodegaRepository bodegaRepository) {
 		this.repositorioProducto = repositorioProducto;
 		this.categoriaRepository = categoriaRepository;
 		this.proveedorRepository = proveedorRepository;
+		this.bodegaRepository = bodegaRepository;
 	}
 	@Autowired
     private CloudinaryConfig cloudc;
@@ -44,13 +48,13 @@ public class ProductoController {
     public String showSignUpForm(Producto producto, Model model) {
     	model.addAttribute("categoriaproductos",categoriaRepository.findAll());
     	model.addAttribute("proveedores",proveedorRepository.findAll());
+    	model.addAttribute("bodegas",bodegaRepository.findAll());
         return "Producto/addProducto";
     }
     
     @PostMapping("/addproducto")
     public String addProducto(@Valid Producto producto, BindingResult result, Model model,@RequestParam("file") MultipartFile file) {
         if (result.hasErrors()) {
-        	
             return "Producto/addProducto";
         }
         
@@ -77,7 +81,10 @@ public class ProductoController {
     public String showUpdateForm(@PathVariable("idProducto") int idProducto, Model model) {
     	Producto producto = repositorioProducto.findById(idProducto).orElseThrow(() -> new IllegalArgumentException("Invalido Producto id:" + idProducto));
         model.addAttribute("producto", producto);
-        return "Categoria/updateProducto";
+        model.addAttribute("categoriaproductos",categoriaRepository.findAll());
+    	model.addAttribute("proveedores",proveedorRepository.findAll());
+    	model.addAttribute("bodegas",bodegaRepository.findAll());
+        return "Producto/updateProducto";
     }
     
     
@@ -87,6 +94,7 @@ public class ProductoController {
         	producto.setIdProducto(idProducto);
         	model.addAttribute("categoriaproductos",categoriaRepository.findAll());
         	model.addAttribute("proveedores",proveedorRepository.findAll());
+        	model.addAttribute("bodegas",bodegaRepository.findAll());
             return "Producto/updateProducto";
         }
         
@@ -124,7 +132,7 @@ public class ProductoController {
   	//@PreAuthorize("hasRole('ROLE_ADMIN')")
   	public String list(Producto producto, Model model) {
   		model.addAttribute("productos", repositorioProducto.findAll());
-        return "Categoria/listadoProducto";
+        return "Producto/listadoProducto";
   	}
   	
   

@@ -15,16 +15,53 @@
     <div th:replace="Componentes/Navbar :: nav"></div>
     <!--Fin del Menu de Administrador-->
     <!-- Inicio del Cuerpo de la Pagina -->
-
-
-
-
-
-
-
-
-
-
+	<div th:switch="${productos}" class="container my-5">
+		<div class="row">
+			<div class="col-md-6">
+				<h2>Listado de Productos</h2>
+				<div th:case="*">
+					<table class="table table-striped table-responsive-md">
+						<thead>
+							<tr>
+								<th>Producto</th>
+								<th>Marca</th>
+								<th>Cantidad Actual</th>
+								<th>Valor Unitario</th>
+								<th>Bodega</th>
+								<th>Categoria</th>
+								<th>Proveedor</th>
+								<th>Imagen</th>
+								<th>Editar</th>
+								<th>Eliminar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="producto : ${productos}">
+								<td th:text="${producto.nombreProducto}"></td>
+								<td th:text="${producto.marca}"></td>
+								<td th:text="${producto.cantidadActual}"></td>
+								<td th:text="${producto.valorUnitario}"></td>
+								<td th:text="${producto.bodega.nombreBodega}"></td>
+								<td th:text="${producto.categoriaproducto.nombreCategoria}"></td>
+								<td th:text="${producto.proveedor.nombreProvedor}"></td>
+								<td><img id="imcargar" th:src="${producto.urlFoto}" class="img-fluid rounded mt-2" style='width: 10rem; heigth: auto;'></td>
+								<td><a
+									th:href="@{/editProducto/{idProducto}(idProducto=${producto.idProducto})}"
+									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+								<td><a
+									th:href="@{/deleteProducto/{idProducto}(idProducto=${producto.idProducto})}"
+									class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p class="my-5">
+					<a th:href="@{/ingresoProducto}" class="btn btn-primary"><i
+						class="fas fa-user-plus ml-2"></i>Agregar Nuevo</a>
+				</p>
+			</div>
+		</div>
+	</div>
     <!-- Fin del Cuerpo de la Pagina -->
     <!-- Inicio del Footer -->
 
@@ -41,6 +78,7 @@
 	<!-- Fin del Footer -->
 	<!-- Scripts de JS de bootstrap  -->
 	<!-- (Orden) jQuery first, then Popper.js, then Bootstrap JS -->
+	
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 		crossorigin="anonymous"></script>

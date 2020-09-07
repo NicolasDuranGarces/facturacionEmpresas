@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <title>Index Admin</title>
 </head>
 
@@ -14,16 +15,80 @@
     <div th:replace="Componentes/Navbar :: nav"></div>
     <!--Fin del Menu de Administrador-->
     <!-- Inicio del Cuerpo de la Pagina -->
+	<div class="container">
+         <form  th:action="@{/updateProducto/{idProducto}(idProducto=${producto.idProducto})}" th:object="${producto}" enctype="multipart/form-data" method="post">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="nombreProducto" class="col-form-label">Nombre Del
+                        Producto</label> <input type="text" th:field="*{nombreProducto}" class="form-control"
+                        id="nombreProducto" placeholder="..." required="required"> <span th:if="${#fields.hasErrors('nombreProducto')}" th:errors="*{nombreProducto}"
+						class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="marca" class="col-form-label" >Marca</label> <input
+                        type="text" th:field="*{marca}" class="form-control" id="marca" placeholder="..."
+                        required="required"> <span th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}"
+						class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="minimoInventario" class="col-form-label" >Producto minimo en el inventario</label> <input
+                        type="number" th:field="*{minimoInventario}" class="form-control" id="minimoInventario" placeholder="0"
+                        required="required"> <span th:if="${#fields.hasErrors('minimoInventario')}" th:errors="*{minimoInventario}"
+						class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="cantidadActual" class="col-form-label" >Cantidad de Producto Actual</label> <input
+                        type="number" th:field="*{cantidadActual}" class="form-control" id="cantidadActual" placeholder="0"
+                        required="required"> <span th:if="${#fields.hasErrors('cantidadActual')}" th:errors="*{cantidadActual}"
+						class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="valorUnitario" class="col-form-label" >Presio Unitario</label> <input
+                        type="text" th:field="*{valorUnitario}" class="form-control" id="valorUnitario" placeholder="$..."
+                        required="required"> <span th:if="${#fields.hasErrors('valorUnitario')}" th:errors="*{valorUnitario}"
+						class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="validationTooltip04" >Bodega</label>
+                      <select th:field="*{bodega.idBodega}" class="custom-select" id="validationTooltip04"  >
+                        <option th:each="bodega : ${bodegas}" th:value="${bodega.idBodega}"
+                        th:text="${bodega.nombreBodega}" th:selected="false"/>
+                    </select>
+                    <span th:if="${#fields.hasErrors('bodega.idBodega')}" th:errors="*{bodega.idBodega}" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="validationTooltip04" >Categoria</label>
+                      <select th:field="*{categoriaproducto.id_categoriaProducto}" class="custom-select" id="validationTooltip04"  >
+                        <option th:each="categoriaproducto : ${categoriaproductos}" th:value="${categoriaproducto.id_categoriaProducto}"
+                        th:text="${categoriaproducto.nombreCategoria}" th:selected="false"/>
+                    </select>
+                    <span th:if="${#fields.hasErrors('categoriaproducto.id_categoriaProducto')}" th:errors="*{categoriaproducto.id_categoriaProducto}" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="validationTooltip04" >Proveedor</label>
+                      <select th:field="*{proveedor.idProveedor}" class="custom-select" id="validationTooltip04"  >
+                        <option th:each="proveedor : ${proveedores}" th:value="${proveedor.idProveedor}"
+                        th:text="${proveedor.nombreProvedor}" th:selected="false"/>
+                    </select>
+                    <span th:if="${#fields.hasErrors('proveedor.idProveedor')}" th:errors="*{proveedor.idProveedor}" class="text-danger"></span>
+                </div>
+                <div class="form-group ">
+                    <label for="file-upload" class="subir btn btn-primary" >
+                        <i class="fas fa-cloud-upload-alt"></i> 
+                    </label>
+                    <input type="file" id="file-upload" accept="image/" class="form-control-file" style='display: none;' name="file">
+                    <span th:if="${#fields.hasErrors('urlFoto')}" th:errors="{urlFoto}" class="text-danger"></span>
+                    <div>
+                        <img id="imcargar" src="/imagenes/sinImagen.jpg" class="img-fluid rounded mt-2" style='width: 14rem; heigth: auto;'>
+                    </div>
+                </div>
+            </div>
 
-
-
-
-
-
-
-
-
-
+			<button type="submit" class="btn btn-primary"
+				th:value="#{updateProducto-btn-update}">Actualizar
+				Producto</button>
+		</form>
+	</div>
     <!-- Fin del Cuerpo de la Pagina -->
     <!-- Inicio del Footer -->
     <footer id="sticky-footer" class="py-4 bg-dark text-white-50"
@@ -39,6 +104,7 @@
 	<!-- Fin del Footer -->
 	<!-- Scripts de JS de bootstrap  -->
 	<!-- (Orden) jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="js/subirImagen.js" th:src="@{/js/subirImagen.js}"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 		crossorigin="anonymous"></script>
