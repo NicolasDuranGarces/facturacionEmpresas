@@ -16,44 +16,50 @@
     <!--Fin del Menu de Administrador-->
     <!-- Inicio del Cuerpo de la Pagina -->
 	<div class="container">
-         <form  th:action="@{/updateProducto/{idProducto}(idProducto=${producto.idProducto})}" th:object="${producto}" enctype="multipart/form-data" method="post">
+         <form  th:action="@{/updateMercancia/{idProducto}(idProducto=${producto.idProducto})}" th:object="${producto}" enctype="multipart/form-data" method="post">
             <input type="hidden" id="agregarUrl" th:field="*{urlFoto}" th:value="${producto.urlFoto}">
             <input type="hidden" id="cambioUrl" name="cambioUrl" value="false">
             
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="nombreProducto" class="col-form-label">Nombre Del
-                        Producto</label> <input type="text" th:field="*{nombreProducto}" class="form-control"
+                        Producto</label> <input disabled type="text" th:field="*{nombreProducto}" class="form-control"
                         id="nombreProducto" placeholder="..." required="required"> <span th:if="${#fields.hasErrors('nombreProducto')}" th:errors="*{nombreProducto}"
 						class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="marca" class="col-form-label" >Marca</label> <input
+                    <label for="marca" class="col-form-label" >Marca</label> <input disabled
                         type="text" th:field="*{marca}" class="form-control" id="marca" placeholder="..."
                         required="required"> <span th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}"
 						class="text-danger"></span>
                 </div>
+               
                 <div class="form-group col-md-6">
-                    <label for="minimoInventario" class="col-form-label" >Producto minimo en el inventario</label> <input
-                        type="number" th:field="*{minimoInventario}" class="form-control" id="minimoInventario" placeholder="0"
-                        required="required"> <span th:if="${#fields.hasErrors('minimoInventario')}" th:errors="*{minimoInventario}"
-						class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="cantidadActual" class="col-form-label" >Cantidad de Producto Actual</label> <input
+                    <label for="cantidadActual" class="col-form-label" >Cantidad de Producto Actual</label> <input disabled
                         type="number" th:field="*{cantidadActual}" class="form-control" id="cantidadActual" placeholder="0"
                         required="required"> <span th:if="${#fields.hasErrors('cantidadActual')}" th:errors="*{cantidadActual}"
 						class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="valorUnitario" class="col-form-label" >Presio Unitario</label> <input
+                    <label class="col-form-label" >Nuevas Unidades </label> <input 
+                        type="number" class="form-control" th:name="cantidadActualNueva"  placeholder="0"
+                        required="required"> 
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="minimoInventario" class="col-form-label" >Producto minimo en el inventario</label> <input disabled
+                        type="number" th:field="*{minimoInventario}" class="form-control" id="minimoInventario" placeholder="0"
+                        required="required"> <span th:if="${#fields.hasErrors('minimoInventario')}" th:errors="*{minimoInventario}"
+						class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="valorUnitario" class="col-form-label" >Precio Unitario</label> <input disabled
                         type="text" th:field="*{valorUnitario}" class="form-control" id="valorUnitario" placeholder="$..."
                         required="required"> <span th:if="${#fields.hasErrors('valorUnitario')}" th:errors="*{valorUnitario}"
 						class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="validationTooltip04" >Bodega</label>
-                      <select th:field="*{bodega.idBodega}" class="custom-select" id="validationTooltip04"  >
+                      <select disabled th:field="*{bodega.idBodega}" class="custom-select" id="validationTooltip04"  >
                         <option th:each="bodega : ${bodegas}" th:value="${bodega.idBodega}"
                         th:text="${bodega.nombreBodega}" th:selected="false"/>
                     </select>
@@ -61,7 +67,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="validationTooltip04" >Categoria</label>
-                      <select th:field="*{categoriaproducto.id_categoriaProducto}" class="custom-select" id="validationTooltip04"  >
+                      <select disabled th:field="*{categoriaproducto.id_categoriaProducto}" class="custom-select" id="validationTooltip04"  >
                         <option th:each="categoriaproducto : ${categoriaproductos}" th:value="${categoriaproducto.id_categoriaProducto}"
                         th:text="${categoriaproducto.nombreCategoria}" th:selected="false"/>
                     </select>
@@ -69,28 +75,22 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="validationTooltip04" >Proveedor</label>
-                      <select th:field="*{proveedor.idProveedor}" class="custom-select" id="validationTooltip04"  >
+                      <select disabled th:field="*{proveedor.idProveedor}" class="custom-select" id="validationTooltip04"  >
                         <option th:each="proveedor : ${proveedores}" th:value="${proveedor.idProveedor}"
                         th:text="${proveedor.nombreProvedor}" th:selected="false"/>
                     </select>
                     <span th:if="${#fields.hasErrors('proveedor.idProveedor')}" th:errors="*{proveedor.idProveedor}" class="text-danger"></span>
                 </div>
-                <div class="form-group ">
-    				<label  for="file-upload" class="subir btn btn-primary" >
-    					<i class="fas fa-cloud-upload-alt" ></i> 
-					</label>
-    				<input type="file" id="file-upload" accept="image/*" class="form-control-file" style='display: none;' name="file">
-    				<span th:if="${#fields.hasErrors('urlFoto')}" th:errors="*{urlFoto}" class="text-danger"></span>
-    				<div id="zona">
-  						<img id="imcargar" th:src="${producto.urlFoto}"    alt="${producto.urlFoto}" class="img-fluid rounded mt-2" style='width: 12rem; heigth: auto;' >
-  					</div>
-  				</div>
+                
             </div>
-
+		<br>
 			<button type="submit" class="btn btn-primary"
-				th:value="#{updateProducto-btn-update}">Actualizar
+				th:value="#{updateMercancia-btn-update}">Actualizar
 				Producto</button>
 		</form>
+		
+		<br>
+		<br>
 	</div>
     <!-- Fin del Cuerpo de la Pagina -->
     <!-- Inicio del Footer -->

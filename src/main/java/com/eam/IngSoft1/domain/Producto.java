@@ -2,6 +2,9 @@ package com.eam.IngSoft1.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import lombok.ToString;
+
 import java.util.List;
 
 
@@ -11,6 +14,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Producto.findAll", query="SELECT p FROM Producto p")
+@ToString(includeFieldNames = true)
 public class Producto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -161,5 +165,6 @@ public class Producto implements Serializable {
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;
 	}
+	
 
 }

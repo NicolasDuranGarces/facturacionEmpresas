@@ -53,7 +53,7 @@ public class ProductoController {
     }
     
     @PostMapping("/addproducto")
-    public String addProducto(@Valid Producto producto, BindingResult result, Model model,@RequestParam("file") MultipartFile file) {
+    public String addProducto(@Valid Producto producto, BindingResult result, Model model, @RequestParam("file") MultipartFile file) {
         if (result.hasErrors()) {
             return "Producto/addProducto";
         }
@@ -71,7 +71,6 @@ public class ProductoController {
         return "redirect:/listadoProducto";
     }
       
-    
     
     
     
@@ -98,7 +97,7 @@ public class ProductoController {
             return "Producto/updateProducto";
         }
         
-        if (cambioUrl) {
+        if (cambioUrl) { 
 			try {
 	            Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
 	            System.out.println(uploadResult.get("url").toString());
@@ -113,7 +112,41 @@ public class ProductoController {
         return "redirect:/listadoProducto";
     }
     
+    
+    
+  //Actualizar Mercancia de los productos 
+    @GetMapping("/updateMercanciaProducto/{idProducto}")
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String showUpdateInventario(@PathVariable("idProducto") int idProducto, Model model) {
+    	Producto producto = repositorioProducto.findById(idProducto).orElseThrow(() -> new IllegalArgumentException("Invalido Producto id:" + idProducto));
+        model.addAttribute("producto", producto);
+        model.addAttribute("categoriaproductos",categoriaRepository.findAll());
+    	model.addAttribute("proveedores",proveedorRepository.findAll());
+    	model.addAttribute("bodegas",bodegaRepository.findAll());
+        return "Producto/agregarMercanciaProducto";
+    }
+    
+    @PostMapping("/updateMercancia/{idProducto}")
+    public String updateMercanciaProducto(@PathVariable("idProducto") int idProducto, @RequestParam(value = "cantidadActualNueva") int cantidadNueva,  Producto producto, BindingResult result, Model model ) {
+        if (result.hasErrors()) {
+        	producto.setIdProducto(idProducto);
+        	
+        	model.addAttribute("categoriaproductos",categoriaRepository.findAll());
+        	model.addAttribute("proveedores",proveedorRepository.findAll());
+        	model.addAttribute("bodegas",bodegaRepository.findAll());
+            return "Producto/agregarMercanciaProducto";
+        }
         
+        System.out.println(producto.toString());
+        producto.toString();
+    	producto = repositorioProducto.findById(idProducto).orElseThrow(() -> new IllegalArgumentException("Invalido Producto id:" + idProducto));
+    	producto.setCantidadActual(producto.getCantidadActual()+cantidadNueva);
+        repositorioProducto.save(producto);
+        model.addAttribute("productos", repositorioProducto.findAll());
+        return "redirect:/listadoProducto";
+    }
+    
+     
     
     //Metodo para Eliminar Producto
     @GetMapping("/deleteProducto/{idProducto}")

@@ -19,6 +19,7 @@
          <form  th:action="@{/updateProducto/{idProducto}(idProducto=${producto.idProducto})}" th:object="${producto}" enctype="multipart/form-data" method="post">
             <input type="hidden" id="agregarUrl" th:field="*{urlFoto}" th:value="${producto.urlFoto}">
             <input type="hidden" id="cambioUrl" name="cambioUrl" value="false">
+            
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="nombreProducto" class="col-form-label">Nombre Del
@@ -81,7 +82,7 @@
     				<input type="file" id="file-upload" accept="image/*" class="form-control-file" style='display: none;' name="file">
     				<span th:if="${#fields.hasErrors('urlFoto')}" th:errors="*{urlFoto}" class="text-danger"></span>
     				<div id="zona">
-  						<img id="imcargar" th:src="${producto.urlFoto}" alt="${producto.urlFoto}" class="img-fluid rounded mt-2" style='width: 12rem; heigth: auto;' >
+  						<img id="imcargar" th:src="${producto.urlFoto}"    alt="${producto.urlFoto}" class="img-fluid rounded mt-2" style='width: 12rem; heigth: auto;' >
   					</div>
   				</div>
             </div>

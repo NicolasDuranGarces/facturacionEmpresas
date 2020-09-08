@@ -27,37 +27,43 @@
 								<th>Marca</th>
 								<th>Cantidad Actual</th>
 								<th>Valor Unitario</th>
+								<th>Cantidad Minima</th>
 								<th>Bodega</th>
 								<th>Categoria</th>
 								<th>Proveedor</th>
 								<th>Imagen</th>
 								<th>Editar</th>
 								<th>Eliminar</th>
+								<th>Sumar Mercancia</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="producto : ${productos}">
+							<tr th:each ="producto : ${productos}">
 								<td th:text="${producto.nombreProducto}"></td>
 								<td th:text="${producto.marca}"></td>
 								<td th:text="${producto.cantidadActual}"></td>
 								<td th:text="${producto.valorUnitario}"></td>
+								<td th:text="${producto.minimoInventario}"></td>
 								<td th:text="${producto.bodega.nombreBodega}"></td>
 								<td th:text="${producto.categoriaproducto.nombreCategoria}"></td>
 								<td th:text="${producto.proveedor.nombreProvedor}"></td>
 								<td><img id="imcargar" th:src="${producto.urlFoto}" class="img-fluid rounded mt-2" style='width: 10rem; heigth: auto;'></td>
 								<td><a
 									th:href="@{/editProducto/{idProducto}(idProducto=${producto.idProducto})}"
-									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+									class="btn btn-primary"><i class="fas fa-edit ml-2 mr-1"></i></a></td>
 								<td><a
 									th:href="@{/deleteProducto/{idProducto}(idProducto=${producto.idProducto})}"
-									class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a></td>
+									class="btn btn-danger"><i class="fas fa-times ml-2 mr-2"></i></a></td>
+								<td><a
+									th:href="@{/updateMercanciaProducto/{idProducto}(idProducto=${producto.idProducto})}"
+									class="btn btn-success"><i class="fas fa-plus ml-2 mr-2"></i></a></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 				<p class="my-5">
 					<a th:href="@{/ingresoProducto}" class="btn btn-primary"><i
-						class="fas fa-user-plus ml-2"></i>Agregar Nuevo</a>
+						class="fas fa-plus ml-2"></i> Agregar Nuevo</a>
 				</p>
 			</div>
 		</div>

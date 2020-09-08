@@ -21,6 +21,7 @@ function readImage(input) {
 	}
 	reader.readAsDataURL(input[0]);
 }
+
 /*
 function readImage(input) {
 	var data = new FormData();

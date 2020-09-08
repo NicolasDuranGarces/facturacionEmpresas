@@ -21,6 +21,7 @@ public class CloudinaryConfig {
         cloudinary.config.cloudName=cloud;
         cloudinary.config.apiSecret=secret;
         cloudinary.config.apiKey=key;
+        
     }
 
     public Map upload(Object file, Map options) {
