@@ -5,7 +5,7 @@
         box-sizing: border-box;
         font-family: 'Poppins', sans-serif;
     }
-    
+
     section {
         display: flex;
         justify-content: center;
@@ -13,7 +13,7 @@
         min-height: 100vh;
         background: linear-gradient(-30deg, #03a9f4 0%, #3a78b7 50%, #262626 50%, #607d8b 100%);
     }
-    
+
     .box {
         position: relative;
         padding: 50px;
@@ -26,7 +26,16 @@
         border-radius: 6px;
         box-shadow: 0 5px 35 px rgba(0, 0, 0, 0.2);
     }
-    
+
+    .box .form .header{
+      margin-bottom: 20px;
+    }
+
+    .box .form .header img{
+      width: 100%;
+      height: auto;
+    }
+
     .box::after {
         content: '';
         position: absolute;
@@ -38,25 +47,26 @@
         pointer-events: none;
         background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.3) 100%);
     }
-    
+
     .box .form {
         position: relative;
         width: 100%;
     }
-    
-    .box .form h2 {
+
+    .box .form .header h2 {
         color: #fff;
         font-weight: 600;
         letter-spacing: 2px;
         margin-bottom: 30px;
+        text-align: center;
     }
-    
+
     .box .form .inputBx {
         position: relative;
         width: 100%;
         margin-bottom: 20px;
     }
-    
+
     .box .form .inputBx input {
         width: 100%;
         outline: none;
@@ -69,11 +79,11 @@
         font-weight: 300;
         box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.2);
     }
-    
+
     .box .form .inputBx input::placeholder {
         color: #fff;
     }
-    
+
     .box .form .inputBx input[type="submit"] {
         background: #fff;
         color: #111;
@@ -84,11 +94,11 @@
         letter-spacing: 1px;
         cursor: pointer;
     }
-    
-    .box .form .inputBx img {
+
+    /* .box .form .inputBx img {
         position: absolute;
         top: 8px;
         left: 10px;
         transform: scale(0.7);
         filter: invert(1);
-    }
+    } */
