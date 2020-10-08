@@ -23,6 +23,49 @@ public class Detallefactura implements Serializable {
 	private int cantidadProducto;
 
 	private int valorTotal;
+	
+	public Detallefactura() {
+	}
+
+	public int getId_detalleFactura() {
+		return this.id_detalleFactura;
+	}
+
+	public void setId_detalleFactura(int id_detalleFactura) {
+		this.id_detalleFactura = id_detalleFactura;
+	}
+
+	public int getCantidadProducto() {
+		return this.cantidadProducto;
+	}
+
+	public void setCantidadProducto(int cantidadProducto) {
+		this.cantidadProducto = cantidadProducto;
+	}
+
+	public int getValorTotal() {
+		return this.valorTotal;
+	}
+
+	public void setValorTotal(int valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	public Factura getFactura() {
+		return this.factura;
+	}
+
+	public void setFactura(Factura factura) {
+		this.factura = factura;
+	}
+
+	public Producto getProducto() {
+		return this.producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
 
 	//bi-directional many-to-one association to Factura
 	@ManyToOne

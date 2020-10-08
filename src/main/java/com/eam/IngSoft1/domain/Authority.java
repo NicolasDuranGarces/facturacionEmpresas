@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import lombok.Data;
 
 @Entity
-@Data
 public class Authority implements Serializable {
 
 	/**
@@ -33,4 +32,18 @@ public class Authority implements Serializable {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+	
 }

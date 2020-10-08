@@ -39,7 +39,50 @@ public class Pedido implements Serializable {
 	//bi-directional many-to-one association to Cliente
 	@ManyToOne
 	@JoinColumn(name="DNI_cliente")
-	private Cliente cliente;
+	private Usuario cliente;
+	
+	public Pedido() {
+	}
+
+	public int getIdPedido() {
+		return this.idPedido;
+	}
+
+	public void setIdPedido(int idPedido) {
+		this.idPedido = idPedido;
+	}
+
+	public byte getDespachado() {
+		return this.despachado;
+	}
+
+	public void setDespachado(byte despachado) {
+		this.despachado = despachado;
+	}
+
+	public int getDNI_vendedor() {
+		return this.DNI_vendedor;
+	}
+
+	public void setDNI_vendedor(int DNI_vendedor) {
+		this.DNI_vendedor = DNI_vendedor;
+	}
+
+	public Date getFechaPedido() {
+		return this.fechaPedido;
+	}
+
+	public void setFechaPedido(Date fechaPedido) {
+		this.fechaPedido = fechaPedido;
+	}
+
+	public List<Factura> getFacturas() {
+		return this.facturas;
+	}
+
+	public void setFacturas(List<Factura> facturas) {
+		this.facturas = facturas;
+	}
 
 	public Factura addFactura(Factura factura) {
 		getFacturas().add(factura);
@@ -55,11 +98,11 @@ public class Pedido implements Serializable {
 		return factura;
 	}
 
-	public Cliente getCliente() {
+	public Usuario getCliente() {
 		return this.cliente;
 	}
 
-	public void setCliente(Cliente cliente) {
+	public void Usuario(Usuario cliente) {
 		this.cliente = cliente;
 	}
 

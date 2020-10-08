@@ -35,6 +35,33 @@ public class Factura implements Serializable {
 	@JoinColumn(name="id_pedido")
 	private Pedido pedido;
 
+	
+	public Factura() {
+	}
+
+	public int getIdFactura() {
+		return this.idFactura;
+	}
+
+	public void setIdFactura(int idFactura) {
+		this.idFactura = idFactura;
+	}
+
+	public int getPrecioTotal() {
+		return this.precioTotal;
+	}
+
+	public void setPrecioTotal(int precioTotal) {
+		this.precioTotal = precioTotal;
+	}
+
+	public List<Detallefactura> getDetallefacturas() {
+		return this.detallefacturas;
+	}
+
+	public void setDetallefacturas(List<Detallefactura> detallefacturas) {
+		this.detallefacturas = detallefacturas;
+	}
 
 	public Detallefactura addDetallefactura(Detallefactura detallefactura) {
 		getDetallefacturas().add(detallefactura);
@@ -48,6 +75,14 @@ public class Factura implements Serializable {
 		detallefactura.setFactura(null);
 
 		return detallefactura;
+	}
+	
+	public Pedido getPedido() {
+		return this.pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 
 

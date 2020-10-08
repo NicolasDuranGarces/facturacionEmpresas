@@ -10,29 +10,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.eam.IngSoft1.IRepository.IEmpleadoRepository;
-import com.eam.IngSoft1.domain.Empleado;
+import com.eam.IngSoft1.IRepository.IUsuarioRepository;
+import com.eam.IngSoft1.domain.Usuario;
 
 
 @Controller
 public class EmpleadoController {
 
-	private final IEmpleadoRepository repositorioEmpleado;
+	private final IUsuarioRepository repositorioEmpleado;
 	
 	@Autowired
-	public EmpleadoController (IEmpleadoRepository repositorioEmpleado){
+	public EmpleadoController (IUsuarioRepository repositorioEmpleado){
 		this.repositorioEmpleado = repositorioEmpleado;
 	}
 	
 	//Metodo Para Crear Empleado
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/ingresoEmpleado")
-    public String showSignUpForm(Empleado empleado) {
+    public String showSignUpForm(Usuario empleado) {
         return "Empleado/addEmpleado";
     }
     
     @PostMapping("/addempleado")
-    public String addEmpleado(@Valid Empleado empleado, BindingResult result, Model model) {
+    public String addEmpleado(@Valid Usuario empleado, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "Empleado/addEmpleado";
         }
@@ -46,16 +46,16 @@ public class EmpleadoController {
     @GetMapping("/editEmpleado/{DNI_empleado}")
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String showUpdateForm(@PathVariable("DNI_empleado") int DNI_empleado, Model model) {
-    	Empleado empleado = repositorioEmpleado.findById(DNI_empleado).orElseThrow(() -> new IllegalArgumentException("Invalido Empleado id:" + DNI_empleado));
+    	Usuario empleado = repositorioEmpleado.findById(DNI_empleado).orElseThrow(() -> new IllegalArgumentException("Invalido Empleado id:" + DNI_empleado));
         model.addAttribute("empleado", empleado);
         return "Empleado/updateEmpleado";
     }
     
     
     @PostMapping("/updateEmpleado/{DNI_empleado}")
-    public String updateEmpleado(@PathVariable("DNI_empleado") int DNI_empleado,  Empleado empleado, BindingResult result, Model model) {
+    public String updateEmpleado(@PathVariable("DNI_empleado") int DNI_empleado,  Usuario empleado, BindingResult result, Model model) {
         if (result.hasErrors()) {
-        	empleado.setDNI_empleado(DNI_empleado);
+        	empleado.setDni(DNI_empleado);
             return "Empleado/updateEmpleado";
         }
         
@@ -70,7 +70,7 @@ public class EmpleadoController {
     @GetMapping("/deleteEmpleado/{DNI_empleado}")
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String deleteEmpleado(@PathVariable("DNI_empleado") int DNI_empleado, Model model) {
-    	Empleado empleado = repositorioEmpleado.findById(DNI_empleado).orElseThrow(() -> new IllegalArgumentException("Invalido Empleado id:" + DNI_empleado));
+    	Usuario empleado = repositorioEmpleado.findById(DNI_empleado).orElseThrow(() -> new IllegalArgumentException("Invalido Empleado id:" + DNI_empleado));
         repositorioEmpleado.delete(empleado);
         model.addAttribute("empleado", repositorioEmpleado.findAll());
         return "redirect:/listadoEmpleados";
@@ -81,7 +81,7 @@ public class EmpleadoController {
     //Listado de empleado
   	@GetMapping("/listadoEmpleados")
   	//@PreAuthorize("hasRole('ROLE_ADMIN')")
-  	public String list(Empleado empleado, Model model) {
+  	public String list(Usuario empleado, Model model) {
   		model.addAttribute("empleado", repositorioEmpleado.findAll());
         return "/Empleado/listadoEmpleado";
   	}

@@ -1,4 +1,4 @@
-package com.eam.IngSoft1.config;
+/*package com.eam.IngSoft1.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -72,4 +72,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// And Setting PassswordEncoder
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
-}
+}*/

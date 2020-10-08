@@ -1,4 +1,4 @@
-package com.eam.IngSoft1.service;
+/*package com.eam.IngSoft1.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     IEmpleadoRepository empleadoRepository;
 	
     @Override
-     public UserDetails loadUserByUsername(String dni) throws UsernameNotFoundException {
+     //public UserDetails loadUserByUsername(String dni) throws UsernameNotFoundException {
 		
      //Buscar el usuario con el repositorio y si no existe lanzar una exepcion
 	     Empleado appUser = 
@@ -41,8 +41,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	    }
 			
 	    //Crear El objeto UserDetails que va a ir en sesion y retornarlo.
-	   // UserDetails user = (UserDetails) new User(appUser.getDNI_empleado(), appUser.getPassword(), grantList);
+	    // UserDetails user = (UserDetails) new User(appUser.getDNI_empleado(), appUser.getPassword(), grantList);
 	    //System.out.println(appUser.getDNI_empleado()+" - clave:" + appUser.getPassword());
-        return user;
+        //return user;
     }
-}
+}*/
