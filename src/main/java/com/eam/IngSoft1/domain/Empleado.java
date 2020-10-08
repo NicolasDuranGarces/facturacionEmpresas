@@ -26,6 +26,10 @@ public class Empleado implements Serializable {
 	private String direccion;
 
 	private String nombre;
+	
+	private String usario;
+	
+	private String contrasena;
 
 	private int telefono;
 
@@ -37,8 +41,5 @@ public class Empleado implements Serializable {
 	joinColumns=@JoinColumn(name="empleado_dni"),
 	inverseJoinColumns=@JoinColumn(name="authority_id"))
 	private Set<Authority> authority;
-
-	
-	
 
 }

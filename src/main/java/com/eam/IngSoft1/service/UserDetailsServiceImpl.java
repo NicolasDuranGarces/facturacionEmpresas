@@ -41,8 +41,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	    }
 			
 	    //Crear El objeto UserDetails que va a ir en sesion y retornarlo.
-	    UserDetails user = (UserDetails) new User(appUser.getDNI_empleado(), appUser.getPassword(), grantList);
-	    System.out.println(appUser.getDNI_empleado()+" - clave:" + appUser.getPassword());
+	   // UserDetails user = (UserDetails) new User(appUser.getDNI_empleado(), appUser.getPassword(), grantList);
+	    //System.out.println(appUser.getDNI_empleado()+" - clave:" + appUser.getPassword());
         return user;
     }
 }
