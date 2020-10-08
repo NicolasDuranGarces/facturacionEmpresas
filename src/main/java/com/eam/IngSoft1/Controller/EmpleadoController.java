@@ -67,7 +67,7 @@ public class EmpleadoController {
     
    
     //Metodo para Eliminar empleado
-    @GetMapping("/deleteProveedor/{DNI_empleado}")
+    @GetMapping("/deleteEmpleado/{DNI_empleado}")
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String deleteEmpleado(@PathVariable("DNI_empleado") int DNI_empleado, Model model) {
     	Empleado empleado = repositorioEmpleado.findById(DNI_empleado).orElseThrow(() -> new IllegalArgumentException("Invalido Empleado id:" + DNI_empleado));
@@ -83,7 +83,7 @@ public class EmpleadoController {
   	//@PreAuthorize("hasRole('ROLE_ADMIN')")
   	public String list(Empleado empleado, Model model) {
   		model.addAttribute("empleado", repositorioEmpleado.findAll());
-        return "/Empleado/listadoEmpleados";
+        return "/Empleado/listadoEmpleado";
   	}
 	
 }
