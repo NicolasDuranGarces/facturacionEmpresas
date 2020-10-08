@@ -34,6 +34,7 @@ public class Empleado implements Serializable {
 	private int telefono;
 
 	public Empleado() {
+		
 	}
 	
 	@ManyToMany(fetch = FetchType.EAGER)
