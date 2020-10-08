@@ -15,12 +15,12 @@ import com.eam.IngSoft1.domain.Usuario;
 
 
 @Controller
-public class EmpleadoController {
+public class UsuarioController {
 
 	private final IUsuarioRepository repositorioEmpleado;
 	
 	@Autowired
-	public EmpleadoController (IUsuarioRepository repositorioEmpleado){
+	public UsuarioController (IUsuarioRepository repositorioEmpleado){
 		this.repositorioEmpleado = repositorioEmpleado;
 	}
 	
