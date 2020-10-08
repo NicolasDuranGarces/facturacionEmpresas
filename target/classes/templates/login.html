@@ -19,7 +19,7 @@
                 <img src="Imagenes/LOGO.png" alt="">
                 <h2>Login</h2>
               </div>
-                <form action="">
+                <form th:action="@{/login}" method="post">
                     <div class="form-group">
                         <input type="text" th:field="*{usuario}" class="form-control" id="usuario" placeholder="Usuario"  required="required">
                         <span th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}" class="text-danger"></span>
@@ -35,6 +35,12 @@
                         <input type="button" class="btn bg-dark text-white" th:href="@{/registrar}" value="Registrarse">
                     </div>
                 </form>
+                <div th:if="${param.error}" class="alert alert-danger" role="alert">
+		            Invalid username and password.
+		        </div>
+		        <div th:if="${param.logout}" class="alert alert-success" role="alert">
+		            You have been logged out.
+		        </div>
             </div>
         </div>
     </section>
