@@ -2,6 +2,9 @@ package com.eam.IngSoft1.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import lombok.Data;
+
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +14,7 @@ import java.util.List;
  * 
  */
 @Entity
+@Data
 @NamedQuery(name="Pedido.findAll", query="SELECT p FROM Pedido p")
 public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -36,49 +40,6 @@ public class Pedido implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="DNI_cliente")
 	private Cliente cliente;
-
-	public Pedido() {
-	}
-
-	public int getIdPedido() {
-		return this.idPedido;
-	}
-
-	public void setIdPedido(int idPedido) {
-		this.idPedido = idPedido;
-	}
-
-	public byte getDespachado() {
-		return this.despachado;
-	}
-
-	public void setDespachado(byte despachado) {
-		this.despachado = despachado;
-	}
-
-	public int getDNI_vendedor() {
-		return this.DNI_vendedor;
-	}
-
-	public void setDNI_vendedor(int DNI_vendedor) {
-		this.DNI_vendedor = DNI_vendedor;
-	}
-
-	public Date getFechaPedido() {
-		return this.fechaPedido;
-	}
-
-	public void setFechaPedido(Date fechaPedido) {
-		this.fechaPedido = fechaPedido;
-	}
-
-	public List<Factura> getFacturas() {
-		return this.facturas;
-	}
-
-	public void setFacturas(List<Factura> facturas) {
-		this.facturas = facturas;
-	}
 
 	public Factura addFactura(Factura factura) {
 		getFacturas().add(factura);
