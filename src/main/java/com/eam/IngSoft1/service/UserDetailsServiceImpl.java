@@ -1,4 +1,4 @@
-/*package com.eam.IngSoft1.service;
+package com.eam.IngSoft1.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +12,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.eam.IngSoft1.domain.Cliente;
-import com.eam.IngSoft1.domain.Empleado;
-import com.eam.IngSoft1.IRepository.IEmpleadoRepository;
+
+import com.eam.IngSoft1.domain.Usuario;
+import com.eam.IngSoft1.IRepository.IUsuarioRepository;
 import com.eam.IngSoft1.domain.Authority;
 
 
@@ -22,14 +22,14 @@ import com.eam.IngSoft1.domain.Authority;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    IEmpleadoRepository empleadoRepository;
+    IUsuarioRepository usuarioRepository;
 	
     @Override
-     //public UserDetails loadUserByUsername(String dni) throws UsernameNotFoundException {
+     public UserDetails loadUserByUsername(String usuario) throws UsernameNotFoundException {
 		
      //Buscar el usuario con el repositorio y si no existe lanzar una exepcion
-	     Empleado appUser = 
-	                 empleadoRepository.findById(Integer.valueOf(dni)).orElseThrow(() -> new UsernameNotFoundException("No existe usuario"));
+	     Usuario appUser = 
+	                 usuarioRepository.findByUsername(usuario).orElseThrow(() -> new UsernameNotFoundException("No existe usuario"));
 			
 	    //Mapear nuestra lista de Authority con la de spring security 
 	    List grantList = new ArrayList();
@@ -41,8 +41,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	    }
 			
 	    //Crear El objeto UserDetails que va a ir en sesion y retornarlo.
-	    // UserDetails user = (UserDetails) new User(appUser.getDNI_empleado(), appUser.getPassword(), grantList);
-	    //System.out.println(appUser.getDNI_empleado()+" - clave:" + appUser.getPassword());
-        //return user;
+	    UserDetails user = (UserDetails) new User(appUser.getUsuario(), appUser.getContrasena(), grantList);
+	    System.out.println(appUser.getUsuario()+" - clave:" + appUser.getContrasena());
+        return user;
     }
-}*/
+}

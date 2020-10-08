@@ -1,4 +1,4 @@
-/*package com.eam.IngSoft1.config;
+package com.eam.IngSoft1.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	// Necesario para evitar que la seguridad se aplique a los resources
 	// Como los css, imagenes y javascripts
-	String[] resources = new String[] { "/include/**", "/css/**", "/icons/**", "/img/**", "/js/**", "/layer/**" };
+	String[] resources = new String[] { "/include/*", "/css/", "/icons/", "/img/", "/js/", "/layer/*" };
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -30,18 +30,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/user*").access("hasRole('USER') or hasRole('ADMIN')")
 				.and()
 			.formLogin()
-				.loginPage("/login-empleados")
-				.defaultSuccessUrl("/home-empleado")
-				.failureUrl("/login-empleados?error=true")
-				.usernameParameter("usuario")
-				.passwordParameter("password")
-				.and()
-			.formLogin()
 				.loginPage("/login")
-				.defaultSuccessUrl("/home")
+				.defaultSuccessUrl("/home-empleado")
 				.failureUrl("/login?error=true")
 				.usernameParameter("usuario")
-				.passwordParameter("password")
+				.passwordParameter("contrasena")
 				.and()
 			.logout()
 				.permitAll()
@@ -72,4 +65,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// And Setting PassswordEncoder
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
-}*/
+}
