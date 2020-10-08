@@ -75,6 +75,26 @@
 						th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"
 						class="text-danger"></span>
 				</div>
+				
+				<!-- Usuario del Empleado -->
+
+				<div class="form-group col-md-6">
+					<label for="usario" class="col-form-label">Nombre de Usuario del Empleado</label> <input
+						type="text" th:field="*{usario}" class="form-control"
+						id="usario" placeholder="..." required="required"> <span
+						th:if="${#fields.hasErrors('usario')}" th:errors="*{usario}"
+						class="text-danger"></span>
+				</div>
+				
+				<!-- Contrasena del Empleado -->
+
+				<div class="form-group col-md-6">
+					<label for="contrasena" class="col-form-label">Contrasena del Empleado</label> <input
+						type="password" th:field="*{contrasena}" class="form-control"
+						id="contrasena" placeholder="..." required="required"> <span
+						th:if="${#fields.hasErrors('contrasena')}" th:errors="*{contrasena}"
+						class="text-danger"></span>
+				</div>
 
 			</div>
 			<div class="row">
