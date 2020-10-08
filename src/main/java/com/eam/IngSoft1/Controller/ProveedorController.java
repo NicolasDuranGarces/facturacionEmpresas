@@ -67,8 +67,6 @@ public class ProveedorController {
     
     
    
-    
-    
     //Metodo para Eliminar Proveedor
     @GetMapping("/deleteProveedor/{idProveedor}")
     //@PreAuthorize("hasRole('ROLE_ADMIN')")

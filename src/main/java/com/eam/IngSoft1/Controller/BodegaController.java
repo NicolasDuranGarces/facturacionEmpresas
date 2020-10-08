@@ -36,7 +36,7 @@ public class BodegaController {
             return "Bodega/addBodega";
         }
         repositorioBodega.save(bodega);
-        model.addAttribute("categoriaProductos", repositorioBodega.findAll());
+        model.addAttribute("bodega", repositorioBodega.findAll());
         return "redirect:/listadoBodega";
     }
     
@@ -45,7 +45,7 @@ public class BodegaController {
     @GetMapping("/editBodega/{idBodega}")
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String showUpdateForm(@PathVariable("idBodega") int idBodega, Model model) {
-    	Bodega bodega = repositorioBodega.findById(idBodega).orElseThrow(() -> new IllegalArgumentException("Invalido categoria idBodega:" + idBodega));
+    	Bodega bodega = repositorioBodega.findById(idBodega).orElseThrow(() -> new IllegalArgumentException("Invalido Bodega idBodega:" + idBodega));
         model.addAttribute("bodega", bodega);
         return "Bodega/updateBodega";
     }
@@ -68,19 +68,18 @@ public class BodegaController {
     @GetMapping("/deleteBodega/{idBodega}")
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String deleteBodega(@PathVariable("idBodega") int idBodega, Model model) {
-    	Bodega bodega = repositorioBodega.findById(idBodega).orElseThrow(() -> new IllegalArgumentException("Invalido categoria idBodega:" + idBodega));
+    	Bodega bodega = repositorioBodega.findById(idBodega).orElseThrow(() -> new IllegalArgumentException("Invalido Bodega idBodega:" + idBodega));
         repositorioBodega.delete(bodega);
         model.addAttribute("bodega", repositorioBodega.findAll());
         return "redirect:/listadoBodega";
     }
     
     
-    //Listado de Categorias
   	@GetMapping("/listadoBodega")
   	//@PreAuthorize("hasRole('ROLE_ADMIN')")
   	public String list(Bodega bodega, Model model) {
   		model.addAttribute("bodega", repositorioBodega.findAll());
-        return "Categoria/listadoBodega";
+        return "Bodega/listadoBodega";
   	}
 	
 }

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Agregar Bodega</title>
+</head>
+
+<body>
+    <!-- Menu para Todas las Vistas de Administrador-->
+	<div th:replace="Componentes/Navbar :: nav"></div>
+	<!--Fin del Menu de Administrador-->
+	<!-- Inicio del Cuerpo de la Pagina -->
+    <br>
+    <div class="container">
+    	<br><br>
+        <h1>Registro de Bodega</h1>
+        <hr>
+    </div>
+    <br>
+    <!-- Inicio del Cuerpo de la Pagina -->
+
+    <div class="container my-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <form action="#" th:action="@{/addbodega}" th:object="${bodega}" method="post">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="nombreBodega" class="col-form-label" >Nombre de la Bodega</label>
+                                <input type="text" th:field="*{nombreBodega}" class="form-control" id="nombreBodega" placeholder="Nombre de la Bodega" required="required">
+                                <span th:if="${#fields.hasErrors('nombreBodega')}" th:errors="*{nombreBodega}" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="ubicacion" class="col-form-label" >Ubicacion de la Bodega</label>
+                                <input type="text" th:field="*{ubicacion}" class="form-control" id="ubicacion" placeholder="Ubicacion de la Bodega" required="required">
+                                <span th:if="${#fields.hasErrors('ubicacion')}" th:errors="*{ubicacion}" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mt-5">
+                                <input type="submit" class="btn btn-primary" >
+                            </div>
+                        </div>    
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+    <!-- Fin del Cuerpo de la Pagina -->
+    <br>
+    <br>
+    <br>
+    <!-- Inicio del Footer -->
+    <br>
+    <br>
+    <br><br><br><br><br><br><br>
+
+    <footer id="sticky-footer" class="py-4 bg-dark text-white-50" style="flex-shrink: none;">
+        <div class="container text-center">
+            <small> &copy; Derechos Reservados : <a href="www.github.com/papugarces">Papu</a>-<a href="">Jose Miguel</a>-<a href="">Sebastian Hidalgo</a></small>
+        </div>
+    </footer>
+
+
+    <!-- Fin del Footer -->
+    <!-- Scripts de JS de bootstrap  -->
+    <!-- (Orden) jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

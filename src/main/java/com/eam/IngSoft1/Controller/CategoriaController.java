@@ -30,7 +30,7 @@ public class CategoriaController {
     public String showSignUpForm(Categoriaproducto categoriaProducto) {
         return "Categoria/addCategoria";
     }
-    
+   
     @PostMapping("/addcategoria")
     public String addCategoria(@Valid Categoriaproducto categoriaProducto, BindingResult result, Model model) {
         if (result.hasErrors()) {
