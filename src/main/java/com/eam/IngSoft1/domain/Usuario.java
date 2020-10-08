@@ -24,7 +24,7 @@ public class Usuario implements Serializable {
 	private String contrasena;
 
 	private String direccion;
-
+	
 	@Id
 	private int dni;
 
@@ -32,7 +32,7 @@ public class Usuario implements Serializable {
 
 	private String telefono;
 
-	private String usuario;
+	private String nombreUsuario;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="authorities_usuarios",
@@ -98,11 +98,11 @@ public class Usuario implements Serializable {
 	}
 
 	public String getUsuario() {
-		return this.usuario;
+		return this.nombreUsuario;
 	}
 
 	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+		this.nombreUsuario = usuario;
 	}
 	
 	public List<Pedido> getPedidos() {

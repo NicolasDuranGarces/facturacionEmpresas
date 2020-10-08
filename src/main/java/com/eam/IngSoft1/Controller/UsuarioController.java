@@ -24,66 +24,66 @@ public class UsuarioController {
 		this.repositorioEmpleado = repositorioEmpleado;
 	}
 	
-	//Metodo Para Crear Empleado
+	//Metodo Para Crear Usuario
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/ingresoEmpleado")
+    @GetMapping("/ingresoUsuario")
     public String showSignUpForm(Usuario empleado) {
-        return "Empleado/addEmpleado";
+        return "Usuario/addUsuario";
     }
     
-    @PostMapping("/addempleado")
-    public String addEmpleado(@Valid Usuario empleado, BindingResult result, Model model) {
+    @PostMapping("/addusuario")
+    public String addUsuario(@Valid Usuario empleado, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "Empleado/addEmpleado";
+            return "Usuario/addUsuario";
         }
         repositorioEmpleado.save(empleado);
-        model.addAttribute("empleado", repositorioEmpleado.findAll());
-        return "redirect:/listadoEmpleados";
+        model.addAttribute("usuario", repositorioEmpleado.findAll());
+        return "redirect:/listadoUsuario";
     }
     
     
-    //Metodo Para Actualizar empleado
-    @GetMapping("/editEmpleado/{DNI_empleado}")
+    //Metodo Para Actualizar usuario
+    @GetMapping("/editUsuario/{dni}")
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String showUpdateForm(@PathVariable("DNI_empleado") int DNI_empleado, Model model) {
-    	Usuario empleado = repositorioEmpleado.findById(DNI_empleado).orElseThrow(() -> new IllegalArgumentException("Invalido Empleado id:" + DNI_empleado));
-        model.addAttribute("empleado", empleado);
-        return "Empleado/updateEmpleado";
+    public String showUpdateForm(@PathVariable("dni") int dni, Model model) {
+    	Usuario empleado = repositorioEmpleado.findById(dni).orElseThrow(() -> new IllegalArgumentException("Invalido Empleado id:" + dni));
+        model.addAttribute("usuario", empleado);
+        return "Usuario/updateUsuario";
     }
     
     
-    @PostMapping("/updateEmpleado/{DNI_empleado}")
-    public String updateEmpleado(@PathVariable("DNI_empleado") int DNI_empleado,  Usuario empleado, BindingResult result, Model model) {
+    @PostMapping("/updateUsuario/{dni}")
+    public String updateEmpleado(@PathVariable("dni") int dni,  Usuario empleado, BindingResult result, Model model) {
         if (result.hasErrors()) {
-        	empleado.setDni(DNI_empleado);
-            return "Empleado/updateEmpleado";
+        	empleado.setDni(dni);
+            return "Usuario/updateUsuario";
         }
         
         repositorioEmpleado.save(empleado);
-        model.addAttribute("empleado", repositorioEmpleado.findAll());
-        return "redirect:/listadoEmpleados";
+        model.addAttribute("usuario", repositorioEmpleado.findAll());
+        return "redirect:/listadoUsuario";
     }
     
     
    
-    //Metodo para Eliminar empleado
-    @GetMapping("/deleteEmpleado/{DNI_empleado}")
+    //Metodo para Eliminar usuario
+    @GetMapping("/deleteUsuario/{dni}")
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String deleteEmpleado(@PathVariable("DNI_empleado") int DNI_empleado, Model model) {
-    	Usuario empleado = repositorioEmpleado.findById(DNI_empleado).orElseThrow(() -> new IllegalArgumentException("Invalido Empleado id:" + DNI_empleado));
+    public String deleteEmpleado(@PathVariable("dni") int dni, Model model) {
+    	Usuario empleado = repositorioEmpleado.findById(dni).orElseThrow(() -> new IllegalArgumentException("Invalido Empleado id:" + dni));
         repositorioEmpleado.delete(empleado);
-        model.addAttribute("empleado", repositorioEmpleado.findAll());
-        return "redirect:/listadoEmpleados";
+        model.addAttribute("usuario", repositorioEmpleado.findAll());
+        return "redirect:/listadoUsuario";
     }
     
     
     
     //Listado de empleado
-  	@GetMapping("/listadoEmpleados")
+  	@GetMapping("/listadoUsuario")
   	//@PreAuthorize("hasRole('ROLE_ADMIN')")
   	public String list(Usuario empleado, Model model) {
-  		model.addAttribute("empleado", repositorioEmpleado.findAll());
-        return "/Empleado/listadoEmpleado";
+  		model.addAttribute("usuario", repositorioEmpleado.findAll());
+        return "/Usuario/listadoUsuario";
   	}
 	
 }
