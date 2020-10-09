@@ -2,6 +2,9 @@ package com.eam.IngSoft1.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -23,11 +26,19 @@ public class Proveedor implements Serializable {
 	@Column(name="id_proveedor")
 	private int idProveedor;
 
+	@NotBlank(message = "{address-mandatory}")
+	@Size(min= 7, max=255, message="{address-size}")
 	private String direccion;
 
+	@NotBlank(message = "{name-mandatory}")
+	@Size(min= 3, max=50, message="{name-size}")
+	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message="{name-valid}")
 	@Column(name="nombre_provedor")
 	private String nombreProvedor;
 
+	@NotBlank(message = "{phone-mandatory}")
+	@Size(min= 7, max=20, message="{phone-size}")
+	//@Pattern(regexp="^[0-9]$", message="Por favor solo ingresar numeros")
 	private int telefono;
 
 	//bi-directional many-to-one association to Producto

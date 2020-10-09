@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -19,20 +22,39 @@ import lombok.Data;
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@NotBlank(message = "{dni-mandatory}")
+	@Size(min= 5, max=20, message="{dni-size}")
+	@Column(unique=true)
+	private int dni;
+	
+	@NotBlank(message = "{name-mandatory}")
+	@Size(min= 3, max=50, message="{name-size}")
+	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message="{name-valid}")
+	private String nombre;
+	
+	@NotBlank(message = "{lastname-mandatory}")
+	@Size(min= 3, max=50, message="{lastname-size}")
+	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$",  message="{lastname-valid}")
 	private String apellido;
+	
+	@Column(unique=true)
+	private String nombreUsuario;
 
+	@NotBlank(message = "{password-mandatory}")
+	@Size(min= 8, max=200, message="{password-size}")
 	private String contrasena;
 
+	@NotBlank(message = "{address-mandatory}")
+	@Size(min= 7, max=255, message="{address-size}")
 	private String direccion;
-	
-	@Id
-	private int dni;
 
-	private String nombre;
-
+	@NotBlank(message = "{phone-mandatory}")
+	@Size(min= 7, max=20, message="{phone-size}")
+	//@Pattern(regexp="^[0-9]$", message="Por favor solo ingresar numeros")
 	private String telefono;
 
-	private String nombreUsuario;
+	
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="authorities_usuarios",

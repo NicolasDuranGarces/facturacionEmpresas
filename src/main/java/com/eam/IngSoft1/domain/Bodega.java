@@ -2,6 +2,7 @@ package com.eam.IngSoft1.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 
@@ -23,9 +24,11 @@ public class Bodega implements Serializable {
 	@Column(name="id_bodega")
 	private int idBodega;
 
+	@NotBlank(message = "{name-mandatory}")
 	@Column(name="nombre_bodega")
 	private String nombreBodega;
 
+	@NotBlank(message = "{address-mandatory}")
 	private String ubicacion;
 
 	//bi-directional many-to-one association to Producto

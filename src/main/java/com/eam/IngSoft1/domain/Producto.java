@@ -2,6 +2,9 @@ package com.eam.IngSoft1.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 import lombok.ToString;
@@ -25,20 +28,29 @@ public class Producto implements Serializable {
 	@Column(name="id_producto")
 	private int idProducto;
 
+	@NotBlank(message = "{cantidadActual-mandatory}")
+	@Size(min= 3, max=999, message="{cantidadActual-size}")
 	@Column(name="cantidad_actual")
 	private int cantidadActual;
 
 	private String marca;
 
+	@NotBlank(message = "{minimoInventario-mandatory}")
+	@Size(min= 1, max=10, message="{minimoInventario-size}")
 	@Column(name="minimo_inventario")
 	private int minimoInventario;
 
+	@NotBlank(message = "{name-mandatory}")
+	@Size(min= 3, max=50, message="{name-size}")
+	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message="{name-valid}")
 	@Column(name="nombre_producto")
 	private String nombreProducto;
 
 	@Lob
 	private String urlFoto;
 
+	@NotBlank(message = "{valor-unitario-mandatory}")
+	@Size(min= 50, max=9999999, message="{valor-unitario-size}")
 	@Column(name="valor_unitario")
 	private int valorUnitario;
 

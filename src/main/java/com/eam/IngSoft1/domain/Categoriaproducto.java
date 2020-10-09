@@ -2,6 +2,9 @@ package com.eam.IngSoft1.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -22,7 +25,10 @@ public class Categoriaproducto implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id_categoriaProducto;
 
-	@Column(name="nombre_categoria")
+	@NotBlank(message = "{name-mandatory}")
+	@Size(min= 3, max=50, message="{name-size}")
+	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message="{name-valid}")
+	@Column(name="nombre_categoria",unique=true)
 	private String nombreCategoria;
 
 	//bi-directional many-to-one association to Producto

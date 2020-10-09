@@ -28,12 +28,13 @@
                         <input type="password"  class="form-control" id="password" placeholder="Contraseña" required="required">
                         
                     </div>
-                    <div class="inputBx col-12 mt-5">
+                    <div class="inputBx col-12 mt-2">
+                         <a href="/ingresoUsuario">Regístrate aquí ¡es gratis!</a>
+                    </div>
+                    <div class="inputBx col-12 mt-2">
                         <input type="submit" class="btn bg-dark text-white" value="Iniciar">
                     </div>
-                    <div class="inputBx col-12 mt-3">
-                        <input type="button" class="btn bg-dark text-white" th:href="@{/registrar}" value="Registrarse">
-                    </div>
+                    
                 </form>
                 <div th:if="${param.error}" class="alert alert-danger" role="alert">
 		            Invalid username and password.

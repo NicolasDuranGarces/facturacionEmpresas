@@ -50,6 +50,15 @@
 					th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"
 					class="text-danger"></span>
 			</div>
+			
+			<!-- Nombre de usuario -->
+			<div class="form-group col-md-6">
+				<label for="nombreUsuario" class="col-form-label">Usuario</label> <input type="text" th:field="*{nombreUsuario}"
+					class="form-control" id="nombre" placeholder="Nombre Usuario"
+					required="required"> <span
+					th:if="${#fields.hasErrors('nombreUsuario')}" th:errors="*{nombreUsuario}"
+					class="text-danger"></span>
+			</div>
 
 			<!-- Direccion de Vivienda del Empleado -->
 

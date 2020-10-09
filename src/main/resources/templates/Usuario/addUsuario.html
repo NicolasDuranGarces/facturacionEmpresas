@@ -23,7 +23,14 @@
 					method="post">
 					<div class="row">
 					
-					
+						<!-- Cedula (DNI) Usuario -->
+						<div class="form-group col-12 mb-4">
+							<input type="text" th:field="*{dni}" class="form-control col-6"
+								id="dni" placeholder="DNI Usuario" required="required">
+							<span th:if="${#fields.hasErrors('dni')}"
+								th:errors="*{dni}" class="text-danger"></span>
+						</div>
+						
 						<!--  Nombre Usuario -->
 						<div class="form-group col-6">
 							<input type="text" th:field="*{nombre}" class="form-control"
@@ -40,16 +47,8 @@
 								th:errors="*{apellido}" class="text-danger"></span>
 						</div>
 
-						<!-- Cedula (DNI) Usuario -->
-						<div class="form-group col-6">
-							<input type="text" th:field="*{dni}" class="form-control"
-								id="dni" placeholder="DNI Usuario" required="required">
-							<span th:if="${#fields.hasErrors('dni')}"
-								th:errors="*{dni}" class="text-danger"></span>
-						</div>
-
 						<!-- "Usuario" del Usuario -->
-						<div class="form-group col-6">
+						<div class="form-group col-6 mt-4">
 							<input type="text" th:field="*{nombreUsuario}" class="form-control"
 								id="nombreUsuario" placeholder="Usuario del Sistema" required="required">
 							<span th:if="${#fields.hasErrors('nombreUsuario')}"
@@ -57,9 +56,9 @@
 						</div>
 
 						<!-- Contrasena Usuario -->
-						<div class="form-group col-6">
+						<div class="form-group col-6 mt-4">
 							<input type="password" th:field="*{contrasena}"
-								class="form-control" id="contrasena" placeholder="Contrasena"
+								class="form-control" id="contrasena" placeholder="Contraseña"
 								required="required"> <span
 								th:if="${#fields.hasErrors('contrasena')}"
 								th:errors="*{contrasena}" class="text-danger"></span>
