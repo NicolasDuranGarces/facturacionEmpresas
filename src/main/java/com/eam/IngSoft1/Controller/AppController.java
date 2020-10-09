@@ -40,17 +40,18 @@ public class AppController {
 	public String index() {
 		return "index";
 	}
-	/*
-	@GetMapping("/menu")
+	
+	@GetMapping({"/home"})
 	public String menu() {
-		return "menu";
+		return "homePageUsuario";
 	}
 	
 	@GetMapping("/user")
 	public String user() {
 		return "user";
 	}
-	*/
+	
+	
 	//@GetMapping("/admin")
 	//public String admin() {
 	//	return "admin";
