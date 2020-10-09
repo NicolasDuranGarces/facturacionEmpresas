@@ -184,5 +184,15 @@ public class ProductoController {
   		model.addAttribute("categorias", categoriaRepository.findAll());
   		return "homePageUsuario";
   	}
+  	
+ // metodo filtrar productos por categorias---------------------------------------------
+   	@GetMapping("/detalleproducto/{idProducto}")
+   	public String viewDetail(@PathVariable("idProducto") int idProducto, Model model) {
+   		Producto producto = repositorioProducto.findById(idProducto).orElseThrow(() -> new IllegalArgumentException("Invalido Producto id:" + idProducto));
+   		model.addAttribute("producto", producto);
+   		return "Producto/detalleProducto";
+   	}
+  	
+  	
   
 }
