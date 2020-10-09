@@ -3,6 +3,7 @@ package com.eam.IngSoft1.Controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,8 +27,8 @@ public class ProveedorController {
 	
 	
 	//Metodo Para Crear Proveedor
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/ingresoProveedor")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
+    @GetMapping("/admin/ingresoProveedor")
     public String showSignUpForm(Proveedor proveedor) {
         return "Proveedor/addProveedor";
     }
@@ -39,12 +40,12 @@ public class ProveedorController {
         }
         repositorioProveedor.save(proveedor);
         model.addAttribute("proveedores", repositorioProveedor.findAll());
-        return "redirect:/listadoProveedores";
+        return "redirect:/admin/listadoProveedores";
     }
     
     
     //Metodo Para Actualizar Proveedor
-    @GetMapping("/editProveedor/{idProveedor}")
+    @GetMapping("/admin/editProveedor/{idProveedor}")
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String showUpdateForm(@PathVariable("idProveedor") int idProveedor, Model model) {
     	Proveedor proveedor = repositorioProveedor.findById(idProveedor).orElseThrow(() -> new IllegalArgumentException("Invalido Proveedor id:" + idProveedor));
@@ -62,13 +63,13 @@ public class ProveedorController {
         
         repositorioProveedor.save(proveedor);
         model.addAttribute("proveedores", repositorioProveedor.findAll());
-        return "redirect:/listadoProveedores";
+        return "redirect:/admin/listadoProveedores";
     }
     
     
    
     //Metodo para Eliminar Proveedor
-    @GetMapping("/deleteProveedor/{idProveedor}")
+    @GetMapping("/admin/deleteProveedor/{idProveedor}")
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String deleteProveedor(@PathVariable("idProveedor") int idProveedor, Model model) {
     	Proveedor proveedor = repositorioProveedor.findById(idProveedor).orElseThrow(() -> new IllegalArgumentException("Invalido Proveedor id:" + idProveedor));
@@ -80,7 +81,8 @@ public class ProveedorController {
     
     
     //Listado de Proveedores
-  	@GetMapping("/listadoProveedores")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
+  	@GetMapping("/admin/listadoProveedores")
   	//@PreAuthorize("hasRole('ROLE_ADMIN')")
   	public String list(Proveedor proveedor, Model model) {
   		model.addAttribute("proveedores", repositorioProveedor.findAll());

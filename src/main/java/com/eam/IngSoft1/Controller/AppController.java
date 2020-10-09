@@ -31,12 +31,12 @@ public class AppController {
 		return "login";
 	}
 	
-	@GetMapping({"/login-empleados"})
+	@GetMapping({"/admin/login-empleados"})
 	public String loginEmpleados() {
 		return "login-empleados";
 	}
 	
-	@GetMapping({"/home-empleado"})
+	@GetMapping({"/admin/home-empleado"})
 	public String index() {
 		return "index";
 	}
@@ -45,12 +45,12 @@ public class AppController {
 	public String menu() {
 		return "homePageUsuario";
 	}
-	
+	/*
 	@GetMapping("/user")
 	public String user() {
 		return "user";
 	}
-	
+	*/
 	
 	//@GetMapping("/admin")
 	//public String admin() {

@@ -38,7 +38,7 @@
 						class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="minimoInventario" class="col-form-label" >Producto minimo en el inventario</label> <input
+                    <label for="minimoInventario" class="col-form-label" >Producto mínimo en el inventario</label> <input
                         type="number" th:field="*{minimoInventario}" class="form-control" id="minimoInventario" placeholder="0"
                         required="required"> <span th:if="${#fields.hasErrors('minimoInventario')}" th:errors="*{minimoInventario}"
 						class="text-danger"></span>
@@ -50,7 +50,7 @@
 						class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="valorUnitario" class="col-form-label" >Presio Unitario</label> <input
+                    <label for="valorUnitario" class="col-form-label" >Precio Unitario</label> <input
                         type="text" th:field="*{valorUnitario}" class="form-control" id="valorUnitario" placeholder="$..."
                         required="required"> <span th:if="${#fields.hasErrors('valorUnitario')}" th:errors="*{valorUnitario}"
 						class="text-danger"></span>
@@ -64,7 +64,7 @@
                     <span th:if="${#fields.hasErrors('bodega.idBodega')}" th:errors="*{bodega.idBodega}" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="validationTooltip04" >Categoria</label>
+                    <label for="validationTooltip04" >Categoría</label>
                       <select th:field="*{categoriaproducto.id_categoriaProducto}" class="custom-select" id="validationTooltip04"  >
                         <option th:each="categoriaproducto : ${categoriaproductos}" th:value="${categoriaproducto.id_categoriaProducto}"
                         th:text="${categoriaproducto.nombreCategoria}" th:selected="false"/>

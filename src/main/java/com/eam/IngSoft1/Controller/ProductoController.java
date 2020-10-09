@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,8 +44,8 @@ public class ProductoController {
 	
 	
 	//Metodo Para Crear Producto
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/ingresoProducto")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
+    @GetMapping("/admin/ingresoProducto")
     public String showSignUpForm(Producto producto, Model model) {
     	model.addAttribute("categoriaproductos",categoriaRepository.findAll());
     	model.addAttribute("proveedores",proveedorRepository.findAll());
@@ -68,15 +69,15 @@ public class ProductoController {
         
         repositorioProducto.save(producto);
         model.addAttribute("productos", repositorioProducto.findAll());
-        return "redirect:/listadoProducto";
+        return "redirect:/admin/listadoProducto";
     }
       
     
     
     
     //Metodo Para Actualizar Producto
-    @GetMapping("/editProducto/{idProducto}")
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
+    @GetMapping("/admin/editProducto/{idProducto}")
     public String showUpdateForm(@PathVariable("idProducto") int idProducto, Model model) {
     	Producto producto = repositorioProducto.findById(idProducto).orElseThrow(() -> new IllegalArgumentException("Invalido Producto id:" + idProducto));
         model.addAttribute("producto", producto);
@@ -109,14 +110,14 @@ public class ProductoController {
         
         repositorioProducto.save(producto);
         model.addAttribute("productos", repositorioProducto.findAll());
-        return "redirect:/listadoProducto";
+        return "redirect:/admin/listadoProducto";
     }
     
     
     
   //Actualizar Mercancia de los productos 
-    @GetMapping("/updateMercanciaProducto/{idProducto}")
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
+    @GetMapping("/admin/updateMercanciaProducto/{idProducto}")
     public String showUpdateInventario(@PathVariable("idProducto") int idProducto, Model model) {
     	Producto producto = repositorioProducto.findById(idProducto).orElseThrow(() -> new IllegalArgumentException("Invalido Producto id:" + idProducto));
         model.addAttribute("producto", producto);
@@ -143,24 +144,24 @@ public class ProductoController {
     	producto.setCantidadActual(producto.getCantidadActual()+cantidadNueva);
         repositorioProducto.save(producto);
         model.addAttribute("productos", repositorioProducto.findAll());
-        return "redirect:/listadoProducto";
+        return "redirect:/admin/listadoProducto";
     }
      
     
     //Metodo para Eliminar Producto
-    @GetMapping("/deleteProducto/{idProducto}")
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
+    @GetMapping("/admin/deleteProducto/{idProducto}")
     public String deleteProducto(@PathVariable("idProducto") int idProducto, Model model) {
     	Producto producto = repositorioProducto.findById(idProducto).orElseThrow(() -> new IllegalArgumentException("Invalido Producto id:" + idProducto));
         repositorioProducto.delete(producto);
         model.addAttribute("productos", repositorioProducto.findAll());
-        return "redirect:/listadoProducto";
+        return "redirect:/admin/listadoProducto";
     }
     
   
     //Listado de Producto
-  	@GetMapping("/listadoProducto")
-  	//@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
+  	@GetMapping("/admin/listadoProducto")
   	public String list(Producto producto, Model model) {
   		model.addAttribute("productos", repositorioProducto.findAll());
         return "Producto/listadoProducto";

@@ -3,6 +3,7 @@ package com.eam.IngSoft1.Controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,8 +25,8 @@ public class BodegaController {
 	}
 	
 	//Metodo Para Crear Bodegas
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/ingresoBodega")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
+    @GetMapping("/admin/ingresoBodega")
     public String showSignUpForm(Bodega bodega) {
         return "Bodega/addBodega";
     }
@@ -37,13 +38,13 @@ public class BodegaController {
         }
         repositorioBodega.save(bodega);
         model.addAttribute("bodega", repositorioBodega.findAll());
-        return "redirect:/listadoBodega";
+        return "redirect:/admin/listadoBodega";
     }
     
     
     //Metodo Para Actualizar Bodega
-    @GetMapping("/editBodega/{idBodega}")
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/admin/editBodega/{idBodega}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
     public String showUpdateForm(@PathVariable("idBodega") int idBodega, Model model) {
     	Bodega bodega = repositorioBodega.findById(idBodega).orElseThrow(() -> new IllegalArgumentException("Invalido Bodega idBodega:" + idBodega));
         model.addAttribute("bodega", bodega);
@@ -60,23 +61,23 @@ public class BodegaController {
         
         repositorioBodega.save(bodega);
         model.addAttribute("bodega", repositorioBodega.findAll());
-        return "redirect:/listadoBodega";
+        return "redirect:/admin/listadoBodega";
     }
     
     
     //Metodo para Eliminar Bodegas
-    @GetMapping("/deleteBodega/{idBodega}")
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/admin/deleteBodega/{idBodega}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
     public String deleteBodega(@PathVariable("idBodega") int idBodega, Model model) {
     	Bodega bodega = repositorioBodega.findById(idBodega).orElseThrow(() -> new IllegalArgumentException("Invalido Bodega idBodega:" + idBodega));
         repositorioBodega.delete(bodega);
         model.addAttribute("bodega", repositorioBodega.findAll());
-        return "redirect:/listadoBodega";
+        return "redirect:/admin/listadoBodega";
     }
     
     
-  	@GetMapping("/listadoBodega")
-  	//@PreAuthorize("hasRole('ROLE_ADMIN')")
+  	@GetMapping("/admin/listadoBodega")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
   	public String list(Bodega bodega, Model model) {
   		model.addAttribute("bodega", repositorioBodega.findAll());
         return "Bodega/listadoBodega";

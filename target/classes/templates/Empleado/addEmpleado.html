@@ -23,7 +23,7 @@
 	<br>
 	<!-- Inicio del Cuerpo de la Pagina -->
 	<div class="container">
-		<form action="#" th:action="@{/addempleado}" th:object="${empleado}"
+		<form action="#" th:action="@{/addempleado}" th:object="${usuario}"
 			method="post">
 			<div class="row">
 
@@ -50,11 +50,11 @@
 				<!-- Cedula del Empleado -->
 				<div class="form-group col-md-6">
 					<label for="DNI_empleado" class="col-form-label">Documento
-						de Identidad</label> <input type="number" th:field="*{DNI_empleado}"
+						de Identidad</label> <input type="number" th:field="*{dni}"
 						class="form-control" id="DNI_empleado"
 						placeholder="Cedula del Empleado" required="required"> <span
-						th:if="${#fields.hasErrors('DNI_empleado')}"
-						th:errors="*{DNI_empleado}" class="text-danger"></span>
+						th:if="${#fields.hasErrors('dni')}"
+						th:errors="*{dni}" class="text-danger"></span>
 				</div>
 
 				<!-- Direccion de Vivienda del Empleado -->
@@ -80,9 +80,9 @@
 
 				<div class="form-group col-md-6">
 					<label for="usario" class="col-form-label">Nombre de Usuario del Empleado</label> <input
-						type="text" th:field="*{usario}" class="form-control"
+						type="text" th:field="*{nombreUsuario}" class="form-control"
 						id="usario" placeholder="..." required="required"> <span
-						th:if="${#fields.hasErrors('usario')}" th:errors="*{usario}"
+						th:if="${#fields.hasErrors('nombreUsuario')}" th:errors="*{nombreUsuario}"
 						class="text-danger"></span>
 				</div>
 				
