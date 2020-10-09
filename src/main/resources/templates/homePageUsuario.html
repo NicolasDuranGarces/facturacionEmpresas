@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
 
@@ -51,6 +52,9 @@
 				</form>
 				<form th:action="@{/logout}" method="post">
             		<input type="submit" class="btn btn-dark ml-5" value="Cerrar Sesion"/>
+        		</form>
+        		<form th:action="@{/admin/home-empleado}" method="get">
+        			<input th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_EMPLEADO'')')}" type="submit" class="btn btn-dark ml-5" value="ADMINISTRAR"/>
         		</form>
 			</div>
 		</div>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
     <meta charset="UTF-8">
@@ -57,7 +58,7 @@
                 <!-- Fin de Desplegable de Proveedores-->
                 
                 <!-- Inicio de Desplegable de Usuarios-->
-                <li class="nav-item dropdown mx-3"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Usuarios </a>
+                <li th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" class="nav-item dropdown mx-3"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Usuarios </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" th:href="@{/admin/listadoUsuario}">Listar Usuarios</a>
                         <div class="dropdown-divider"></div>
