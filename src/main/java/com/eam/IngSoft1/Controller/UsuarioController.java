@@ -88,7 +88,7 @@ public class UsuarioController {
         
         repositorioEmpleado.save(usuario);
         model.addAttribute("usuario", repositorioEmpleado.findAll());
-        return "redirect:/listadoUsuario";
+        return "redirect:/admin/listadoUsuario";
     }
     
     
@@ -125,7 +125,7 @@ public class UsuarioController {
     	Usuario empleado = repositorioEmpleado.findById(dni).orElseThrow(() -> new IllegalArgumentException("Invalido Empleado id:" + dni));
         repositorioEmpleado.delete(empleado);
         model.addAttribute("usuario", repositorioEmpleado.findAll());
-        return "redirect:/listadoUsuario";
+        return "redirect:/admin/listadoUsuario";
     }
     
     

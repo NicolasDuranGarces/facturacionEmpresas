@@ -39,10 +39,10 @@
 								<td th:text="${bodega.nombreBodega}"></td>
 								<td th:text="${bodega.ubicacion}"></td>
 								<td><a
-									th:href="@{/editBodega/{idBodega}(idBodega=${bodega.idBodega})}"
+									th:href="@{/admin/editBodega/{idBodega}(idBodega=${bodega.idBodega})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 								<td><a
-									th:href="@{/deleteBodega/{idBodega}(idBodega=${bodega.idBodega})}"
+									th:href="@{/admin/deleteBodega/{idBodega}(idBodega=${bodega.idBodega})}"
 									class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a></td>
 							</tr>
 						</tbody>

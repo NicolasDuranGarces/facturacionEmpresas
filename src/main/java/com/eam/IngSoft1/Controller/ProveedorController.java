@@ -75,7 +75,7 @@ public class ProveedorController {
     	Proveedor proveedor = repositorioProveedor.findById(idProveedor).orElseThrow(() -> new IllegalArgumentException("Invalido Proveedor id:" + idProveedor));
         repositorioProveedor.delete(proveedor);
         model.addAttribute("proveedores", repositorioProveedor.findAll());
-        return "redirect:/listadoProveedores";
+        return "redirect:/admin/listadoProveedores";
     }
     
     

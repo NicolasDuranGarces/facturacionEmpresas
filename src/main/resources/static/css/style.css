@@ -1,96 +1,104 @@
-    @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
-    }
+@import
+	url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap')
+	;
 
-    section {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background: linear-gradient(-30deg, #03a9f4 0%, #3a78b7 50%, #262626 50%, #607d8b 100%);
-    }
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
 
-    .box {
-        position: relative;
-        padding: 50px;
-        width: 360px;
-        height: 480px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 6px;
-        box-shadow: 0 5px 35 px rgba(0, 0, 0, 0.2);
-    }
+section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background: linear-gradient(-30deg, #03a9f4 0%, #3a78b7 50%, #262626 50%, #607d8b
+		100%);
+}
 
-    .box .form .header{
-      margin-bottom: 20px;
-    }
+.box {
+	position: relative;
+	padding: 50px;
+	width: 360px;
+	height: 480px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 6px;
+	box-shadow: 0 5px 35 px rgba(0, 0, 0, 0.2);
+}
 
-    .box .form .header img{
-      width: 100%;
-      height: auto;
-    }
+.box .form .header {
+	margin-bottom: 20px;
+}
 
-    .box::after {
-        content: '';
-        position: absolute;
-        top: 5px;
-        left: 5px;
-        right: 5px;
-        bottom: 5px;
-        border-radius: 5px;
-        pointer-events: none;
-        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.3) 100%);
-    }
+.box .form .header img {
+	width: 100%;
+	height: auto;
+}
 
-    .box .form {
-        position: relative;
-        width: 100%;
-    }
+.box::after {
+	content: '';
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	right: 5px;
+	bottom: 5px;
+	border-radius: 5px;
+	pointer-events: none;
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%,
+		rgba(255, 255, 255, 0.3) 100%);
+}
 
-    .box .form .header h2 {
-        color: #fff;
-	       width:100%;
-        font-weight: 500;
-        letter-spacing: 2px;
-        margin-bottom: 30px;
-        text-align: center;
-    }
+.box .form {
+	position: relative;
+	width: 100%;
+}
 
-    .box .form .inputBx {
-        position: relative;
-        width: 100%;
-        margin-bottom: 20px;
-    }
+.box .form .header h2 {
+	color: #fff;
+	width: 100%;
+	font-weight: 500;
+	letter-spacing: 2px;
+	margin-bottom: 30px;
+	text-align: center;
+}
 
-    .box .form .inputBx input{
-        width: 100%;
-        outline: none;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        padding: 8px 10px;
-        border-radius: 6px;
-        font-size: 16px;
-        font-weight: 300;
-        box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.2);
-    }
+.box .form .inputBx {
+	position: relative;
+	width: 100%;
+	margin-bottom: 20px;
+}
 
-    .box .form .inputBx input[type="submit"]{
-        font-weight: 500;
-        letter-spacing: 2px;
-    }
-    .box .form .inputBx input[type="button"]{
-        font-weight: 500;
-        letter-spacing: 2px;
-    }
+.box .form .inputBx input {
+	width: 100%;
+	outline: none;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	padding: 8px 10px;
+	border-radius: 6px;
+	font-size: 16px;
+	font-weight: 300;
+	box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.2);
+}
 
+.box .form .inputBx input[type="submit"] {
+	font-weight: 500;
+	letter-spacing: 2px;
+}
 
+.box .form .inputBx input[type="button"] {
+	font-weight: 500;
+	letter-spacing: 2px;
+}
 
-    /* .box .form .inputBx img {
+#registrar_link {
+	color: red;
+}
+
+/* .box .form .inputBx img {
         position: absolute;
         top: 8px;
         left: 10px;

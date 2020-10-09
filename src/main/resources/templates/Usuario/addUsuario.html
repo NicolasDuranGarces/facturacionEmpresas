@@ -23,12 +23,12 @@
 					method="post">
 					<div class="row">
 					
-						<!-- Cedula (DNI) Usuario -->
-						<div class="form-group col-12 mb-4">
-							<input type="number" th:field="*{dni}" class="form-control col-6"
-								id="dni" placeholder="DNI Usuario" required="required">
-							<span th:if="${#fields.hasErrors('dni')}"
-								th:errors="*{dni}" class="text-danger"></span>
+						<!--  DNI Usuario -->
+						<div class="form-group col-6">
+							<input type="number" th:field="*{dni}" class="form-control"
+								id="dni" placeholder="Numero de documento" required="required"><span
+								th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"
+								class="text-danger"></span>
 						</div>
 						
 						<!--  Nombre Usuario -->
@@ -40,7 +40,7 @@
 						</div>
 
 						<!-- Apellido Usuario -->
-						<div class="form-group col-6">
+						<div class="form-group col-6 mt-4">
 							<input type="text" th:field="*{apellido}" class="form-control"
 								id="apellido" placeholder="Apellido Del Usuario" required="required">
 							<span th:if="${#fields.hasErrors('apellido')}"
@@ -64,14 +64,6 @@
 								th:errors="*{contrasena}" class="text-danger"></span>
 						</div>
 
-						<!-- Direccion Usuario -->
-						<div class="form-group col-6 mt-4">
-							<input type="text" th:field="*{direccion}" class="form-control"
-								id="direccion" placeholder="Direccion de referencia"
-								required="required"> <span
-								th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"
-								class="text-danger"></span>
-						</div>
 
 						<!-- Telefono Usuario -->
 						<div class="form-group col-6 mt-4">
@@ -81,8 +73,17 @@
 								th:if="${#fields.hasErrors('telefono')}"
 								th:errors="*{telefono}" class="text-danger"></span>
 						</div>
+						
+						<!-- Direccion Usuario -->
+						<div class="form-group col-12 mt-4">
+							<input type="text" th:field="*{direccion}" class="form-control"
+								id="direccion" placeholder="Direccion de recidencia"
+								required="required"> <span
+								th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"
+								class="text-danger"></span>
+						</div>
 					</div>
-					<div class="inputBx col-12 mt-5">
+					<div class="inputBx col-12 mt-3">
 						<input type="submit" class="btn bg-dark text-white"
 							value="Registrar">
 					</div>

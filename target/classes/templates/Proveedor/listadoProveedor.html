@@ -40,10 +40,10 @@
 								<td th:text="${proveedor.direccion}"></td>
 								<td th:text="${proveedor.telefono}"></td>
 								<td><a
-									th:href="@{/editProveedor/{idProveedor}(idProveedor=${proveedor.idProveedor})}"
+									th:href="@{/admin/editProveedor/{idProveedor}(idProveedor=${proveedor.idProveedor})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 								<td><a
-									th:href="@{/deleteProveedor/{idProveedor}(idProveedor=${proveedor.idProveedor})}"
+									th:href="@{/admin/deleteProveedor/{idProveedor}(idProveedor=${proveedor.idProveedor})}"
 									class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a></td>
 							</tr>
 						</tbody>

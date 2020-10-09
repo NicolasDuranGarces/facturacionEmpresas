@@ -52,7 +52,7 @@ public class BodegaController {
     }
     
     
-    @PostMapping("/updateBodega/{idBodega}")
+    @PostMapping("/admin/updateBodega/{idBodega}")
     public String updateBodega(@PathVariable("idBodega") int idBodega,@Valid Bodega bodega, BindingResult result, Model model) {
         if (result.hasErrors()) {
         	bodega.setIdBodega(idBodega);

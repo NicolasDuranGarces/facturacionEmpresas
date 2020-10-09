@@ -24,7 +24,7 @@
     <!-- Inicio del Cuerpo de la Pagina -->
 
     <div class="container">
-         <form action="#" th:action="@{/updateBodega/{idBodega}(idBodega=${bodega.idBodega})}" th:object="${bodega}" method="post">
+         <form action="#" th:action="@{/admin/updateBodega/{idBodega}(idBodega=${bodega.idBodega})}" th:object="${bodega}" method="post">
 
             <div class="form-group col-md-6">
                 <label for=nombreBodega class="col-form-label">Nombre de la
