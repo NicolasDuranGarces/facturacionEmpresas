@@ -11,7 +11,7 @@ public interface IProductoRepository extends CrudRepository<Producto, Integer> {
 
 	// ----------Consulta para traer los productos a mostrar -----------
 
-	@Query("SELECT p FROM Producto p " + " WHERE p.cantidadActual > p.minimoInventario")
+	@Query("SELECT p FROM Producto p " + " WHERE p.cantidadActual > 1")
 	public Iterable<Producto> cargarProductosActivos();
 
 	// --------------------Consulta al abrir la publicacion -----------
@@ -24,6 +24,6 @@ public interface IProductoRepository extends CrudRepository<Producto, Integer> {
 
 	// ------------------------- filtrar por categoría ---------
 	@Query("SELECT p FROM Producto p "
-			+ "JOIN p.categoriaproducto c WHERE p.cantidadActual > p.minimoInventario AND c.nombreCategoria= ?1")
+			+ "JOIN p.categoriaproducto c WHERE p.cantidadActual > 1 AND c.nombreCategoria= ?1")
 	public Iterable<Producto> mostrarProductoFiltroCategoria(String busqueda);
 }

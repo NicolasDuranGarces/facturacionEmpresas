@@ -145,7 +145,6 @@ public class ProductoController {
         model.addAttribute("productos", repositorioProducto.findAll());
         return "redirect:/listadoProducto";
     }
-    
      
     
     //Metodo para Eliminar Producto
@@ -158,8 +157,7 @@ public class ProductoController {
         return "redirect:/listadoProducto";
     }
     
-    
-    
+  
     //Listado de Producto
   	@GetMapping("/listadoProducto")
   	//@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -168,5 +166,23 @@ public class ProductoController {
         return "Producto/listadoProducto";
   	}
   	
+  	
+  	// metodo productos disponibles ---------------------------------------------
+ 	@GetMapping("/productos-disponibles")
+ 	public String traerSoloDisponibles(Model model) {
+ 		
+ 		model.addAttribute("productos", repositorioProducto.cargarProductosActivos());
+ 		model.addAttribute("categorias", categoriaRepository.findAll());
+ 		return "homePageUsuario";
+ 	}
+ 	
+ 	// metodo filtrar productos por categorias---------------------------------------------
+  	@GetMapping("/categoriaproductos/{nombreCategoria}")
+  	public String traerSoloPorCategoria(@PathVariable("nombreCategoria") String nombre, Model model) {
+ 
+  		model.addAttribute("productos", repositorioProducto.mostrarProductoFiltroCategoria(nombre));
+  		model.addAttribute("categorias", categoriaRepository.findAll());
+  		return "homePageUsuario";
+  	}
   
 }
