@@ -34,6 +34,7 @@
 								<th>Telefono</th>
 								<th>Editar</th>
 								<th>Eliminar</th>
+
 							</tr>
 						</thead>
 						<tbody>
@@ -42,6 +43,7 @@
 								<td th:text="${usuario.apellido}" ></td>
 								<td th:text="${usuario.direccion}" ></td>
 								<td th:text="${usuario.telefono}" ></td>
+
 								<td><a
 									th:href="@{/admin/editUsuario/{dni}(dni=${usuario.dni})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>

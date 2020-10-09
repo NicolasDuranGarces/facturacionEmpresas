@@ -51,6 +51,7 @@
 						class="text-danger"></span>
 				</div>
 
+				
 				<!-- Direccion de Vivienda del Empleado -->
 
 				<div class="form-group col-md-6">
@@ -71,7 +72,6 @@
 				</div>
 				
 				<!-- Usuario del Empleado -->
-
 				<div class="form-group col-md-6">
 					<label for="usario" class="col-form-label">Nombre de Usuario del Empleado</label> <input
 						type="text" th:field="*{nombreUsuario}" class="form-control"
@@ -80,6 +80,14 @@
 						class="text-danger"></span>
 				</div>
 				
+				<!-- Contrasena del Empleado -->
+				<div class="form-group col-md-6">
+					<label for="contrasena" class="col-form-label">Contrasena del Empleado</label> <input
+						type="password" th:field="*{contrasena}" class="form-control"
+						id="contrasena" placeholder="..." required="required"> <span
+						th:if="${#fields.hasErrors('contrasena')}" th:errors="*{contrasena}"
+						class="text-danger"></span>
+				</div>
 			
 
 			<button type="submit" class="btn btn-primary"

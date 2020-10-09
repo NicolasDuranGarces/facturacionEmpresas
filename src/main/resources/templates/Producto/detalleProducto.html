@@ -21,7 +21,7 @@
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="#">Start Bootstrap</a>
+			<a class="navbar-brand" th:href="@{/productos-disponibles}">Los Tres Mosqueteros</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarResponsive" aria-controls="navbarResponsive"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -29,15 +29,25 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a class="nav-link" href="#">Home
-							<span class="sr-only">(current)</span>
+					<li class="nav-item active"><a class="nav-link"
+						th:href="@{/productos-disponibles}">Inicio <span
+							class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">About</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Services</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="#">Contact</a>
-					</li>
+					<li class="nav-item"><a class="nav-link" href="#">[[${#httpServletRequest.remoteUser}]]!</a></li>
+					<li class="nav-item"><a class="nav-link" href="#"></a></li>
 				</ul>
+
+				<form class="form-inline my-2 my-lg-0" method="post">
+					<input  class="form-control mr-sm-2" type="search"
+						placeholder="Buscar" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+				</form>
+				<form th:action="@{/logout}" method="post">
+            		<input type="submit" class="btn btn-dark ml-5" value="Cerrar Sesion"/>
+        		</form>
+        		<form th:action="@{/admin/home-empleado}" method="get">
+        			<input th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_EMPLEADO'')')}" type="submit" class="btn btn-dark ml-5" value="ADMINISTRAR"/>
+        		</form>
 			</div>
 		</div>
 	</nav>
