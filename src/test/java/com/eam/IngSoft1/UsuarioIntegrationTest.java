@@ -41,7 +41,7 @@ class UsuarioIntegrationTest {
 
 	@Test
 	public void should_store_a_usuario() {
-		Authority permiso = new Authority("ROLE_USER");
+		Authority permiso = new Authority();
 		entityManager.persist(permiso);
 		Set<Authority> permisos = new HashSet<Authority>();
 		permisos.add(permiso);
@@ -60,7 +60,7 @@ class UsuarioIntegrationTest {
 
 	@Test
 	public void should_find_all_usuarios() {
-		Authority permiso = new Authority("ROLE_USER");
+		Authority permiso = new Authority();
 		entityManager.persist(permiso);
 		Set<Authority> permisos = new HashSet<Authority>();
 		permisos.add(permiso);
@@ -81,7 +81,7 @@ class UsuarioIntegrationTest {
 
 	@Test
 	public void should_find_usuario_by_id() {
-		Authority permiso = new Authority("ROLE_USER");
+		Authority permiso = new Authority();
 		entityManager.persist(permiso);
 		Set<Authority> permisos = new HashSet<Authority>();
 		permisos.add(permiso);
@@ -99,7 +99,7 @@ class UsuarioIntegrationTest {
 
 	@Test
 	public void should_update_usuario_by_id() {
-		Authority permiso = new Authority("ROLE_USER");
+		Authority permiso = new Authority();
 		entityManager.persist(permiso);
 		Set<Authority> permisos = new HashSet<Authority>();
 		permisos.add(permiso);
@@ -110,7 +110,7 @@ class UsuarioIntegrationTest {
 		Usuario usuario2 = new Usuario(10635941, "Andrés", "Villanueva", "avilla", "contraseña", "dirección casa", "3218956846", permisos, null);
 		entityManager.persist(usuario2);
 
-		Authority permiso2 = new Authority("ROLE_EMPLEADO");
+		Authority permiso2 = new Authority();
 		entityManager.persist(permiso2);
 		Set<Authority> permisos2 = new HashSet<Authority>();
 		permisos2.add(permiso2);
@@ -145,7 +145,7 @@ class UsuarioIntegrationTest {
 
 	@Test
 	public void should_delete_usuario_by_id() {
-		Authority permiso = new Authority("ROLE_USER");
+		Authority permiso = new Authority();
 		entityManager.persist(permiso);
 		Set<Authority> permisos = new HashSet<Authority>();
 		permisos.add(permiso);
@@ -169,7 +169,7 @@ class UsuarioIntegrationTest {
 
 	@Test
 	public void should_delete_all_usuarios() {
-		Authority permiso = new Authority("ROLE_USER");
+		Authority permiso = new Authority();
 		entityManager.persist(permiso);
 		Set<Authority> permisos = new HashSet<Authority>();
 		permisos.add(permiso);
