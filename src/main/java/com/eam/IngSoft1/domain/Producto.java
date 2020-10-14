@@ -180,5 +180,28 @@ public class Producto implements Serializable {
 		this.proveedor = proveedor;
 	}
 
+	public Producto(
+			@NotBlank(message = "{cantidadActual-mandatory}") @Size(min = 3, max = 999, message = "{cantidadActual-size}") int cantidadActual,
+			String marca,
+			@NotBlank(message = "{minimoInventario-mandatory}") @Size(min = 1, max = 10, message = "{minimoInventario-size}") int minimoInventario,
+			@NotBlank(message = "{name-mandatory}") @Size(min = 3, max = 50, message = "{name-size}") @Pattern(regexp = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "{name-valid}") String nombreProducto,
+			String urlFoto,
+			@NotBlank(message = "{valor-unitario-mandatory}") @Size(min = 50, max = 9999999, message = "{valor-unitario-size}") int valorUnitario,
+			Bodega bodega, Categoriaproducto categoriaproducto,
+			Proveedor proveedor) {
+		super();
+		this.cantidadActual = cantidadActual;
+		this.marca = marca;
+		this.minimoInventario = minimoInventario;
+		this.nombreProducto = nombreProducto;
+		this.urlFoto = urlFoto;
+		this.valorUnitario = valorUnitario;
+		this.bodega = bodega;
+		this.categoriaproducto = categoriaproducto;
+		this.proveedor = proveedor;
+	}
+	
+	
+
 
 }

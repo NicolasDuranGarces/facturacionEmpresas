@@ -77,4 +77,12 @@ public class Categoriaproducto implements Serializable {
 		return producto;
 	}
 
+	public Categoriaproducto(
+			@NotBlank(message = "{name-mandatory}") @Size(min = 3, max = 50, message = "{name-size}") @Pattern(regexp = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "{name-valid}") String nombreCategoria) {
+		super();
+		this.nombreCategoria = nombreCategoria;
+	}
+	
+	
+
 }

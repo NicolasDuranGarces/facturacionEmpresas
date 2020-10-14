@@ -47,6 +47,8 @@ public class Proveedor implements Serializable {
 	
 	public Proveedor() {
 	}
+	
+	
 
 	public int getIdProveedor() {
 		return this.idProveedor;
@@ -101,6 +103,16 @@ public class Proveedor implements Serializable {
 		producto.setProveedor(null);
 
 		return producto;
+	}
+	public Proveedor(
+			@NotBlank(message = "{address-mandatory}") @Size(min = 7, max = 255, message = "{address-size}") String direccion,
+			@NotBlank(message = "{name-mandatory}") @Size(min = 3, max = 50, message = "{name-size}") @Pattern(regexp = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "{name-valid}") String nombreProvedor,
+			@NotBlank(message = "{phone-mandatory}") @Size(min = 7, max = 20, message = "{phone-size}") int telefono) {
+		super();
+		this.direccion = direccion;
+		this.nombreProvedor = nombreProvedor;
+		this.telefono = telefono;
+		
 	}
 
 }
