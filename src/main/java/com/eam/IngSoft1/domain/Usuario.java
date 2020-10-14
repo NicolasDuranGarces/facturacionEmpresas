@@ -70,6 +70,26 @@ public class Usuario implements Serializable {
 
 	public Usuario() {
 	}
+	
+	public Usuario(@NotBlank(message = "{dni-mandatory}") @Size(min = 5, max = 20, message = "{dni-size}") int dni,
+			@NotBlank(message = "{name-mandatory}") @Size(min = 3, max = 50, message = "{name-size}") @Pattern(regexp = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "{name-valid}") String nombre,
+			@NotBlank(message = "{lastname-mandatory}") @Size(min = 3, max = 50, message = "{lastname-size}") @Pattern(regexp = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "{lastname-valid}") String apellido,
+			String nombreUsuario,
+			@NotBlank(message = "{password-mandatory}") @Size(min = 8, max = 200, message = "{password-size}") String contrasena,
+			@NotBlank(message = "{address-mandatory}") @Size(min = 7, max = 255, message = "{address-size}") String direccion,
+			@NotBlank(message = "{phone-mandatory}") @Size(min = 7, max = 20, message = "{phone-size}") String telefono,
+			Set<Authority> authority, List<Pedido> pedidos) {
+		super();
+		this.dni = dni;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.nombreUsuario = nombreUsuario;
+		this.contrasena = contrasena;
+		this.direccion = direccion;
+		this.telefono = telefono;
+		this.authority = authority;
+		this.pedidos = pedidos;
+	}
 
 	public String getApellido() {
 		return this.apellido;
@@ -148,5 +168,6 @@ public class Usuario implements Serializable {
 
 		return pedido;
 	}
+
 
 }

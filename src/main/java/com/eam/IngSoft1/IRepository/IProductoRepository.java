@@ -26,4 +26,10 @@ public interface IProductoRepository extends CrudRepository<Producto, Integer> {
 	@Query("SELECT p FROM Producto p "
 			+ "JOIN p.categoriaproducto c WHERE p.cantidadActual > 1 AND c.nombreCategoria= ?1")
 	public Iterable<Producto> mostrarProductoFiltroCategoria(String busqueda);
+	
+	// ------------------------- filtrar por bodega ---------
+	@Query("SELECT p FROM Producto p JOIN p.bodega b WHERE b.idBodega= ?1")
+	public Iterable<Producto> mostrarProductoFiltroBodega(Integer idBodega);
+	
+	
 }

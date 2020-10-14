@@ -37,6 +37,15 @@ public class Bodega implements Serializable {
 	
 	public Bodega() {
 	}
+	
+	public Bodega(@NotBlank(message = "{name-mandatory}") String nombreBodega,
+			@NotBlank(message = "{address-mandatory}") String ubicacion, List<Producto> productos) {
+		super();
+		this.nombreBodega = nombreBodega;
+		this.ubicacion = ubicacion;
+		this.productos = productos;
+	}
+
 
 	public int getIdBodega() {
 		return this.idBodega;
@@ -84,5 +93,10 @@ public class Bodega implements Serializable {
 
 		return producto;
 	}
+
+	
+
+
+	
 
 }

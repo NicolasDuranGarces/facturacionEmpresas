@@ -194,6 +194,15 @@ public class ProductoController {
    		model.addAttribute("producto", producto);
    		return "Producto/detalleProducto";
    	}
+   	
+ // metodo filtrar productos por bodega---------------------------------------------
+   	@GetMapping("/admin/productos-bodega/{idBodega}")
+   	public String traerProductosBodega(@PathVariable("idBodega") int idBodega, Model model) {
+  
+   		model.addAttribute("productos", repositorioProducto.mostrarProductoFiltroBodega(idBodega));
+   		
+   		return "Bodega/listadoProductosBodega";
+   	}
   	
   
 }
