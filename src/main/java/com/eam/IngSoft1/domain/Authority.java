@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import lombok.Data;
 
 @Entity
+@Data
 public class Authority implements Serializable {
 
 	/**
@@ -24,7 +25,13 @@ public class Authority implements Serializable {
 	
 	@Column(unique = true)
 	private String authority;
-	
+			
+
+	public Authority(String authority) {
+		super();
+		this.authority = authority;
+	}
+
 	public String getAuthority() {
 		return authority;
 	}
