@@ -26,9 +26,6 @@ public class Authority implements Serializable {
 	@Column(unique = true)
 	private String authority;
 			
-
-	
-
 	public String getAuthority() {
 		return authority;
 	}
