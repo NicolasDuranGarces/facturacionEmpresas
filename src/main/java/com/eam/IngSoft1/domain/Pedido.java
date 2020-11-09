@@ -24,9 +24,11 @@ public class Pedido implements Serializable {
 	@Column(name="id_pedido")
 	private int idPedido;
 
-	private byte despachado;
-
-	private int DNI_vendedor;
+	private boolean despachado;
+	
+	private boolean activo;
+	
+	private int DNI_Encargado;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_pedido")
@@ -41,6 +43,8 @@ public class Pedido implements Serializable {
 	@JoinColumn(name="DNI_cliente")
 	private Usuario cliente;
 	
+	
+	
 	public Pedido() {
 	}
 
@@ -52,20 +56,20 @@ public class Pedido implements Serializable {
 		this.idPedido = idPedido;
 	}
 
-	public byte getDespachado() {
+	public boolean getDespachado() {
 		return this.despachado;
 	}
 
-	public void setDespachado(byte despachado) {
+	public void setDespachado(boolean despachado) {
 		this.despachado = despachado;
 	}
 
 	public int getDNI_vendedor() {
-		return this.DNI_vendedor;
+		return this.DNI_Encargado;
 	}
 
 	public void setDNI_vendedor(int DNI_vendedor) {
-		this.DNI_vendedor = DNI_vendedor;
+		this.DNI_Encargado = DNI_vendedor;
 	}
 
 	public Date getFechaPedido() {
