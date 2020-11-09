@@ -73,8 +73,6 @@ public class ProductoController {
     }
       
     
-    
-    
     //Metodo Para Actualizar Producto
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
     @GetMapping("/admin/editProducto/{idProducto}")
