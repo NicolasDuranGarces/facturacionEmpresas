@@ -25,7 +25,7 @@ public class FacturaController {
 
 	public void crearFactura() {
 		Pedido pedido = new Pedido();
-		//pedido.setCliente();
+		pedido.setCliente();
 
 		pedido.setActivo(true);
 		pedido.setDespachado(false);
@@ -34,7 +34,7 @@ public class FacturaController {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		
 		// Captura La Fecha del Sistema
-		//pedido.setFechaPedido(dateFormat.format(date));
+		pedido.setFechaPedido(dateFormat.format(date));
 
 	}
 
