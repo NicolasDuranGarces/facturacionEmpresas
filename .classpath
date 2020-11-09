@@ -18,7 +18,11 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="src" path="target/generated-sources/annotations">
+=======
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+>>>>>>> parent of 1323529... Adjunto Consultas JPQL Para la Generacion de Facturas y Carrito de Compras
 		<attributes>
 			<attribute name="ignore_optional_problems" value="true"/>
 			<attribute name="optional" value="true"/>
@@ -41,6 +45,7 @@
 			<attribute name="m2e-apt" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
@@ -49,6 +54,15 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 8 [1.8.0_271]">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
+=======
+	<classpathentry kind="src" output="target/test-classes" path="target/generated-test-sources/test-annotations">
+		<attributes>
+			<attribute name="ignore_optional_problems" value="true"/>
+			<attribute name="test" value="true"/>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="m2e-apt" value="true"/>
+>>>>>>> parent of 1323529... Adjunto Consultas JPQL Para la Generacion de Facturas y Carrito de Compras
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
