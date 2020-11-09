@@ -46,7 +46,7 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/addusuario")
-	public String addUsuario(@Valid Usuario empleado, BindingResult result, Model model) {
+	public String addUsuario(@Valid Usuario usuario, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "Usuario/addUsuario";
 		}
@@ -56,10 +56,10 @@ public class UsuarioController {
 		Set<Authority> authority = new HashSet<Authority>();
 		authority.add(autorizacion);
 
-		empleado.setAuthority(authority);
-		empleado.setContrasena(passgenerator.enciptarPassword(empleado.getContrasena()));
+		usuario.setAuthority(authority);
+		usuario.setContrasena(passgenerator.enciptarPassword(usuario.getContrasena()));
 
-		repositorioEmpleado.save(empleado);
+		repositorioEmpleado.save(usuario);
 		model.addAttribute("usuario", repositorioEmpleado.findAll());
 		return "redirect:/login";
 	}

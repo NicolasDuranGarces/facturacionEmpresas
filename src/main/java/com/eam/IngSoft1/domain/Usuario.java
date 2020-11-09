@@ -38,6 +38,7 @@ public class Usuario implements Serializable {
 	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$",  message="{lastname-valid}")
 	private String apellido;
 	
+	@Size(min= 5, max=20, message="{username-size}")
 	@Column(unique=true)
 	private String nombreUsuario;
 
