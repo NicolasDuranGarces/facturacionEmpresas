@@ -2,6 +2,7 @@ package com.eam.IngSoft1.Controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
@@ -53,7 +54,7 @@ public class FacturaController {
 
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@PostMapping("/user/agregar-al-carrito")
-	public String crearFactura(@RequestParam(value = "idProducto") String idProducto,
+	public String crearFactura(@RequestParam(value = "idProducto") int idProducto,
 			@RequestParam(value = "cantidad") int cantidad) {
 
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -74,19 +75,24 @@ public class FacturaController {
 		System.out.println("dni usuario :" + user.getDni());
 		System.out.println(user.toString());
 		int idFactura = 0;
-
-		idFactura = repositorioFactura.codigoFactura(user.getDni());
+		int idFacturaNueva = 0;
+		
+		ArrayList<Pedido> pedidos = repositorioFactura.mostrarPedidos();
+		
+		if(pedidos.size()!=0) {
+			idFactura = repositorioFactura.codigoFactura(user.getDni());
+		}
 
 		Detallefactura detallefactura = new Detallefactura();
 
 		if (idFactura != 0) {
 			detallefactura.setFactura(repositorioFactura.findByidFactura(idFactura));
-
 		} else {
 			// Se crea un nuevo pedido en el sistema y se le asocia una factura
 			Pedido pedido = new Pedido();
 			pedido.setActivo(true);
 			pedido.setDespachado(false);
+			pedido.setDNI_Encargado(1004);
 			pedido.setCliente(repositorioUsuario.findByDni(user.getDni()));
 			java.util.Date fecha = new Date();
 			// Captura La Fecha del Sistema
@@ -102,11 +108,18 @@ public class FacturaController {
 			repositorioFactura.save(factura);
 
 			// Obtenemos la factura con el ID generado
-			int idFacturaNueva = repositorioFactura.codigoFactura(user.getDni());
+			
+			ArrayList<Factura> facturas = repositorioFactura.mostrarFacturas();
+			
+			if(facturas.size()!=0) {
+				 idFacturaNueva = repositorioFactura.codigoFactura(user.getDni());
+			}
+			
 			detallefactura.setFactura(repositorioFactura.findByidFactura(idFacturaNueva));
 		}
-
-		Producto producto = repositorioProducto.findByidProducto(Integer.parseInt(idProducto));
+		
+		
+		Producto producto = repositorioProducto.findByidProducto(idProducto);
 
 		if (producto.getCantidadActual() >= cantidad) {
 

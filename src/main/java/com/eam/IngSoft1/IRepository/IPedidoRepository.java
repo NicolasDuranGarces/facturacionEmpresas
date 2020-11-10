@@ -8,4 +8,7 @@ import com.eam.IngSoft1.domain.Pedido;
 @Repository
 public interface IPedidoRepository extends CrudRepository<Pedido,Integer> {
 
+	
+	
+	
 }
