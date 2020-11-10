@@ -85,12 +85,10 @@
             </div>
 
             <div class="col-lg-6">
-                <form class="form-horizontal" th:action="/user/agregar-al-carrito"  method="post">
+                <form class="form-horizontal" th:action="@{/user/agregar-al-carrito}"  method="post">
 					
 					<!-- nombre del usuario -->
-                    <input type="hidden" class="form-control" th:name="idProducto" value="producto.idProducto">
-                    <!-- nombre del usuario -->
-                    <input type="hidden" class="form-control" th:name="username" value="[[${#httpServletRequest.remoteUser}]]">
+                    <input type="hidden" class="form-control" th:name="idProducto" th:field="*{producto.idProducto}">
 
                     <!-- Product Price  -->
                     <div class="form-group price_elem row">

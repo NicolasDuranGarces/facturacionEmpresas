@@ -13,14 +13,17 @@ public interface IFacturaRepository extends CrudRepository<Factura, Integer> {
 
 	// ----------Consulta para saber A cual factura Agregar los productos
 
-		@Query("SELECT fac.idFactura FROM Factura fac JOIN Pedido pe ON fac.pedido.idPedido = pe.idPedido WHERE pe.activo = 0 "
-				+ "and pe.cliente.dni = ?1")
-		public int codigoFactura(int dniUsuario);
+	/*
+	 * @Query("SELECT fac.idFactura FROM Factura fac JOIN fac.pedido pe WHERE pe.activo = 0 "
+	 * + "and pe.cliente.dni = ?1") public int codigoFactura(int dniUsuario);
+	 */
+	@Query("SELECT fac.idFactura FROM Factura fac JOIN Pedido pe ON fac.pedido.idPedido = pe.idPedido WHERE pe.activo = 0 "
+			+ "and pe.cliente.dni = ?1")
+	public int codigoFactura(int dniUsuario);
 
-		public Factura findByidFactura(int idFactura);
-		
-		// ------------------------- filtrar por cliente ---------
-		@Query("SELECT f FROM Factura f "
-				+ "JOIN f.pedido p JOIN p.cliente c WHERE c.dni= ?1")
-		public Iterable<Factura> mostrarFacturaFiltroCliente(int busqueda);
+	public Factura findByidFactura(int idFactura);
+
+	// ------------------------- filtrar por cliente ---------
+	@Query("SELECT f FROM Factura f " + "JOIN f.pedido p JOIN p.cliente c WHERE c.dni= ?1")
+	public Iterable<Factura> mostrarFacturaFiltroCliente(int busqueda);
 }
