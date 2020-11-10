@@ -17,4 +17,8 @@ public interface IUsuarioRepository extends CrudRepository<Usuario, Integer> {
 	
 	public Usuario findByDni(int dni);
 	
+	// ------------------------- obtener id por nombre usuario ---------
+			@Query("SELECT u FROM Usuario u "
+					+ " WHERE u.nombreUsuario= ?1")
+			public Usuario mostrarUsuario(String busqueda);
 }
