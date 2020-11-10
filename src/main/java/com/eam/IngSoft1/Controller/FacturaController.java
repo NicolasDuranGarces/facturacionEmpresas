@@ -72,8 +72,6 @@ public class FacturaController {
 		// minutos"></input>
 
 		Usuario user = repositorioUsuario.mostrarUsuario(userName);
-		System.out.println("dni usuario :" + user.getDni());
-		System.out.println(user.toString());
 		int idFactura = 0;
 		int idFacturaNueva = 0;
 		
@@ -128,6 +126,8 @@ public class FacturaController {
 
 			int valor = producto.getValorUnitario() * cantidad;
 			detallefactura.setValorTotal(valor);
+			
+			repositorioDetalle.save(detallefactura);
 
 		}
 		return "/homePageUsuario";
