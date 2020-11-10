@@ -22,13 +22,14 @@
 				<form th:action="@{/addusuario}" th:object="${usuario}"
 					method="post">
 					<div class="row">
-					
+											
 						<!--  DNI Usuario -->
 						<div class="form-group col-6">
 							<input type="number" th:field="*{dni}" class="form-control"
-								id="dni" placeholder="Numero de documento" required="required"><span
-								th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"
-								class="text-danger"></span>
+								id="dni" placeholder="Numero de Cedula"
+								required="required"> <span
+								th:if="${#fields.hasErrors('dni')}"
+								th:errors="*{dni}" class="text-danger"></span>
 						</div>
 						
 						<!--  Nombre Usuario -->

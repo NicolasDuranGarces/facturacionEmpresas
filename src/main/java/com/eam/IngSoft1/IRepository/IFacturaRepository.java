@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.eam.IngSoft1.domain.Factura;
+import com.eam.IngSoft1.domain.Producto;
 
 @Repository
 public interface IFacturaRepository extends CrudRepository<Factura, Integer> {
@@ -16,6 +17,10 @@ public interface IFacturaRepository extends CrudRepository<Factura, Integer> {
 				+ "and pe.cliente.dni = ?1")
 		public int codigoFactura(int dniUsuario);
 
-		
 		public Factura findByidFactura(int idFactura);
+		
+		// ------------------------- filtrar por cliente ---------
+		@Query("SELECT f FROM Factura f "
+				+ "JOIN f.pedido p JOIN p.cliente c WHERE c.dni= ?1")
+		public Iterable<Factura> mostrarFacturaFiltroCliente(int busqueda);
 }

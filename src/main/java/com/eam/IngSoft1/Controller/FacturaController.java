@@ -7,6 +7,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,10 +17,12 @@ import com.eam.IngSoft1.IRepository.IFacturaRepository;
 import com.eam.IngSoft1.IRepository.IPedidoRepository;
 import com.eam.IngSoft1.IRepository.IProductoRepository;
 import com.eam.IngSoft1.IRepository.IUsuarioRepository;
+import com.eam.IngSoft1.domain.Bodega;
 import com.eam.IngSoft1.domain.Detallefactura;
 import com.eam.IngSoft1.domain.Factura;
 import com.eam.IngSoft1.domain.Pedido;
 import com.eam.IngSoft1.domain.Producto;
+import com.eam.IngSoft1.domain.Proveedor;
 
 @Controller
 public class FacturaController {
@@ -90,11 +93,23 @@ public class FacturaController {
 			detallefactura.setValorTotal(valor);
 			
 		}
-		
-			
-		
-		
-
 	}
+	
+	//metodo para listado factura
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
+	@GetMapping("/admin/listadofactura")
+  	public String list(Factura factura, Model model) {
+  		model.addAttribute("facturas", repositorioFactura.findAll());
+        return "Factura/listaFactura";
+  	}
+	
+    
+  //metodo para listado facturas del usuario
+    @PreAuthorize("hasRole('ROLE_USER')")
+	@GetMapping("/listfactura")
+  	public String list(@RequestParam(value = "dniUsuario") int dniUsuario, Factura factura, Model model) {
+  		model.addAttribute("facturas", repositorioFactura.mostrarFacturaFiltroCliente(dniUsuario));
+        return "Factura/listaFactura";
+  	}
 
 }

@@ -1,101 +1,148 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
 </head>
 
 <body>
-    <!-- Menu para Todas las Vistas de Administrador-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Panel de Administración </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	<!-- Menu para Todas las Vistas de Administrador-->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#">Panel de Administración </a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-            	<li class="nav-item active">
-            		<a class="nav-link" th:href="@{/productos-disponibles}">Home 
-            			<span class="sr-only">(current)</span>
-					</a>
-				</li>
-                <li class="nav-item active"><a class="nav-link mx-3" href="/admin/home-empleado">Inicio
-						<span class="sr-only">(current)</span>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link"
+					th:href="@{/productos-disponibles}">Home <span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item active"><a class="nav-link mx-3"
+					href="/admin/home-empleado">Inicio <span class="sr-only">(current)</span>
 				</a></li>
 
-                <!-- Inicio de Desplegable de Categorias-->
-                <li class="nav-item dropdown mx-3"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Categoria </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" th:href="@{/admin/listadoCategorias}">Listar
+				<!-- Inicio de Desplegable de Categorias-->
+				<li class="nav-item dropdown mx-3"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Categoria </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" th:href="@{/admin/listadoCategorias}">Listar
 							Categorias</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" th:href="@{/admin/ingresoCategoria}">Registro
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" th:href="@{/admin/ingresoCategoria}">Registro
 							Categorias</a>
-                    </div>
-                </li>
-                <!-- Fin de Desplegable de Categorias-->
+					</div></li>
+				<!-- Fin de Desplegable de Categorias-->
 
-                <!-- Inicio de Desplegable de Productos-->
-                <li class="nav-item dropdown mx-3"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Producto </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" th:href="@{/admin/listadoProducto}">Listar Productos</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" th:href="@{/admin/ingresoProducto}">Registro de Productos</a>
-                       
-                    </div>
-                </li>
-                <!-- Fin de Desplegable de Productos-->
+				<!-- Inicio de Desplegable de Productos-->
+				<li class="nav-item dropdown mx-3"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Producto </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" th:href="@{/admin/listadoProducto}">Listar
+							Productos</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" th:href="@{/admin/ingresoProducto}">Registro
+							de Productos</a>
 
-                <!-- Inicio de Desplegable de Proveedores-->
-                <li class="nav-item dropdown mx-3"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Proveedor </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" th:href="@{/admin/listadoProveedores}">Listar Proveedores</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" th:href="@{/admin/ingresoProveedor}">Registro de Proveedores</a>
-                    </div>
-                </li>
-                <!-- Fin de Desplegable de Proveedores-->
-                
-                <!-- Inicio de Desplegable de Usuarios-->
-                <li th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" class="nav-item dropdown mx-3"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Usuarios </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" th:href="@{/admin/listadoUsuario}">Listar Usuarios</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" th:href="@{/admin/admin/crear-empleado}">Registro de Empleados</a>
-                    </div>
-                </li>
-                <!-- Fin de Desplegable de Empleados-->
-                
-                <!-- Inicio de Desplegable de Bodegas-->
-                <li class="nav-item dropdown mx-3"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Bodegas </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" th:href="@{/admin/listadoBodega}">Listar Bodegas</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" th:href="@{/admin/ingresoBodega}">Registro de Bodegas</a>
-                    </div>
-                </li>
-                <form th:action="@{/logout}" method="post">
-            		<input type="submit" class="btn btn-dark" value="Cerrar Sesion"/>
-        		</form>
-                <!-- Fin de Desplegable de Bodegas-->
+					</div></li>
+				<!-- Fin de Desplegable de Productos-->
 
-            </ul>
+				<!-- Inicio de Desplegable de Proveedores-->
+				<li class="nav-item dropdown mx-3"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Proveedor </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" th:href="@{/admin/listadoProveedores}">Listar
+							Proveedores</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" th:href="@{/admin/ingresoProveedor}">Registro
+							de Proveedores</a>
+					</div></li>
+				<!-- Fin de Desplegable de Proveedores-->
 
-        </div>
-    </nav>
-    <!--Fin del Menu de Administrador-->
+				<!-- Inicio de Desplegable de Usuarios-->
+				<li th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+					class="nav-item dropdown mx-3"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Usuarios </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" th:href="@{/admin/listadoUsuario}">Listar
+							Usuarios</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" th:href="@{/admin/admin/crear-empleado}">Registro
+							de Empleados</a>
+					</div></li>
+				<!-- Fin de Desplegable de Empleados-->
 
-    
-    <!-- Scripts de JS de bootstrap  -->
-    <!-- (Orden) jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+				<!-- Inicio de Desplegable de Bodegas-->
+				<li class="nav-item dropdown mx-3"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Bodegas </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" th:href="@{/admin/listadoBodega}">Listar
+							Bodegas</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" th:href="@{/admin/ingresoBodega}">Registro
+							de Bodegas</a>
+					</div></li>
+				<!-- Fin de Desplegable de Bodegas-->
+				<!-- Inicio de Desplegable de Factura-->
+				<li class="nav-item dropdown mx-3"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Facturas </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" th:href="@{/admin/listadofactura}">Listar
+							Facturas</a>
+						<div class="dropdown-divider"></div>
+					</div></li>
+
+				<!-- Fin de Desplegable de Factura-->
+				<form th:action="@{/logout}" method="post">
+					<input type="submit" class="btn btn-dark" value="Cerrar Sesion" />
+				</form>
+
+
+
+
+
+			</ul>
+
+		</div>
+	</nav>
+	<!--Fin del Menu de Administrador-->
+
+
+	<!-- Scripts de JS de bootstrap  -->
+	<!-- (Orden) jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+		crossorigin="anonymous"></script>
 
 </body>
 

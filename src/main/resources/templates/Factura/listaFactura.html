@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+<title>Index Admin</title>
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- Menu para Todas las Vistas de Administrador-->
+	<div th:replace="Componentes/Navbar :: nav"></div>
+	<!--Fin del Menu de Administrador-->
+	<br>
+	<!-- Inicio del Cuerpo de la Pagina -->
+	<div class="container">
+		<h1>Listado De Facturas</h1>
+	</div>
+	<br>
+
+	<!-- Inicio del table -->
+	<div class="container" th:switch="${facturas}">
+		<div class="row mt-5">
+			<div class="col-10">
+				<table class="table"> 
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">Codigo Factura</th>
+							<th scope="col">Documento Cliente</th>
+							<th scope="col">Cliente</th>
+							<th scope="col">Valor Total</th>
+							<th scope="col">Ver Factura</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th th:each="factura : ${facturas}"></th>
+							<td th:text="${factura.idFactura}"></td>
+							<td th:text="${factura.pedido.cliente.dni}"></td>
+							<td th:text="${factura.pedido.cliente.nombre}"></td>
+							<td th:text="${factura.precioTotal}"></td>
+							<!-- Aqui vamos a colocar para ver el pdf de la factura -->
+							<!--  <td><a
+								th:href="@{/verfactura/{idFactura}(idFactura=${factura.idFactura})}"
+								class="btn btn-info"><i class="fas fa-times ml-2 mr-2"></i></a></td>-->
+						</tr>
+					</tbody>
+				</table>
+				<!-- Fin del table -->
+</body>
+</html>
