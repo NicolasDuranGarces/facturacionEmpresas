@@ -16,4 +16,6 @@ public interface IFacturaRepository extends CrudRepository<Factura, Integer> {
 				+ "and pe.cliente.dni = ?1")
 		public int codigoFactura(int dniUsuario);
 
+		
+		public Factura findByidFactura(int idFactura);
 }
