@@ -191,6 +191,9 @@ public class FacturaController {
     @GetMapping("/user/deletedetalle/{idDetalle}")
     public String deleteDetalle(@PathVariable("idDetalle") int idDetalle, Model model) {
     	Detallefactura detalleFactura = repositorioDetalle.findById(idDetalle).orElseThrow(() -> new IllegalArgumentException("Invalido detalle idDetalle:" + idDetalle));
+    	Producto producto = repositorioProducto.findByidProducto(detalleFactura.getProducto().getIdProducto());
+    	producto.setCantidadActual(producto.getCantidadActual()+detalleFactura.getCantidadProducto());
+    	repositorioProducto.save(producto);
     	repositorioDetalle.delete(detalleFactura);
     	
         return "redirect:/user/listCarrito";
