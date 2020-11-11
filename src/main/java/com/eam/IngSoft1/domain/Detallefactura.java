@@ -24,6 +24,8 @@ public class Detallefactura implements Serializable {
 
 	private int valorTotal;
 	
+	private int valorIvaTotal;
+	
 	public Detallefactura() {
 	}
 

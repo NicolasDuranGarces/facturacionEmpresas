@@ -51,9 +51,9 @@ public class FacturaController {
 
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@PostMapping("/user/agregar-al-carrito")
-	public String crearFactura(@RequestParam(value = "idProducto") int idProducto,
-			@RequestParam(value = "cantidad") int cantidad) {
+	public String crearFactura(@RequestParam(value = "idProducto") int idProducto, @RequestParam(value = "cantidad") int cantidad) {
 
+		//Codigo Para Obtener El Usuario que esta Sesion
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserDetails userDetails = null;
 		if (principal instanceof UserDetails) {
@@ -61,36 +61,39 @@ public class FacturaController {
 		}
 		String userName = userDetails.getUsername();
 
-		System.out.println(idProducto);
-		System.out.println(userName);
-		System.out.println(cantidad);
-
-		// <input type="text" id="tiempo" th:name="tiempo" placeholder="Tiempo en
-		// minutos"></input>
-
+		//Busqueda de Usuario Mediante nombreUsuario obtenido Anteriormente
 		Usuario user = repositorioUsuario.mostrarUsuario(userName);
+		
+		//Inicializacion de Id de facturas Para busqueda
 		int idFactura = 0;
 		int idFacturaNueva = 0;
+		int sumaTotal=0;
 		
 		ArrayList<Pedido> pedidos = repositorioFactura.mostrarPedidos();
 		
+		//Comparacion para saber si hay pedidos
 		if(pedidos.size()!=0) {
+			//Si Hay pedidos Confirmamos que el pedido este Activo y Obtenemos el idFactura a la que hace referencia
 			idFactura = repositorioFactura.codigoFactura(user.getDni());
 		}
-
+		
+		//Instanciamos un Objeto de DetalleFactura 
 		Detallefactura detallefactura = new Detallefactura();
-
+		
+		//confirmamos que el idFactura no sea 0 
 		if (idFactura != 0) {
+			//Si ya hay una factura la asociamos a un Detalle
 			detallefactura.setFactura(repositorioFactura.findByidFactura(idFactura));
 		} else {
-			// Se crea un nuevo pedido en el sistema y se le asocia una factura
+			//Si es 0 Se crea un nuevo pedido en el sistema y se le asocia una factura
 			Pedido pedido = new Pedido();
 			pedido.setActivo(true);
 			pedido.setDespachado(false);
 			pedido.setDNI_Encargado(1004);
 			pedido.setCliente(repositorioUsuario.findByDni(user.getDni()));
+			
+			//Captura La Fecha del Sistema
 			java.util.Date fecha = new Date();
-			// Captura La Fecha del Sistema
 			pedido.setFechaPedido(fecha);
 
 			// Guardamos el nuevo pedido en la BD
@@ -102,8 +105,6 @@ public class FacturaController {
 			// Guardamos la nueva factura en la BD
 			repositorioFactura.save(factura);
 
-			// Obtenemos la factura con el ID generado
-			
 			ArrayList<Factura> facturas = repositorioFactura.mostrarFacturas();
 			
 			if(facturas.size()!=0) {
@@ -123,9 +124,21 @@ public class FacturaController {
 
 			int valor = producto.getValorUnitario() * cantidad;
 			detallefactura.setValorTotal(valor);
+			int valorIva = (int)(valor*0.19);
+			detallefactura.setValorIvaTotal(valorIva);
 			
 			repositorioDetalle.save(detallefactura);
-
+			
+			ArrayList<Detallefactura> detalleFactura = repositorioDetalle.mostrarDetalles(detallefactura.getFactura().getIdFactura());
+			
+			for (int i = 0; i < detalleFactura.size(); i++) {
+				sumaTotal += detalleFactura.get(i).getValorTotal();
+			}
+			
+			Factura facturaConPrecio = repositorioFactura.findByidFactura(detallefactura.getFactura().getIdFactura());
+			facturaConPrecio.setPrecioTotal(sumaTotal);
+			repositorioFactura.save(facturaConPrecio);
+			
 		}
 		return "/homePageUsuario";
 	}
@@ -160,8 +173,11 @@ public class FacturaController {
 		Usuario user = repositorioUsuario.mostrarUsuario(userName);
 		int idFactura = repositorioFactura.codigoFactura(user.getDni());
 		
-		Iterable<Detallefactura> detalles = repositorioDetalle.mostrarDetalles(idFactura);
+		Factura factura = repositorioFactura.findByidFactura(idFactura);
 		
+		Iterable<Detallefactura> detalles = repositorioDetalle.mostrarDetalles(idFactura);
+		int precio = factura.getPrecioTotal();
+		System.out.println();
    		model.addAttribute("detallefactura",detalles);
    		
    		return "Pedido/listadoCarrito";

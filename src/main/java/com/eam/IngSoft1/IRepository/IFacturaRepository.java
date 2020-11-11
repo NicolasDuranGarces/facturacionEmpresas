@@ -47,7 +47,7 @@ public interface IFacturaRepository extends CrudRepository<Factura, Integer> {
 	public ArrayList<Factura> mostrarFacturasActivas();
 	
 	
-	
+		
 	
 }
 
