@@ -150,8 +150,10 @@ public class FacturaController {
 	}
 
 	//metodo para redireccionar al carrito de compra
-   	@GetMapping("/listCarrito")
-   	public String irVerCarrito(Model model) {
+	
+	@PreAuthorize("hasRole('ROLE_USER')")
+   	@GetMapping("/user/listCarrito")
+   	public String irVerCarrito(Model model,Detallefactura detallefactura) {
    		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserDetails userDetails = null;
 		if (principal instanceof UserDetails) {
@@ -161,11 +163,9 @@ public class FacturaController {
 		Usuario user = repositorioUsuario.mostrarUsuario(userName);
 		int idFactura = repositorioFactura.codigoFactura(user.getDni());
 		
-		ArrayList<Detallefactura> detalles = repositorioDetalle.mostrarDetalles(idFactura);
-		for (int i = 0; i < detalles.size(); i++) {
-			System.out.println(detalles.get(i).getProducto().getNombreProducto());
-		}
-   		model.addAttribute("detallefacturas",detalles );
+		Iterable<Detallefactura> detalles = repositorioDetalle.mostrarDetalles(idFactura);
+		
+   		model.addAttribute("detallefactura",detalles);
    		
    		return "Pedido/listadoCarrito";
    	}
