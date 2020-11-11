@@ -32,9 +32,5 @@ public class PedidoController {
 
 	}
 		
- 	//metodo para redireccionar al carrito de compra
-   	@GetMapping("/listCarrito")
-   	public String irVerCarrito(Model model) {
-   		return "Pedido/listadoCarrito";
-   	}
+ 
 }

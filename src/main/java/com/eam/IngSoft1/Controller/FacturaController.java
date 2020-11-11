@@ -149,4 +149,24 @@ public class FacturaController {
 		return "Factura/listaFactura";
 	}
 
+	//metodo para redireccionar al carrito de compra
+   	@GetMapping("/listCarrito")
+   	public String irVerCarrito(Model model) {
+   		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDetails userDetails = null;
+		if (principal instanceof UserDetails) {
+			userDetails = (UserDetails) principal;
+		}
+		String userName = userDetails.getUsername();
+		Usuario user = repositorioUsuario.mostrarUsuario(userName);
+		int idFactura = repositorioFactura.codigoFactura(user.getDni());
+		
+		ArrayList<Detallefactura> detalles = repositorioDetalle.mostrarDetalles(idFactura);
+		for (int i = 0; i < detalles.size(); i++) {
+			System.out.println(detalles.get(i).getProducto().getNombreProducto());
+		}
+   		model.addAttribute("detallefacturas",detalles );
+   		
+   		return "Pedido/listadoCarrito";
+   	}
 }

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.eam.IngSoft1.domain.Detallefactura;
 import com.eam.IngSoft1.domain.Factura;
 import com.eam.IngSoft1.domain.Pedido;
 import com.eam.IngSoft1.domain.Producto;
@@ -41,12 +42,6 @@ public interface IFacturaRepository extends CrudRepository<Factura, Integer> {
 	public ArrayList<Factura> mostrarFacturas();
 	
 	
-	
-	
-	@Query("SELECT detalle FROM Factura fac JOIN Detallefactura detalle "
-			+ "ON fac.idFactura = detalle.factura.idFactura join Pedido ped on ped.idPedido = fac.pedido.idPedido "
-			+ "where ped.activo = 1 and ped.cliente.dni = ?1") 
-	public Iterable<Pedido> mostrarFacturas(int dniCliente);
 }
 
 

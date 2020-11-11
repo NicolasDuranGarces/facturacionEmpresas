@@ -62,7 +62,7 @@
 	</nav>
 	
 	<!-- Inicio del table -->
-	<div class="container" th:switch="${detalles}">
+	<div class="container" th:switch="${detallefacturas}">
 		<div class="row mt-5">
 			<div class="col-10">
 				<table class="table">
@@ -77,7 +77,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<th th:each="detalle : ${dertalles}"></th>
+							<th th:each="detalle : ${detallefacturas}"></th>
 							<td th:text="${detalle.producto.nombreProducto}"></td>
 							<td th:text="${detalle.producto.marca}"></td>
 							<td th:text="${detalle.cantidadProducto}"></td>
