@@ -23,13 +23,10 @@ import com.eam.IngSoft1.IRepository.IPedidoRepository;
 import com.eam.IngSoft1.IRepository.IProductoRepository;
 import com.eam.IngSoft1.IRepository.IUsuarioRepository;
 import com.eam.IngSoft1.config.MethodSecurityConfig;
-import com.eam.IngSoft1.domain.Bodega;
-import com.eam.IngSoft1.domain.Categoriaproducto;
 import com.eam.IngSoft1.domain.Detallefactura;
 import com.eam.IngSoft1.domain.Factura;
 import com.eam.IngSoft1.domain.Pedido;
 import com.eam.IngSoft1.domain.Producto;
-import com.eam.IngSoft1.domain.Proveedor;
 import com.eam.IngSoft1.domain.Usuario;
 
 @Controller
@@ -169,4 +166,16 @@ public class FacturaController {
    		
    		return "Pedido/listadoCarrito";
    	}
+	
+	//Metodo para quitar producto del carrito
+	@PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/user/deletedetalle/{idDetalle}")
+    public String deleteDetalle(@PathVariable("idDetalle") int idDetalle, Model model) {
+    	Detallefactura detalleFactura = repositorioDetalle.findById(idDetalle).orElseThrow(() -> new IllegalArgumentException("Invalido detalle idDetalle:" + idDetalle));
+    	repositorioDetalle.delete(detalleFactura);
+    	
+        return "redirect:/user/listCarrito";
+    }
+	
+	
 }

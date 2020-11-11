@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<!--Navbar-->
+
+	<nav
+		class="navbar navbar-expand-lg navbar-dark bg-dark primary-color fixed-top">
+		<div class="container">
+
+			<a class="navbar-brand" href="#"> <img src="../Imagenes/LOGO.png"
+				height="40" class="d-inline-block align-top" alt="mdb logo">
+				Los Tres Mosqueteros
+			</a>
+
+			<!-- Collapse button -->
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#basicExampleNav" aria-controls="basicExampleNav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<!-- Collapsible content -->
+			<div class="collapse navbar-collapse" id="basicExampleNav">
+
+				<!-- Links -->
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a class="nav-link"
+						th:href="@{/productos-disponibles}">Inicio <span
+							class="sr-only">(current)</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/listfactura}">Facturas</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">[[${#httpServletRequest.remoteUser}]]!</a></li>
+				</ul>
+
+				<ul class="navbar-nav ml-auto nav-flex-icons">
+					<li class="nav-item"><a
+						class="nav-link waves-effect waves-light"> <i
+							class="fas fa-cart-arrow-down"></i> Carrito
+					</a></li>
+				</ul>
+
+				<form th:action="@{/logout}" method="post">
+					<input type="submit" class="btn btn-danger ml-5"
+						value="Cerrar Sesion" />
+				</form>
+				<form th:action="@{/admin/home-empleado}" method="get">
+					<input
+						th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_EMPLEADO'')')}"
+						type="submit" class="btn btn-dark ml-2" value="ADMINISTRAR" />
+				</form>
+
+			</div>
+			<!-- Collapsible content -->
+		</div>
+	</nav>
+
+	<!--/.Navbar-->
+
+</body>
+
+</html>
