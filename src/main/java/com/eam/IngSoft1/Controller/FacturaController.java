@@ -129,6 +129,9 @@ public class FacturaController {
 			
 			repositorioDetalle.save(detallefactura);
 			
+			producto.setCantidadActual(producto.getCantidadActual()-cantidad);
+			repositorioProducto.save(producto);
+			
 			ArrayList<Detallefactura> detalleFactura = repositorioDetalle.mostrarDetalles(detallefactura.getFactura().getIdFactura());
 			
 			for (int i = 0; i < detalleFactura.size(); i++) {
