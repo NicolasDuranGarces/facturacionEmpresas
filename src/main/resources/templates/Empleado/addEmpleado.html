@@ -31,9 +31,9 @@
 				<div class="form-group col-md-6">
 					<label for="nombre" class="col-form-label">Nombre del
 						Empleado</label> <input type="text" th:field="*{nombre}"
-						class="form-control" id="nombre" placeholder="Nombre Empleado"
-						required="required"> <span
-						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+						class="form-control" id="nombre" placeholder="Nombre Empleado" required="true"
+						> 
+					<span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
 						class="text-danger"></span>
 				</div>
 
@@ -41,18 +41,19 @@
 				<div class="form-group col-md-6">
 					<label for="apellido" class="col-form-label">Apellido</label> <input
 						type="text" th:field="*{apellido}" class="form-control"
-						id="apellido" placeholder="Apelledo de Empleado"
-						required="required"> <span
-						th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"
+						id="apellido" placeholder="Apelledo de Empleado" required="true"
+						> 
+					<span th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"
 						class="text-danger"></span>
 				</div>
 
 				<!-- Cedula del Empleado -->
 				<div class="form-group col-md-6">
 					<label for="DNI_empleado" class="col-form-label">Documento
-						de Identidad</label> <input type="number" th:field="*{dni}"
+						de Identidad</label> <input type="text" th:field="*{dni}"
 						class="form-control" id="DNI_empleado"
-						placeholder="Cedula del Empleado" required="required"> <span
+						placeholder="Cedula del Empleado" required="true"> 
+						<span
 						th:if="${#fields.hasErrors('dni')}"
 						th:errors="*{dni}" class="text-danger"></span>
 				</div>
@@ -62,7 +63,7 @@
 				<div class="form-group col-md-6">
 					<label for="direccion" class="col-form-label">Direccion</label> <input
 						type="text" th:field="*{direccion}" class="form-control"
-						id="direccion" placeholder="..." required="required"> <span
+						id="direccion" placeholder="..." required="true"> <span
 						th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"
 						class="text-danger"></span>
 				</div>
@@ -71,7 +72,7 @@
 				<div class="form-group col-md-6">
 					<label for="telefono" class="col-form-label">Telefono</label> <input
 						type="number" th:field="*{telefono}" class="form-control"
-						id="telefono" placeholder="..." required="required"> <span
+						id="telefono" placeholder="..." required="true"> <span
 						th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"
 						class="text-danger"></span>
 				</div>
@@ -81,7 +82,7 @@
 				<div class="form-group col-md-6">
 					<label for="usario" class="col-form-label">Nombre de Usuario del Empleado</label> <input
 						type="text" th:field="*{nombreUsuario}" class="form-control"
-						id="usario" placeholder="..." required="required"> <span
+						id="usario" placeholder="..." required="true"> <span
 						th:if="${#fields.hasErrors('nombreUsuario')}" th:errors="*{nombreUsuario}"
 						class="text-danger"></span>
 				</div>
@@ -91,12 +92,19 @@
 				<div class="form-group col-md-6">
 					<label for="contrasena" class="col-form-label">Contrasena del Empleado</label> <input
 						type="password" th:field="*{contrasena}" class="form-control"
-						id="contrasena" placeholder="..." required="required"> <span
+						id="contrasena" placeholder="..." required="true"> <span
 						th:if="${#fields.hasErrors('contrasena')}" th:errors="*{contrasena}"
 						class="text-danger"></span>
 				</div>
+				
+				<div th:object="${usuario}" th:remove="tag">
+    				<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
+        				<li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
+    				</ul>
+				</div>
 
 			</div>
+			
 			<div class="row">
 				<div class="col-md-6 mt-5">
 					<input type="submit" class="btn btn-primary">

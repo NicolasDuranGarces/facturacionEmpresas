@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,6 +63,7 @@ public class UsuarioController {
 		repositorioEmpleado.save(usuario);
 		model.addAttribute("usuario", repositorioEmpleado.findAll());
 		return "redirect:/login";
+		
 	}
 
 	// Metodo de crear empleado desde el Administrador
@@ -73,9 +75,16 @@ public class UsuarioController {
 
 	@PostMapping("/addempleado")
 	public String addEmpleado(@Valid Usuario usuario, BindingResult result, Model model) {
+		if (usuario.getDni()>99999999999l) {
+			ObjectError objectError = new ObjectError("dni", "el dni no debe tener longitud mayor a 11");
+	        result.addError(objectError);
+	        return "Empleado/addEmpleado";
+		}
 		if (result.hasErrors()) {
 			return "Empleado/addEmpleado";
 		}
+		
+		
 
 		Authority autorizacion = authorityRepository.findByAuthority("ROLE_EMPLEADO");
 
@@ -107,7 +116,7 @@ public class UsuarioController {
 			empleado.setDni(dni);
 			return "Usuario/updateUsuario";
 		}
-		Usuario appUser = repositorioEmpleado.findById(empleado.getDni()).get();
+		Usuario appUser = repositorioEmpleado.findByDni(empleado.getDni());
 		if (appUser != null) {
 			empleado.setAuthority(appUser.getAuthority());
 		}

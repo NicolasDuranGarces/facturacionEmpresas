@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -23,35 +26,37 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@NotBlank(message = "{dni-mandatory}")
-	@Size(min= 5, max=20, message="{dni-size}")
-	@Column(unique=true)
+	@NotNull(message = "El DNI es obligatorio")
+	//@Size(min= 5, max=11, message="El DNI debe tener entre 5 y 11 caracteres")
+	@Min(10000)
+	@Column(unique=true, length=11)
 	private int dni;
 	
-	@NotBlank(message = "{name-mandatory}")
-	@Size(min= 3, max=50, message="{name-size}")
-	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message="{name-valid}")
+	@NotBlank(message = "El nombre es obligatorio")
+	@Size(min= 3, max=50, message="El nombre debe tener entre 3 y 50 caracteres")
+	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message="El nombre solo admite letras mayúsculas y minúsculas")
 	private String nombre;
 	
-	@NotBlank(message = "{lastname-mandatory}")
-	@Size(min= 3, max=50, message="{lastname-size}")
-	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$",  message="{lastname-valid}")
+	@NotBlank(message = "El apellido es obligatorio")
+	@Size(min= 3, max=50, message="El apellido debe tener entre 3 y 50 caracteres")
+	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$",  message="El apellido solo admite letras mayúsculas y minúsculas")
 	private String apellido;
 	
-	@Size(min= 5, max=20, message="{username-size}")
+	@NotBlank(message = "El nombre de usuario es obligatorio")
+	@Size(min= 5, max=20, message="El nombre de usuario debe tener entre 5 y 20 caracteres")
 	@Column(unique=true)
 	private String nombreUsuario;
 
-	@NotBlank(message = "{password-mandatory}")
-	@Size(min= 8, max=200, message="{password-size}")
+	@NotBlank(message = "La contraseña es obligatoria")
+	@Size(min= 8, max=200, message="La contraseña debe tener entre 8 y 20 caracteres")
 	private String contrasena;
 
-	@NotBlank(message = "{address-mandatory}")
-	@Size(min= 7, max=255, message="{address-size}")
+	@NotBlank(message = "La dirección es obligatoria")
+	@Size(min= 7, max=255, message="La dirección debe tener entre 7 y 255 caracteres")
 	private String direccion;
 
-	@NotBlank(message = "{phone-mandatory}")
-	@Size(min= 7, max=20, message="{phone-size}")
+	@NotBlank(message = "El teléfono es obligatorio")
+	@Size(min= 7, max=20, message="El teléfono debe tener entre 7 y 20 caracteres")
 	//@Pattern(regexp="^[0-9]$", message="Por favor solo ingresar numeros")
 	private String telefono;
 
@@ -72,13 +77,13 @@ public class Usuario implements Serializable {
 	public Usuario() {
 	}
 	
-	public Usuario(@NotBlank(message = "{dni-mandatory}") @Size(min = 5, max = 20, message = "{dni-size}") int dni,
-			@NotBlank(message = "{name-mandatory}") @Size(min = 3, max = 50, message = "{name-size}") @Pattern(regexp = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "{name-valid}") String nombre,
-			@NotBlank(message = "{lastname-mandatory}") @Size(min = 3, max = 50, message = "{lastname-size}") @Pattern(regexp = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "{lastname-valid}") String apellido,
+	public Usuario(@NotBlank(message = "El DNI es obligatorio") @Size(min = 5, max = 11, message = "El DNI debe tener entre 5 y 11 caracteres") int dni,
+			@NotBlank(message = "El nombre es obligatorio") @Size(min = 3, max = 50, message = "El nombre debe tener entre 3 y 50 caracteres") @Pattern(regexp = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "El nombre solo admite letras mayúsculas y minúsculas") String nombre,
+			@NotBlank(message = "El apellido es obligatorio") @Size(min = 3, max = 50, message = "El apellido debe tener entre 3 y 50 caracteres") @Pattern(regexp = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "El apellido solo admite letras mayúsculas y minúsculas") String apellido,
 			String nombreUsuario,
-			@NotBlank(message = "{password-mandatory}") @Size(min = 8, max = 200, message = "{password-size}") String contrasena,
-			@NotBlank(message = "{address-mandatory}") @Size(min = 7, max = 255, message = "{address-size}") String direccion,
-			@NotBlank(message = "{phone-mandatory}") @Size(min = 7, max = 20, message = "{phone-size}") String telefono,
+			@NotBlank(message = "La contraseña es obligatoria") @Size(min = 8, max = 200, message = "La contraseña debe tener entre 8 y 20 caracteres") String contrasena,
+			@NotBlank(message = "La dirección es obligatoria") @Size(min = 7, max = 255, message = "La dirección debe tener entre 7 y 255 caracteres") String direccion,
+			@NotBlank(message = "El teléfono es obligatorio") @Size(min = 7, max = 20, message = "El teléfono debe tener entre 7 y 20 caracteres") String telefono,
 			Set<Authority> authority, List<Pedido> pedidos) {
 		super();
 		this.dni = dni;

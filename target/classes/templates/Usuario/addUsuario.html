@@ -35,9 +35,9 @@
 						<!--  Nombre Usuario -->
 						<div class="form-group col-6">
 							<input type="text" th:field="*{nombre}" class="form-control"
-								id="nombre" placeholder="Nombre Del Usuario" required="required"> <span
-								th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
-								class="text-danger"></span>
+								id="nombre" placeholder="Nombre Del Usuario" required="required"> 
+							<span class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+								></span>
 						</div>
 
 						<!-- Apellido Usuario -->
@@ -53,7 +53,7 @@
 							<input type="text" th:field="*{nombreUsuario}" class="form-control"
 								id="nombreUsuario" placeholder="Usuario del Sistema" required="required">
 							<span th:if="${#fields.hasErrors('nombreUsuario')}"
-								th:errors="*{nombreUsuario}" class="text-danger"></span>
+								th:errors="*{nombreUsuario}" class="text-warning"></span>
 						</div>
 
 						<!-- Contrasena Usuario -->

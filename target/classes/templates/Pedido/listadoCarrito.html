@@ -43,9 +43,10 @@
 								<th>Marca</th>
 								<th>Valor Unitario</th>
 								<th>Cantidad De Producto</th>
-								<th>Valor Total</th>
+								<th>Valor Total + IVA</th>
+								<th>IVA</th>
 								<th>Eliminar</th>
-
+							
 							</tr>
 						</thead>
 						<tbody>
@@ -55,20 +56,21 @@
 								<td th:text="${detallefacturas.producto.valorUnitario}"></td>
 								<td th:text="${detallefacturas.cantidadProducto}"></td>
 								<td th:text="${detallefacturas.valorTotal}"></td>
+								<td th:text="${detallefacturas.valorIvaTotal}"></td>
 								<td><a
 									th:href="@{/user/deletedetalle/{idDetalle}(idDetalle=${detallefacturas.id_detalleFactura})}"
 									class="btn btn-danger"><i class="fas fa-times ml-2 mr-2"></i></a></td>
-
 							</tr>
-
-							<tr>
-
+							
+							<tr >
 								<td></td>
 								<td></td>
 								<td></td>
 								<td><h6>PRECIO TOTAL FACTURA =</h6></td>
-								<td text=""></td>
+								<td >${totalfactura}</td>
 							</tr>
+
+
 						</tbody>
 					</table>
 					<br> <br> <a type="button" class="btn btn-success"
@@ -84,6 +86,8 @@
 			<div class="col-1"></div>
 		</div>
 	</div>
+	
+	
 
 
 
