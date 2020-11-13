@@ -57,6 +57,9 @@ public class ProductoController {
     @PostMapping("/addproducto")
     public String addProducto(@Valid Producto producto, BindingResult result, Model model, @RequestParam("file") MultipartFile file) {
         if (result.hasErrors()) {
+        	model.addAttribute("categoriaproductos",categoriaRepository.findAll());
+        	model.addAttribute("proveedores",proveedorRepository.findAll());
+        	model.addAttribute("bodegas",bodegaRepository.findAll());
             return "Producto/addProducto";
         }
         

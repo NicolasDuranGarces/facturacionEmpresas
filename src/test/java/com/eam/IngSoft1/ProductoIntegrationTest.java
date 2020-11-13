@@ -54,7 +54,7 @@ public class ProductoIntegrationTest {
 		Bodega bodega = repositoryBodega.save(new Bodega("Bodega A", "Local principal", null));
 		// Generacion de Proveedor
 		Proveedor proveedor = repositoryProveedor
-				.save(new Proveedor("Toledo Campestre Casa 27", "Nicolas Duran", 7374228));
+				.save(new Proveedor("Toledo Campestre Casa 27", "Nicolas Duran", "7374228"));
 		// Generacion del Categoria
 		Categoriaproducto categoriaproducto = repositoryCategoria.save(new Categoriaproducto("MacBook Pro"));
 		// Generacion del Objeto Producto
@@ -82,7 +82,7 @@ public class ProductoIntegrationTest {
 		Bodega bodega = new Bodega("Bodega A", "Local principal", null);
 		entityManager.persist(bodega);
 		// Generacion de Proveedor
-		Proveedor proveedor = new Proveedor("Toledo Campestre Casa 27", "Nicolas Duran", 7374228);
+		Proveedor proveedor = new Proveedor("Toledo Campestre Casa 27", "Nicolas Duran", "7374228");
 		entityManager.persist(proveedor);
 		// Genercion de Categoria
 		Categoriaproducto categoriaproducto = new Categoriaproducto("MacBook Pro");
@@ -111,7 +111,7 @@ public class ProductoIntegrationTest {
 		Bodega bodega = new Bodega("Bodega A", "Local principal", null);
 		entityManager.persist(bodega);
 		// Generacion de Proveedor
-		Proveedor proveedor = new Proveedor("Toledo Campestre Casa 27", "Nicolas Duran", 7374228);
+		Proveedor proveedor = new Proveedor("Toledo Campestre Casa 27", "Nicolas Duran", "7374228");
 		entityManager.persist(proveedor);
 		// Genercion de Categoria
 		Categoriaproducto categoriaproducto = new Categoriaproducto("MacBook Pro");
@@ -138,7 +138,7 @@ public class ProductoIntegrationTest {
 		Bodega bodega = new Bodega("Bodega A", "Local principal", null);
 		entityManager.persist(bodega);
 		// Generacion de Proveedor
-		Proveedor proveedor = new Proveedor("Toledo Campestre Casa 27", "Nicolas Duran", 7374228);
+		Proveedor proveedor = new Proveedor("Toledo Campestre Casa 27", "Nicolas Duran", "7374228");
 		entityManager.persist(proveedor);
 		// Genercion de Categoria
 		Categoriaproducto categoriaproducto = new Categoriaproducto("MacBook Pro");
@@ -178,7 +178,7 @@ public class ProductoIntegrationTest {
 		Bodega bodega = new Bodega("Bodega A", "Local principal", null);
 		entityManager.persist(bodega);
 		// Generacion de Proveedor
-		Proveedor proveedor = new Proveedor("Toledo Campestre Casa 27", "Nicolas Duran", 7374228);
+		Proveedor proveedor = new Proveedor("Toledo Campestre Casa 27", "Nicolas Duran", "7374228");
 		entityManager.persist(proveedor);
 		// Genercion de Categoria
 		Categoriaproducto categoriaproducto = new Categoriaproducto("MacBook Pro");
@@ -210,7 +210,7 @@ public class ProductoIntegrationTest {
 		Bodega bodega = new Bodega("Bodega A", "Local principal", null);
 		entityManager.persist(bodega);
 		// Generacion de Proveedor
-		Proveedor proveedor = new Proveedor("Toledo Campestre Casa 27", "Nicolas Duran", 7374228);
+		Proveedor proveedor = new Proveedor("Toledo Campestre Casa 27", "Nicolas Duran", "7374228");
 		entityManager.persist(proveedor);
 		// Genercion de Categoria
 		Categoriaproducto categoriaproducto = new Categoriaproducto("MacBook Pro");

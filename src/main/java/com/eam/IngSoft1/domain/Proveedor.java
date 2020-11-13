@@ -26,20 +26,20 @@ public class Proveedor implements Serializable {
 	@Column(name="id_proveedor")
 	private int idProveedor;
 
-	@NotBlank(message = "{address-mandatory}")
-	@Size(min= 7, max=255, message="{address-size}")
+	@NotBlank(message = "La dirección es obligatoria")
+	@Size(min= 7, max=255, message="La dirección debe tener entre 7 y 255 caracteres")
 	private String direccion;
 
-	@NotBlank(message = "{name-mandatory}")
-	@Size(min= 3, max=50, message="{name-size}")
-	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message="{name-valid}")
+	@NotBlank(message = "El nombre del proveedor es obligatorio")
+	@Size(min= 3, max=50, message="El nombre debe tener entre 3 y 50 caracteres")
+	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message="El nombre solo admite letras mayúsculas y minúsculas")
 	@Column(name="nombre_provedor")
 	private String nombreProvedor;
 
-	@NotBlank(message = "{phone-mandatory}")
-	@Size(min= 7, max=20, message="{phone-size}")
+	@NotBlank(message = "El teléfono es obligatorio")
+	@Size(min= 7, max=20, message="El teléfono debe tener entre 7 y 20 caracteres")
 	//@Pattern(regexp="^[0-9]$", message="Por favor solo ingresar numeros")
-	private int telefono;
+	private String telefono;
 
 	//bi-directional many-to-one association to Producto
 	@OneToMany(mappedBy="proveedor")
@@ -74,11 +74,11 @@ public class Proveedor implements Serializable {
 		this.nombreProvedor = nombreProvedor;
 	}
 
-	public int getTelefono() {
+	public String getTelefono() {
 		return this.telefono;
 	}
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 
@@ -105,9 +105,9 @@ public class Proveedor implements Serializable {
 		return producto;
 	}
 	public Proveedor(
-			@NotBlank(message = "{address-mandatory}") @Size(min = 7, max = 255, message = "{address-size}") String direccion,
-			@NotBlank(message = "{name-mandatory}") @Size(min = 3, max = 50, message = "{name-size}") @Pattern(regexp = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "{name-valid}") String nombreProvedor,
-			@NotBlank(message = "{phone-mandatory}") @Size(min = 7, max = 20, message = "{phone-size}") int telefono) {
+			@NotBlank(message = "La dirección es obligatoria") @Size(min = 7, max = 255, message = "La dirección debe tener entre 7 y 255 caracteres") String direccion,
+			@NotBlank(message = "El nombre del proveedor es obligatorio") @Size(min = 3, max = 50, message = "El nombre debe tener entre 3 y 50 caracteres") @Pattern(regexp = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "El nombre solo admite letras mayúsculas y minúsculas") String nombreProvedor,
+			@NotBlank(message = "El teléfono es obligatorio") @Size(min = 7, max = 20, message = "El teléfono debe tener entre 7 y 20 caracteres") String telefono) {
 		super();
 		this.direccion = direccion;
 		this.nombreProvedor = nombreProvedor;

@@ -25,9 +25,9 @@ public class Categoriaproducto implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id_categoriaProducto;
 
-	@NotBlank(message = "{name-mandatory}")
-	@Size(min= 3, max=50, message="{name-size}")
-	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message="{name-valid}")
+	@NotBlank(message = "El nombre es obligatorio")
+	@Size(min= 3, max=50, message="El nombre debe tener entre 3 y 50 caracteres")
+	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message="El nombre solo admite letras mayúsculas y minúsculas")
 	@Column(name="nombre_categoria",unique=true)
 	private String nombreCategoria;
 
@@ -78,7 +78,7 @@ public class Categoriaproducto implements Serializable {
 	}
 
 	public Categoriaproducto(
-			@NotBlank(message = "{name-mandatory}") @Size(min = 3, max = 50, message = "{name-size}") @Pattern(regexp = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "{name-valid}") String nombreCategoria) {
+			@NotBlank(message = "El nombre es obligatorio") @Size(min = 3, max = 50, message = "El nombre debe tener entre 3 y 50 caracteres") @Pattern(regexp = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "El nombre solo admite letras mayúsculas y minúsculas") String nombreCategoria) {
 		super();
 		this.nombreCategoria = nombreCategoria;
 	}

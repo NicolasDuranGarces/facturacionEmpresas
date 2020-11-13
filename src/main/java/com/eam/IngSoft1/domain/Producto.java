@@ -2,8 +2,10 @@ package com.eam.IngSoft1.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
@@ -28,29 +30,31 @@ public class Producto implements Serializable {
 	@Column(name="id_producto")
 	private int idProducto;
 
-	@NotBlank(message = "{cantidadActual-mandatory}")
-	@Size(min= 3, max=999, message="{cantidadActual-size}")
+	@NotNull(message = "Es necesario indicar la cantidad actual del producto")
+	@Min(0)
+	@Max(999)
 	@Column(name="cantidad_actual")
 	private int cantidadActual;
 
 	private String marca;
 
-	@NotBlank(message = "{minimoInventario-mandatory}")
-	@Size(min= 1, max=10, message="{minimoInventario-size}")
+	@NotNull(message = "Es necesario indicar una cantidad mínima para alerta")
+	@Min(0)
+	@Max(10)
 	@Column(name="minimo_inventario")
 	private int minimoInventario;
 
-	@NotBlank(message = "{name-mandatory}")
-	@Size(min= 3, max=50, message="{name-size}")
-	@Pattern(regexp="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message="{name-valid}")
+	@NotBlank(message = "Se debe indicar el nombre del producto")
+	@Size(min= 3, max=50, message="El nombre debe tener entre 3 y 50 caracteres")
 	@Column(name="nombre_producto")
 	private String nombreProducto;
 
 	@Lob
 	private String urlFoto;
 
-	@NotBlank(message = "{valor-unitario-mandatory}")
-	@Size(min= 50, max=9999999, message="{valor-unitario-size}")
+	@NotNull(message = "Se debe indicar el valor unitario del producto")
+	@Min(0)
+	@Max(9999999)
 	@Column(name="valor_unitario")
 	private int valorUnitario;
 
@@ -181,12 +185,12 @@ public class Producto implements Serializable {
 	}
 
 	public Producto(
-			@NotBlank(message = "{cantidadActual-mandatory}") @Size(min = 3, max = 999, message = "{cantidadActual-size}") int cantidadActual,
+			@NotNull(message = "Es necesario indicar la cantidad actual del producto") @Min(0) @Max(999) int cantidadActual,
 			String marca,
-			@NotBlank(message = "{minimoInventario-mandatory}") @Size(min = 1, max = 10, message = "{minimoInventario-size}") int minimoInventario,
-			@NotBlank(message = "{name-mandatory}") @Size(min = 3, max = 50, message = "{name-size}") @Pattern(regexp = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "{name-valid}") String nombreProducto,
+			@NotNull(message = "Es necesario indicar una cantidad mínima para alerta") @Min(0) @Max(10) int minimoInventario,
+			@NotBlank(message = "Se debe indicar el nombre del producto") @Size(min = 3, max = 50, message = "El nombre debe tener entre 3 y 50 caracteres") String nombreProducto,
 			String urlFoto,
-			@NotBlank(message = "{valor-unitario-mandatory}") @Size(min = 50, max = 9999999, message = "{valor-unitario-size}") int valorUnitario,
+			@NotNull(message = "Se debe indicar el valor unitario del producto") @Min(0) @Max(9999999) int valorUnitario,
 			Bodega bodega, Categoriaproducto categoriaproducto,
 			Proveedor proveedor) {
 		super();

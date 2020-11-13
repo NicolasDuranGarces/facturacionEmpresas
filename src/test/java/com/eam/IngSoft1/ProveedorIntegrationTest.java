@@ -36,13 +36,13 @@ public class ProveedorIntegrationTest {
 
 	@Test
 	public void should_find_all_Proveedors() {
-		Proveedor proveedor1 = new Proveedor("Carrera a verificar#1", "Proveedir#1", 77557);
+		Proveedor proveedor1 = new Proveedor("Carrera a verificar#1", "Proveedir#1", "77557");
 		entityManager.persist(proveedor1);
 
-		Proveedor proveedor2 = new Proveedor("Carrera a verificar#2", "Proveedir#2", 77557);
+		Proveedor proveedor2 = new Proveedor("Carrera a verificar#2", "Proveedir#2", "77557");
 		entityManager.persist(proveedor2);
 
-		Proveedor proveedor3 = new Proveedor("Carrera a verificar#3", "Proveedir#3", 77557);
+		Proveedor proveedor3 = new Proveedor("Carrera a verificar#3", "Proveedir#3", "77557");
 		entityManager.persist(proveedor3);
 
 		Iterable<Proveedor> proveedors = repository.findAll();
@@ -52,10 +52,10 @@ public class ProveedorIntegrationTest {
 
 	@Test
 	public void should_find_Proveedor_by_id() {
-		Proveedor proveedor1 = new Proveedor("Carrera a verificar#1", "Proveedir#1", 77557);
+		Proveedor proveedor1 = new Proveedor("Carrera a verificar#1", "Proveedir#1", "77557");
 		entityManager.persist(proveedor1);
 
-		Proveedor proveedor2 = new Proveedor("Carrera a verificar#2", "Proveedir#2", 77557);
+		Proveedor proveedor2 = new Proveedor("Carrera a verificar#2", "Proveedir#2", "77557");
 		entityManager.persist(proveedor2);
 
 		Proveedor foundProveedor = repository.findById(proveedor2.getIdProveedor()).get();
@@ -66,13 +66,13 @@ public class ProveedorIntegrationTest {
 
 	@Test
 	public void should_update_Proveedor_by_id() {
-		Proveedor proveedor1 = new Proveedor("Carrera a verificar#1", "Proveedor#1", 77557);
+		Proveedor proveedor1 = new Proveedor("Carrera a verificar#1", "Proveedor#1", "77557");
 		entityManager.persist(proveedor1);
 
-		Proveedor proveedor2 = new Proveedor("Carrera a verificar#2", "Proveedor#2", 77557);
+		Proveedor proveedor2 = new Proveedor("Carrera a verificar#2", "Proveedor#2", "77557");
 		entityManager.persist(proveedor2);
 
-		Proveedor updatedProveedor = new Proveedor("Carrera update Tut#2", "Proveedor Upd", 5555);
+		Proveedor updatedProveedor = new Proveedor("Carrera update Tut#2", "Proveedor Upd", "5555");
 
 		Proveedor proveedor = repository.findById(proveedor2.getIdProveedor()).get();
 		
@@ -92,13 +92,13 @@ public class ProveedorIntegrationTest {
 
 	@Test
 	public void should_delete_Proveedor_by_id() {
-		Proveedor proveedor1 = new Proveedor("Carrera a verificar#1", "Proveedor#1", 77557);
+		Proveedor proveedor1 = new Proveedor("Carrera a verificar#1", "Proveedor#1", "77557");
 		entityManager.persist(proveedor1);
 
-		Proveedor proveedor2 = new Proveedor("Carrera a verificar#2", "Proveedor#2", 77557);
+		Proveedor proveedor2 = new Proveedor("Carrera a verificar#2", "Proveedor#2", "77557");
 		entityManager.persist(proveedor2);
 
-		Proveedor proveedor3 = new Proveedor("Carrera a verificar#3", "Proveedorr#3", 77557);
+		Proveedor proveedor3 = new Proveedor("Carrera a verificar#3", "Proveedorr#3", "77557");
 		entityManager.persist(proveedor3);
 
 		repository.deleteById(proveedor1.getIdProveedor());

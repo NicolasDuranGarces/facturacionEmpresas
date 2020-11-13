@@ -24,11 +24,11 @@ public class Bodega implements Serializable {
 	@Column(name="id_bodega")
 	private int idBodega;
 
-	@NotBlank(message = "{name-mandatory}")
+	@NotBlank(message = "El nombre es obligatorio")
 	@Column(name="nombre_bodega")
 	private String nombreBodega;
 
-	@NotBlank(message = "{address-mandatory}")
+	@NotBlank(message = "La dirección es obligatoria")
 	private String ubicacion;
 
 	//bi-directional many-to-one association to Producto
@@ -38,8 +38,8 @@ public class Bodega implements Serializable {
 	public Bodega() {
 	}
 	
-	public Bodega(@NotBlank(message = "{name-mandatory}") String nombreBodega,
-			@NotBlank(message = "{address-mandatory}") String ubicacion, List<Producto> productos) {
+	public Bodega(@NotBlank(message = "El nombre es obligatorio") String nombreBodega,
+			@NotBlank(message = "La dirección es obligatoria") String ubicacion, List<Producto> productos) {
 		super();
 		this.nombreBodega = nombreBodega;
 		this.ubicacion = ubicacion;

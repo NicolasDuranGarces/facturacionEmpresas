@@ -29,14 +29,14 @@
 								id="dni" placeholder="Numero de Cedula"
 								required="required"> <span
 								th:if="${#fields.hasErrors('dni')}"
-								th:errors="*{dni}" class="text-danger"></span>
+								th:errors="*{dni}" class="text-warning"></span>
 						</div>
 						
 						<!--  Nombre Usuario -->
 						<div class="form-group col-6">
 							<input type="text" th:field="*{nombre}" class="form-control"
 								id="nombre" placeholder="Nombre Del Usuario" required="required"> 
-							<span class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+							<span class="text-warning" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
 								></span>
 						</div>
 
@@ -45,7 +45,7 @@
 							<input type="text" th:field="*{apellido}" class="form-control"
 								id="apellido" placeholder="Apellido Del Usuario" required="required">
 							<span th:if="${#fields.hasErrors('apellido')}"
-								th:errors="*{apellido}" class="text-danger"></span>
+								th:errors="*{apellido}" class="text-warning"></span>
 						</div>
 
 						<!-- "Usuario" del Usuario -->
@@ -62,7 +62,7 @@
 								class="form-control" id="contrasena" placeholder="Contraseña"
 								required="required"> <span
 								th:if="${#fields.hasErrors('contrasena')}"
-								th:errors="*{contrasena}" class="text-danger"></span>
+								th:errors="*{contrasena}" class="text-warning"></span>
 						</div>
 
 
@@ -72,7 +72,7 @@
 								id="telefono" placeholder="telefono de residencia"
 								required="required"> <span
 								th:if="${#fields.hasErrors('telefono')}"
-								th:errors="*{telefono}" class="text-danger"></span>
+								th:errors="*{telefono}" class="text-warning"></span>
 						</div>
 						
 						<!-- Direccion Usuario -->
@@ -81,7 +81,7 @@
 								id="direccion" placeholder="Direccion de recidencia"
 								required="required"> <span
 								th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"
-								class="text-danger"></span>
+								class="text-warning"></span>
 						</div>
 					</div>
 					<div class="inputBx col-12 mt-3">

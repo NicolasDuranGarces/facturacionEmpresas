@@ -77,7 +77,7 @@ public class Usuario implements Serializable {
 	public Usuario() {
 	}
 	
-	public Usuario(@NotBlank(message = "El DNI es obligatorio") @Size(min = 5, max = 11, message = "El DNI debe tener entre 5 y 11 caracteres") int dni,
+	public Usuario(@NotBlank(message = "El DNI es obligatorio") @Min(10000) int dni,
 			@NotBlank(message = "El nombre es obligatorio") @Size(min = 3, max = 50, message = "El nombre debe tener entre 3 y 50 caracteres") @Pattern(regexp = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "El nombre solo admite letras mayúsculas y minúsculas") String nombre,
 			@NotBlank(message = "El apellido es obligatorio") @Size(min = 3, max = 50, message = "El apellido debe tener entre 3 y 50 caracteres") @Pattern(regexp = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$", message = "El apellido solo admite letras mayúsculas y minúsculas") String apellido,
 			String nombreUsuario,
