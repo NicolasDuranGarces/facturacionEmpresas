@@ -110,4 +110,13 @@ public class Pedido implements Serializable {
 		this.cliente = cliente;
 	}
 
+	public Pedido(boolean despachado, boolean activo, int dNI_Encargado,
+			com.eam.IngSoft1.domain.Usuario cliente) {
+		super();
+		this.despachado = despachado;
+		this.activo = activo;
+		DNI_Encargado = dNI_Encargado;
+		this.cliente = cliente;
+	}
+
 }
