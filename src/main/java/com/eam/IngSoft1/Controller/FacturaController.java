@@ -73,16 +73,14 @@ public class FacturaController {
 		int sumaTotal=0;
 		
 		ArrayList<Pedido> pedidos = new ArrayList<>();
-		try {
+		
 			pedidos = repositorioFactura.mostrarPedidosActivos(user.getDni());
-		} catch (Exception e) {
-			
-		}
+		
 		
 		Producto producto = repositorioProducto.findByidProducto(idProducto);
 		
 		//Comparacion para saber si hay pedidos
-		if(pedidos.size()>=0) {
+		if(pedidos.size()>0) {
 			//Si Hay pedidos Confirmamos que el pedido este Activo y Obtenemos el idFactura a la que hace referencia
 			idFactura = repositorioFactura.codigoFactura(user.getDni());
 			Detallefactura detallePrueba = null;
