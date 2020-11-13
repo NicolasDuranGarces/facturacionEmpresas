@@ -30,6 +30,8 @@
 							<tr>
 								<th>Nombre</th>
 								<th>Apellido</th>
+								<th>Nombre de Usuario</th>
+								<th>Tipo de Usuario</th>
 								<th>Direccion</th>
 								<th>Telefono</th>
 								<th>Editar</th>
@@ -38,9 +40,11 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="usuario : ${usuario}">
+							<tr th:each="usuario : ${usuario}" >
 								<td th:text="${usuario.nombre}" ></td>
 								<td th:text="${usuario.apellido}" ></td>
+								<td th:text="${usuario.nombreUsuario}" ></td>
+								<td th:text="${usuario.authority}" ></td>
 								<td th:text="${usuario.direccion}" ></td>
 								<td th:text="${usuario.telefono}" ></td>
 

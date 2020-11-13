@@ -190,7 +190,7 @@ public class ProductoController {
   		return "homePageUsuario";
   	}
   	
- // metodo filtrar productos por categorias---------------------------------------------
+ // metodo mostrar detalle de producto---------------------------------------------
    	@GetMapping("/detalleproducto/{idProducto}")
    	public String viewDetail(@PathVariable("idProducto") int idProducto, Model model) {
    		Producto producto = repositorioProducto.findById(idProducto).orElseThrow(() -> new IllegalArgumentException("Invalido Producto id:" + idProducto));

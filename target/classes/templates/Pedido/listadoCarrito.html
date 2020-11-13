@@ -42,10 +42,13 @@
 								<th>Nombre Producto</th>
 								<th>Marca</th>
 								<th>Valor Unitario</th>
-								<th>Cantidad De Producto</th>
-								<th>Valor Total + IVA</th>
+								
+								<th>Quitar unidad</th>
+								<th>Cantidad producto</th>
+								<th>Agregar unidad</th>
+								<th>Valor Total (IVA incluido)</th>
 								<th>IVA</th>
-								<th>Eliminar</th>
+								<th>Eliminar producto</th>
 							
 							</tr>
 						</thead>
@@ -54,32 +57,59 @@
 								<td th:text="${detallefacturas.producto.nombreProducto}"></td>
 								<td th:text="${detallefacturas.producto.marca}"></td>
 								<td th:text="${detallefacturas.producto.valorUnitario}"></td>
+								
+								<td><a
+									th:href="@{/user/restaruno/{idDetalle}(idDetalle=${detallefacturas.id_detalleFactura})}"
+									class="btn btn-danger"><i class="fas fa-minus-circle ml-1 mr-1"></i></a></td>
 								<td th:text="${detallefacturas.cantidadProducto}"></td>
+								<td><a
+									th:href="@{/user/sumaruno/{idDetalle}(idDetalle=${detallefacturas.id_detalleFactura})}"
+									class="btn btn-success"><i class="fas fa-plus-circle ml-1 mr-1"></i></a></td>
+									
 								<td th:text="${detallefacturas.valorTotal}"></td>
 								<td th:text="${detallefacturas.valorIvaTotal}"></td>
 								<td><a
 									th:href="@{/user/deletedetalle/{idDetalle}(idDetalle=${detallefacturas.id_detalleFactura})}"
-									class="btn btn-danger"><i class="fas fa-times ml-2 mr-2"></i></a></td>
+									class="btn btn-warning"><i class="fas fa-times ml-3 mr-3"></i></a></td>
 							</tr>
 							
 							<tr >
 								<td></td>
 								<td></td>
 								<td></td>
-								<td><h6>PRECIO TOTAL FACTURA =</h6></td>
-								<td >${totalfactura}</td>
+								<td></td>
+								<td></td>
+								<td><h6>TOTAL =</h6></td>
+								<td th:text="${totalfactura}"></td>
+								<td></td>
+								<td></td>
 							</tr>
 
 
 						</tbody>
 					</table>
-					<br> <br> <a type="button" class="btn btn-success"
-						href="#"><svg width="1em" height="1em" viewBox="0 0 16 16"
-							class="bi bi-check-square-fill" fill="currentColor"
-							xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd"
-								d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-</svg>Confimar Pedido</a>
+					<span th:text="${mensaje}" class="text-danger"></span>
+					<span th:text="${mensajebueno}" class="text-primary"></span>
+					<form class="form-horizontal"
+					th:action="@{/user/confirmar-pedido}" method="post">
+					<br> <br> 
+					<i class="fas fa-shopping-cart"></i>
+					<input type="submit" class="crearFactura-btn-add adc btn btn-primary" value="Confirmar pedido"><i class="fas fa-shopping-cart"></i></input>
+					
+					<!--
+					 
+						<a type="button" class="btn btn-success"
+							th:href="">
+							<svg width="1em" height="1em" viewBox="0 0 16 16"
+								class="bi bi-check-square-fill" fill="currentColor"
+								xmlns="http://www.w3.org/2000/svg">
+	  					<path fill-rule="evenodd"
+									d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+						</svg>Confimar Pedido</a>
+					
+					 -->
+					 
+					</form>
 				</div>
 
 			</div>
@@ -88,12 +118,30 @@
 	</div>
 	
 	
+	
+		
+	<!-- 
+	<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        ...
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Understood</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
-
-
-
-
-
+	-->
 
 
 	<!-- Fin del Cuerpo de la Pagina -->

@@ -14,4 +14,8 @@ public interface IDetalleFacturaRepository extends CrudRepository<Detallefactura
 	@Query("SELECT d FROM Detallefactura d JOIN d.factura f "
 			+ "where f.idFactura=?1 ")
 	public ArrayList<Detallefactura> mostrarDetalles(int idFactura);
+	
+	@Query("SELECT d FROM Detallefactura d JOIN d.factura f ON d.factura.idFactura = f.idFactura "
+			+ "JOIN d.producto p ON d.producto.idProducto = p.idProducto WHERE f.idFactura= ?1 AND p.idProducto= ?2 ")
+	public Detallefactura verificarDetalle(int idFactura, int idProducto);
 }

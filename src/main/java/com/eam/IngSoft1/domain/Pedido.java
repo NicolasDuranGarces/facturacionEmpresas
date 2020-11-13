@@ -63,6 +63,14 @@ public class Pedido implements Serializable {
 	public void setDespachado(boolean despachado) {
 		this.despachado = despachado;
 	}
+	
+	public boolean getActivo() {
+		return this.activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
 
 	public int getDNI_vendedor() {
 		return this.DNI_Encargado;

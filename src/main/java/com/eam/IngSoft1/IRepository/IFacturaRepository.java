@@ -21,7 +21,7 @@ public interface IFacturaRepository extends CrudRepository<Factura, Integer> {
 	 * @Query("SELECT fac.idFactura FROM Factura fac JOIN fac.pedido pe WHERE pe.activo = 0 "
 	 * + "and pe.cliente.dni = ?1") public int codigoFactura(int dniUsuario);
 	 */
-	@Query("SELECT fac.idFactura FROM Factura fac JOIN Pedido pe ON fac.pedido.idPedido = pe.idPedido WHERE pe.activo = 1 "
+	@Query("SELECT fac.idFactura FROM Factura fac JOIN Pedido pe ON fac.pedido.idPedido = pe.idPedido WHERE pe.activo = true "
 			+ "and pe.cliente.dni = ?1")
 	public int codigoFactura(int dniUsuario);
 
@@ -33,8 +33,13 @@ public interface IFacturaRepository extends CrudRepository<Factura, Integer> {
 	
 	
 	//---------------------------------------
-	@Query("SELECT p FROM Pedido p") 
-	public ArrayList<Pedido> mostrarPedidos();
+	@Query("SELECT p FROM Pedido p JOIN p.cliente c WHERE c.dni= ?1 ") 
+	public ArrayList<Pedido> mostrarPedidos(int busqueda);
+	
+	
+	//---------------------------------------
+	@Query("SELECT p FROM Pedido p JOIN p.cliente c WHERE c.dni= ?1 AND p.activo = true") 
+	public ArrayList<Pedido> mostrarPedidosActivos(int busqueda);
 	
 	
 	//---------------------------------------
