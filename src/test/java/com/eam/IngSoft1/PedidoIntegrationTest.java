@@ -61,7 +61,6 @@ public class PedidoIntegrationTest {
 			assertThat(pedido).hasFieldOrPropertyWithValue("DNI_Encargado", 1004);
 			assertThat(pedido).hasFieldOrPropertyWithValue("cliente", usuario);
 
-
 		}
 		
 		@Test
@@ -135,10 +134,6 @@ public class PedidoIntegrationTest {
 			//Pedido Numero 3
 			Pedido pedido3 = new Pedido( true, true, 1004, usuario);
 			entityManager.persist(pedido3);
-			
-
-			// Objeto Producto con Parametros Actulizados
-			Pedido pedidoActualizado = new Pedido( true, true, 10076, usuario);
 
 			Pedido pedidoAc = repositroioPedido.findById(pedido.getIdPedido()).get();
 			pedidoAc.setDNI_vendedor(pedidoAc.getDNI_vendedor());

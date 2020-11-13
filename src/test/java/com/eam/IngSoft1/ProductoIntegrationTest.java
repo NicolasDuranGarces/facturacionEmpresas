@@ -1,9 +1,7 @@
 package com.eam.IngSoft1;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.never;
 
-import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -126,7 +124,7 @@ public class ProductoIntegrationTest {
 		// Generacion de Producto 2
 		Producto producto2 = new Producto(100, "apple", 5, "Apple MacBook Pro 2019", "Ejemplo URL For", 16000000,
 				bodega, categoriaproducto, proveedor);
-		entityManager.persist(producto1);
+		entityManager.persist(producto2);
 
 		// Busqueda de Producto Por ID
 		Producto productoEncontrado = repository.findById(producto1.getIdProducto()).get();

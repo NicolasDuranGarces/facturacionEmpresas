@@ -85,5 +85,13 @@ public class Factura implements Serializable {
 		this.pedido = pedido;
 	}
 
+	public Factura(int precioTotal, Pedido pedido) {
+		super();
+		this.precioTotal = precioTotal;
+		this.pedido = pedido;
+	}
+	
+	
+
 
 }
