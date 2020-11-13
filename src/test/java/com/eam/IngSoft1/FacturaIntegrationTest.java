@@ -93,7 +93,7 @@ public class FacturaIntegrationTest {
 	}
 
 	@Test
-	public void should_find_pedido_by_id() {
+	public void should_find_factura_by_id() {
 		// PERMISOS
 		Authority permiso = new Authority();
 		entityManager.persist(permiso);
@@ -111,7 +111,7 @@ public class FacturaIntegrationTest {
 		Factura factura = new Factura(232323, pedido);
 		entityManager.persist(factura);
 
-		// Busqueda de Producto Por ID
+		// Busqueda de factura Por ID
 		Factura facturaEncontrado = repositroioFactura.findById(factura.getIdFactura()).get();
 
 		assertThat(facturaEncontrado).isEqualTo(factura);
@@ -190,7 +190,7 @@ public class FacturaIntegrationTest {
 	}
 
 	@Test
-	public void should_delete_all_pedidos() {
+	public void should_delete_all_factura() {
 		// PERMISOS
 		Authority permiso = new Authority();
 		entityManager.persist(permiso);

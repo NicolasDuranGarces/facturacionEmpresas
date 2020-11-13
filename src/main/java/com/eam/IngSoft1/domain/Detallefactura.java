@@ -5,27 +5,36 @@ import javax.persistence.*;
 
 import lombok.Data;
 
-
 /**
  * The persistent class for the detallefactura database table.
  * 
  */
 @Entity
 @Data
-@NamedQuery(name="Detallefactura.findAll", query="SELECT d FROM Detallefactura d")
+@NamedQuery(name = "Detallefactura.findAll", query = "SELECT d FROM Detallefactura d")
 public class Detallefactura implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_detalleFactura;
 
 	private int cantidadProducto;
 
 	private int valorTotal;
-	
+
 	private int valorIvaTotal;
-	
+
+	// bi-directional many-to-one association to Factura
+	@ManyToOne
+	@JoinColumn(name = "id_factura")
+	private Factura factura;
+
+	// bi-directional many-to-one association to Producto
+	@ManyToOne
+	@JoinColumn(name = "id_producto")
+	private Producto producto;
+
 	public Detallefactura() {
 	}
 
@@ -69,15 +78,15 @@ public class Detallefactura implements Serializable {
 		this.producto = producto;
 	}
 
-	//bi-directional many-to-one association to Factura
-	@ManyToOne
-	@JoinColumn(name="id_factura")
-	private Factura factura;
 
-	//bi-directional many-to-one association to Producto
-	@ManyToOne
-	@JoinColumn(name="id_producto")
-	private Producto producto;
 
+	public Detallefactura(int cantidadProducto, int valorTotal, int valorIvaTotal, Factura factura, Producto producto) {
+		super();
+		this.cantidadProducto = cantidadProducto;
+		this.valorTotal = valorTotal;
+		this.valorIvaTotal = valorIvaTotal;
+		this.factura = factura;
+		this.producto = producto;
+	}
 
 }
