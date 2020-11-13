@@ -186,8 +186,20 @@ public class FacturaController {
 	// metodo para listado facturas del usuario
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@GetMapping("/listfactura")
-	public String list(@RequestParam(value = "dniUsuario") int dniUsuario, Factura factura, Model model) {
-		model.addAttribute("facturas", repositorioFactura.mostrarFacturaFiltroCliente(dniUsuario));
+	public String listFacCliente( Factura factura, Model model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDetails userDetails = null;
+		if (principal instanceof UserDetails) {
+			userDetails = (UserDetails) principal;
+		}
+		String userName = userDetails.getUsername();
+
+		//Busqueda de Usuario Mediante nombreUsuario obtenido Anteriormente
+		Usuario user = repositorioUsuario.mostrarUsuario(userName);
+		
+		
+		
+		model.addAttribute("facturas", repositorioFactura.facturasNoActivas(user.getDni()));
 		return "Factura/listaFactura";
 	}
 

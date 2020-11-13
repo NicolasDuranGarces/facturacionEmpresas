@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -12,47 +14,119 @@
 	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
 	crossorigin="anonymous">
 <title>Index Admin</title>
-<title>Insert title here</title>
 </head>
+
 <body>
-	<!-- Menu para Todas las Vistas de Administrador-->
-	<div th:replace="Componentes/Navbar :: nav"></div>
-	<!--Fin del Menu de Administrador-->
+
+	<!-- Menu para Todas las Vistas cliente-->
+	<div th:replace="Componentes/NavbarUser :: nav"></div>
+	<!--Fin del Menu-->
 	<br>
-	<!-- Inicio del Cuerpo de la Pagina -->
-	<div class="container">
-		<h1>Listado De Facturas</h1>
-	</div>
+	<!-- Page Content -->
+
+	<br>
+	<br>
 	<br>
 
-	<!-- Inicio del table -->
-	<div class="container" th:switch="${facturas}">
-		<div class="row mt-5">
-			<div class="col-10">
-				<table class="table"> 
-					<thead class="thead-dark">
-						<tr>
-							<th scope="col">Codigo Factura</th>
-							<th scope="col">Documento Cliente</th>
-							<th scope="col">Cliente</th>
-							<th scope="col">Valor Total</th>
-							<th scope="col">Ver Factura</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th th:each="factura : ${facturas}"></th>
-							<td th:text="${factura.idFactura}"></td>
-							<td th:text="${factura.pedido.cliente.dni}"></td>
-							<td th:text="${factura.pedido.cliente.nombre}"></td>
-							<td th:text="${factura.precioTotal}"></td>
-							<!-- Aqui vamos a colocar para ver el pdf de la factura -->
-							<!--  <td><a
-								th:href="@{/verfactura/{idFactura}(idFactura=${factura.idFactura})}"
-								class="btn btn-info"><i class="fas fa-times ml-2 mr-2"></i></a></td>-->
-						</tr>
-					</tbody>
-				</table>
-				<!-- Fin del table -->
+	<div th:switch="${facturas}" class="container my-5">
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-md-10">
+				<h2 class="col-12">Listado de Mis Facturas</h2>
+				<hr>
+				<br>
+				<div th:case="*">
+					<table class="table table-striped table-responsive-md">
+						<thead class="thead-dark">
+							<tr>
+								
+								<th>Fecha</th>
+								<th>Despachado</th>
+								<th>Precio Total</th>
+								
+								<th>DESCARGAR PDF</th>
+								
+							
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="facturas : ${facturas}">
+								<td th:text="${facturas.pedido.fechaPedido}"></td>
+								<td th:text="${facturas.pedido.despachado}"></td>
+								<td th:text="${facturas.precioTotal}"></td>
+								
+								<td><a
+									href=""
+									class="btn btn-success"><i class="fas fa-download"></i></a></td>
+							
+							</tr>
+
+						</tbody>
+					</table>
+					 
+					</form>
+				</div>
+
+			</div>
+			<div class="col-1"></div>
+		</div>
+	</div>
+	
+	
+	
+		
+	<!-- 
+	<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        ...
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Understood</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	-->
+
+
+	<!-- Fin del Cuerpo de la Pagina -->
+	<!-- Inicio del Footer -->
+
+	<footer id="sticky-footer" class="py-4 bg-dark text-white-50"
+		style="flex-shrink: none;">
+		<div class="container text-center">
+			<small> &copy; Derechos Reservados : <a
+				href="www.github.com/papugarces">Papu</a>-<a href="">Jose Miguel</a>-<a
+				href="">Sebastian Hidalgo</a></small>
+		</div>
+	</footer>
+
+
+	<!-- Fin del Footer -->
+	<!-- Scripts de JS de bootstrap  -->
+	<!-- (Orden) jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+		crossorigin="anonymous"></script>
+
 </body>
+
 </html>

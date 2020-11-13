@@ -24,6 +24,11 @@ public interface IFacturaRepository extends CrudRepository<Factura, Integer> {
 	@Query("SELECT fac.idFactura FROM Factura fac JOIN Pedido pe ON fac.pedido.idPedido = pe.idPedido WHERE pe.activo = true "
 			+ "and pe.cliente.dni = ?1")
 	public int codigoFactura(int dniUsuario);
+	
+	
+	@Query("SELECT fac FROM Factura fac JOIN Pedido pe ON fac.pedido.idPedido = pe.idPedido WHERE pe.activo = false "
+			+ "and pe.cliente.dni = ?1")
+	public Iterable<Factura> facturasNoActivas(int dniUsuario);
 
 	public Factura findByidFactura(int idFactura);
 

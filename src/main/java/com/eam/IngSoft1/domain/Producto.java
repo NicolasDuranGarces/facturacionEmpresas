@@ -54,7 +54,7 @@ public class Producto implements Serializable {
 
 	@NotNull(message = "Se debe indicar el valor unitario del producto")
 	@Min(0)
-	@Max(9999999)
+	@Max(99999999)
 	@Column(name="valor_unitario")
 	private int valorUnitario;
 
@@ -190,7 +190,7 @@ public class Producto implements Serializable {
 			@NotNull(message = "Es necesario indicar una cantidad mínima para alerta") @Min(0) @Max(10) int minimoInventario,
 			@NotBlank(message = "Se debe indicar el nombre del producto") @Size(min = 3, max = 50, message = "El nombre debe tener entre 3 y 50 caracteres") String nombreProducto,
 			String urlFoto,
-			@NotNull(message = "Se debe indicar el valor unitario del producto") @Min(0) @Max(9999999) int valorUnitario,
+			@NotNull(message = "Se debe indicar el valor unitario del producto") @Min(0) @Max(99999999) int valorUnitario,
 			Bodega bodega, Categoriaproducto categoriaproducto,
 			Proveedor proveedor) {
 		super();
