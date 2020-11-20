@@ -56,7 +56,7 @@
 								<td th:text="${facturas.precioTotal}"></td>
 								
 								<td><a
-									href=""
+									th:href="@{/export/pdf/{idFactura}(idFactura=${facturas.idFactura})}"
 									class="btn btn-success"><i class="fas fa-download"></i></a></td>
 							
 							</tr>
