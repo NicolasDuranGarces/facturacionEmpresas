@@ -2,43 +2,55 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <title>Index Admin</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+<title>Index Admin</title>
 </head>
 
 <body>
-    <!-- Menu para Todas las Vistas de Administrador-->
-    <div th:replace="Componentes/Navbar :: nav"></div>
-    <!--Fin del Menu de Administrador-->
-    <!-- Inicio del Cuerpo de la Pagina -->
+	<!-- Menu para Todas las Vistas de Administrador-->
+	<div th:replace="Componentes/Navbar :: nav"></div>
+	<!--Fin del Menu de Administrador-->
+	<!-- Inicio del Cuerpo de la Pagina -->
 
-    <div class="container">
-        <form action="#"
-            th:action="@{/updateProveedor/{idProveedor}(idProveedor=${proveedor.idProveedor})}"
-            th:object="${proveedor}" method="post">
+	<br>
+	<div class="container text-center">
+		<h1>Actualizacion de Proveedor</h1>
+		<hr>
+	</div>
+	<br>
+	<div class="container">
+		<form action="#"
+			th:action="@{/updateProveedor/{idProveedor}(idProveedor=${proveedor.idProveedor})}"
+			th:object="${proveedor}" method="post">
 
-            <div class="form-group col-md-6">
-                <label for="nombreProvedor" class="col-form-label">Nombre del proveedor</label>
-                <input type="text" th:field="*{nombreProvedor}" class="form-control" id="nombreProvedor"
-                    placeholder="..." required="required">
-                <span th:if="${#fields.hasErrors('nombreProvedor')}" th:errors="*{nombreProvedor}" class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="direccion" class="col-form-label">Direccion</label>
-                    <input type="text" th:field="*{direccion}" class="form-control" id="direccion"
-                        placeholder="..." required="required">
-                    <span th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="telefono" class="col-form-label">Telefono</label>
-                    <input type="number" th:field="*{telefono}" class="form-control" id="telefono"
-                        placeholder="..." required="required">
-                    <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="text-danger"></span>
-                </div>
+			<div class="form-group col-md-6">
+				<label for="nombreProvedor" class="col-form-label">Nombre
+					del proveedor</label> <input type="text" th:field="*{nombreProvedor}"
+					class="form-control" id="nombreProvedor" placeholder="..."
+					required="required"> <span
+					th:if="${#fields.hasErrors('nombreProvedor')}"
+					th:errors="*{nombreProvedor}" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-6">
+				<label for="direccion" class="col-form-label">Direccion</label> <input
+					type="text" th:field="*{direccion}" class="form-control"
+					id="direccion" placeholder="..." required="required"> <span
+					th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"
+					class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-6">
+				<label for="telefono" class="col-form-label">Telefono</label> <input
+					type="number" th:field="*{telefono}" class="form-control"
+					id="telefono" placeholder="..." required="required"> <span
+					th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"
+					class="text-danger"></span>
+			</div>
 
 			<button type="submit" class="btn btn-primary"
 				th:value="#{updateProveedor-btn-update}">Actualizar
@@ -46,18 +58,13 @@
 		</form>
 	</div>
 
-    <!-- Fin del Cuerpo de la Pagina -->
-    <!-- Inicio del Footer -->
-    <footer id="sticky-footer" class="py-4 bg-dark text-white-50"
-		style="flex-shrink: none;">
-		<div class="container text-center">
-			<small> &copy; Derechos Reservados : <a
-				href="www.github.com/papugarces">Papu</a>-<a href="">Jose Miguel</a>-<a
-				href="">Sebastian Hidalgo</a></small>
-		</div>
-	</footer>
+	<!-- Fin del Cuerpo de la Pagina -->
+	<br>
+	<br>
+	<br>
 
-
+	<!-- Footer -->
+	<div th:replace="Componentes/footer :: footer"></div>
 	<!-- Fin del Footer -->
 	<!-- Scripts de JS de bootstrap  -->
 	<!-- (Orden) jQuery first, then Popper.js, then Bootstrap JS -->

@@ -175,17 +175,25 @@ public class FacturaController {
 		
 	}
 
-	// metodo para listado factura
+	// metodo para listado factura 
 	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
-	@GetMapping("/admin/listadofactura")
+	@GetMapping("/listadofactura")
 	public String list(Factura factura, Model model) {
-		model.addAttribute("facturas", repositorioFactura.findAll());
+		model.addAttribute("facturas", repositorioFactura.mostrarFacturas());
+		return "Factura/listaFactura";
+	}
+	
+	//metodo para filtrar factura por un cliente en especifico
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
+	@PostMapping("/filtrarclientefactura")
+	public String flitrarFactura(@RequestParam(value = "dni") int idCliente, Model model) {
+		model.addAttribute("facturas", repositorioFactura.mostrarFacturaFiltroCliente(idCliente));
 		return "Factura/listaFactura";
 	}
 
 	// metodo para listado facturas del usuario
 	@PreAuthorize("hasRole('ROLE_USER')")
-	@GetMapping("/listfactura")
+	@GetMapping("/user/listfactura")
 	public String listFacCliente( Factura factura, Model model) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserDetails userDetails = null;
@@ -197,10 +205,8 @@ public class FacturaController {
 		//Busqueda de Usuario Mediante nombreUsuario obtenido Anteriormente
 		Usuario user = repositorioUsuario.mostrarUsuario(userName);
 		
-		
-		
 		model.addAttribute("facturas", repositorioFactura.facturasNoActivas(user.getDni()));
-		return "Factura/listaFactura";
+		return "Factura/listaFacturaCliente";
 	}
 
 	

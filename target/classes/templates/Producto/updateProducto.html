@@ -15,6 +15,13 @@
     <div th:replace="Componentes/Navbar :: nav"></div>
     <!--Fin del Menu de Administrador-->
     <!-- Inicio del Cuerpo de la Pagina -->
+    
+    <br>
+    <div class="container text-center">
+        <h1>Actualizacion de Producto</h1>
+        <hr>
+    </div>
+    <br>
 	<div class="container">
          <form  th:action="@{/updateProducto/{idProducto}(idProducto=${producto.idProducto})}" th:object="${producto}" enctype="multipart/form-data" method="post">
             <input type="hidden" id="agregarUrl" th:field="*{urlFoto}" th:value="${producto.urlFoto}">
@@ -93,17 +100,12 @@
 		</form>
 	</div>
     <!-- Fin del Cuerpo de la Pagina -->
-    <!-- Inicio del Footer -->
-    <footer id="sticky-footer" class="py-4 bg-dark text-white-50"
-		style="flex-shrink: none;">
-		<div class="container text-center">
-			<small> &copy; Derechos Reservados : <a
-				href="www.github.com/papugarces">Papu</a>-<a href="">Jose Miguel</a>-<a
-				href="">Sebastian Hidalgo</a></small>
-		</div>
-	</footer>
+    <br>
+	<br>
+	<br>
 
-
+	<!-- Footer -->
+	<div th:replace="Componentes/footer :: footer"></div>
 	<!-- Fin del Footer -->
 	<!-- Scripts de JS de bootstrap  -->
 	<!-- (Orden) jQuery first, then Popper.js, then Bootstrap JS -->

@@ -31,19 +31,19 @@
 
 				<!-- Links -->
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item"><a class="nav-link"
+					<li class="nav-item"><a class="nav-link text-light"
 						th:href="@{/productos-disponibles}">Inicio <span
 							class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link"
-						th:href="@{/listfactura}">Facturas</a></li>
+					<li class="nav-item"><a class="nav-link text-light"
+						th:href="@{/user/listfactura}">Facturas</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">[[${#httpServletRequest.remoteUser}]]!</a></li>
 				</ul>
 
 				<ul class="navbar-nav ml-auto nav-flex-icons">
-					<li class="nav-item"><a
-						th:href="@{/user/listCarrito}" class="nav-link waves-effect waves-light"> <i
-							class="fas fa-cart-arrow-down"></i> Carrito
+					<li class="nav-item "><a
+						th:href="@{/user/listCarrito}" class="nav-link waves-effect waves-light text-light"> <i
+							class="fas fa-cart-arrow-down text-success"></i> Carrito
 					</a></li>
 				</ul>
 

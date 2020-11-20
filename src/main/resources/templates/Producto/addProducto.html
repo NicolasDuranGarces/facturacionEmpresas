@@ -16,8 +16,9 @@
     <div th:replace="Componentes/Navbar :: nav"></div>
     <!--Fin del Menu de Administrador-->
     <br>
-    <div class="container">
+    <div class="container text-center">
         <h1>Registro de Productos</h1>
+        <hr>
     </div>
     <br>
     <!-- Inicio del Cuerpo de la Pagina -->
@@ -102,18 +103,9 @@
 	<br>
 	<br>
 	<br>
-	<!-- Inicio del Footer -->
 
-	<footer id="sticky-footer" class="py-4 bg-dark text-white-50"
-		style="flex-shrink: none;">
-		<div class="container text-center">
-			<small> &copy; Derechos Reservados : <a
-				href="www.github.com/papugarces">Papu</a>-<a href="">Jose Miguel</a>-<a
-				href="">Sebastian Hidalgo</a></small>
-		</div>
-	</footer>
-
-
+	<!-- Footer -->
+	<div th:replace="Componentes/footer :: footer"></div>
 	<!-- Fin del Footer -->
 	<!-- Scripts de JS de bootstrap  -->
     <!-- (Orden) jQuery first, then Popper.js, then Bootstrap JS -->

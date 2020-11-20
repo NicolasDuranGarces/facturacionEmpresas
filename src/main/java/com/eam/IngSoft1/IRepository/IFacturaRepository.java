@@ -32,12 +32,12 @@ public interface IFacturaRepository extends CrudRepository<Factura, Integer> {
 
 	public Factura findByidFactura(int idFactura);
 
-	// ------------------------- filtrar por cliente ---------
-	@Query("SELECT f FROM Factura f " + "JOIN f.pedido p JOIN p.cliente c WHERE c.dni= ?1 ")
+	// ------------------------- factura por cliente --------------
+	@Query("SELECT f FROM Factura f JOIN f.pedido p JOIN p.cliente c WHERE p.activo=0 and c.dni= ?1 ")
 	public Iterable<Factura> mostrarFacturaFiltroCliente(int busqueda);
 	
 	
-	//---------------------------------------
+	//----------------------------mostrar los pedido del cliente-----
 	@Query("SELECT p FROM Pedido p JOIN p.cliente c WHERE c.dni= ?1 ") 
 	public ArrayList<Pedido> mostrarPedidos(int busqueda);
 	
@@ -47,8 +47,8 @@ public interface IFacturaRepository extends CrudRepository<Factura, Integer> {
 	public ArrayList<Pedido> mostrarPedidosActivos(int busqueda);
 	
 	
-	//---------------------------------------
-	@Query("SELECT f FROM Factura f") 
+	//--------------------------mostrar todas las facturas que el activo sea 0 -------------
+	@Query("SELECT f FROM Factura f JOIN f.pedido p JOIN p.cliente c WHERE p.activo=0") 
 	public ArrayList<Factura> mostrarFacturas();
 	
 	

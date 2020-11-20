@@ -9,7 +9,10 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
 <title>Index Admin</title>
 </head>
 
@@ -19,40 +22,47 @@
 	<!--Fin del Menu de Administrador-->
 	<!-- Inicio del Cuerpo de la Pagina -->
 
-	<div th:switch="${proveedores}" class="container my-5">
+	<div class="container">
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-12 mt-4 text-center">
 				<h2>Listado de Proveedores</h2>
-				<div th:case="*">
-					<table class="table table-striped table-responsive-md">
-						<thead>
-							<tr>
-								<th>Nombre</th>
-								<th>Direccion</th>
-								<th>Telefono</th>
-								<th>Editar</th>
-								<th>Eliminar</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="proveedor : ${proveedores}">
-								<td th:text="${proveedor.nombreProvedor}"></td>
-								<td th:text="${proveedor.direccion}"></td>
-								<td th:text="${proveedor.telefono}"></td>
-								<td><a
-									th:href="@{/admin/editProveedor/{idProveedor}(idProveedor=${proveedor.idProveedor})}"
-									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
-								<td><a
-									th:href="@{/admin/deleteProveedor/{idProveedor}(idProveedor=${proveedor.idProveedor})}"
-									class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a></td>
-							</tr>
-						</tbody>
-					</table>
+				<hr>
+			</div>
+		</div>
+		<div th:switch="${proveedores}" class="text-center my-5">
+			<div class="row d-flex justify-content-center">
+				<div class="col-md-8">
+					<div th:case="*">
+						<table class="table table-striped table-responsive-md">
+							<thead class="thead-dark">
+								<tr>
+									<th>Nombre</th>
+									<th>Direccion</th>
+									<th>Telefono</th>
+									<th>Editar</th>
+									<th>Eliminar</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="proveedor : ${proveedores}">
+									<td th:text="${proveedor.nombreProvedor}"></td>
+									<td th:text="${proveedor.direccion}"></td>
+									<td th:text="${proveedor.telefono}"></td>
+									<td><a
+										th:href="@{/admin/editProveedor/{idProveedor}(idProveedor=${proveedor.idProveedor})}"
+										class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+									<td><a
+										th:href="@{/admin/deleteProveedor/{idProveedor}(idProveedor=${proveedor.idProveedor})}"
+										class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<p class="my-5">
+						<a th:href="@{/admin/ingresoProveedor}" class="btn btn-primary"><i
+							class="fas fa-user-plus ml-2">Agregar Nuevo</i></a>
+					</p>
 				</div>
-				<p class="my-5">
-					<a th:href="@{/admin/ingresoProveedor}" class="btn btn-primary"><i
-						class="fas fa-user-plus ml-2">Agregar Nuevo</i></a>
-				</p>
 			</div>
 		</div>
 	</div>
@@ -63,21 +73,11 @@
 
 
 
-
 	<!-- Fin del Cuerpo de la Pagina -->
-	<!-- Inicio del Footer -->
-
-	<footer id="sticky-footer" class="py-4 bg-dark text-white-50"
-		style="flex-shrink: none;">
-		<div class="container text-center">
-			<small> &copy; Derechos Reservados : <a
-				href="www.github.com/papugarces">Papu</a>-<a href="">Jose Miguel</a>-<a
-				href="">Sebastian Hidalgo</a></small>
-		</div>
-	</footer>
-
-
+	<!-- Footer -->
+	<div th:replace="Componentes/footer :: footer"></div>
 	<!-- Fin del Footer -->
+	
 	<!-- Scripts de JS de bootstrap  -->
 	<!-- (Orden) jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

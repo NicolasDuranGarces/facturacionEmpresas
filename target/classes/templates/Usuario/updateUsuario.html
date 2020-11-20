@@ -18,98 +18,95 @@
 	<!--Fin del Menu de Administrador-->
 	<!-- Inicio del Cuerpo de la Pagina -->
 
+
+
+	<br>
+	<div class="container text-center">
+		<h1>Actualizacion de Empleado</h1>
+		<hr>
+	</div>
+	<br>
+
 	<div class="container">
-
-		<br>
-		<div class="container">
-			<h1>Actualizacion de Empleado</h1>
-		</div>
-		<br>
-
-
-		<form action="#"
-			th:action="@{/admin/updateUsuario/{dni}(dni=${usuario.dni})}"
+		<form th:action="@{/admin/updateUsuario/{dni}(dni=${usuario.dni})}"
 			th:object="${usuario}" method="post">
 
 			<!-- Nombre del Empleado -->
-				<div class="form-group col-md-6">
-					<label for="nombre" class="col-form-label">Nombre del
-						Empleado</label> <input type="text" th:field="*{nombre}"
-						class="form-control" id="nombre" placeholder="Nombre Empleado"
-						required="required"> <span
-						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
-						class="text-danger"></span>
-				</div>
+			<div class="form-group col-md-6">
+				<label for="nombre" class="col-form-label">Nombre del
+					Empleado</label> <input type="text" th:field="*{nombre}"
+					class="form-control" id="nombre" placeholder="Nombre Empleado"
+					required="required"> <span
+					th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+					class="text-danger"></span>
+			</div>
 
-				<!-- Apellido Empleado -->
-				<div class="form-group col-md-6">
-					<label for="apellido" class="col-form-label">Apellido</label> <input
-						type="text" th:field="*{apellido}" class="form-control"
-						id="apellido" placeholder="Apelledo de Empleado"
-						required="required"> <span
-						th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"
-						class="text-danger"></span>
-				</div>
+			<!-- Apellido Empleado -->
+			<div class="form-group col-md-6">
+				<label for="apellido" class="col-form-label">Apellido</label> <input
+					type="text" th:field="*{apellido}" class="form-control"
+					id="apellido" placeholder="Apelledo de Empleado"
+					required="required"> <span
+					th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"
+					class="text-danger"></span>
+			</div>
 
-				
-				<!-- Direccion de Vivienda del Empleado -->
 
-				<div class="form-group col-md-6">
-					<label for="direccion" class="col-form-label">Direccion</label> <input
-						type="text" th:field="*{direccion}" class="form-control"
-						id="direccion" placeholder="..." required="required"> <span
-						th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"
-						class="text-danger"></span>
-				</div>
+			<!-- Direccion de Vivienda del Empleado -->
 
-				<!-- Telefono Del Empleado -->
-				<div class="form-group col-md-6">
-					<label for="telefono" class="col-form-label">Telefono</label> <input
-						type="number" th:field="*{telefono}" class="form-control"
-						id="telefono" placeholder="..." required="required"> <span
-						th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"
-						class="text-danger"></span>
-				</div>
-				
-				<!-- Usuario del Empleado -->
-				<div class="form-group col-md-6">
-					<label for="usario" class="col-form-label">Nombre de Usuario del Empleado</label> <input
-						type="text" th:field="*{nombreUsuario}" class="form-control"
-						id="usario" placeholder="..." required="required"> <span
-						th:if="${#fields.hasErrors('nombreUsuario')}" th:errors="*{nombreUsuario}"
-						class="text-danger"></span>
-				</div>
-				
-				<!-- Contrasena del Empleado -->
-				<div class="form-group col-md-6">
-					<label for="contrasena" class="col-form-label">Contrasena del Empleado</label> <input
-						type="password" th:field="*{contrasena}" class="form-control"
-						id="contrasena" placeholder="..." required="required"> <span
-						th:if="${#fields.hasErrors('contrasena')}" th:errors="*{contrasena}"
-						class="text-danger"></span>
-				</div>
-			
+			<div class="form-group col-md-6">
+				<label for="direccion" class="col-form-label">Direccion</label> <input
+					type="text" th:field="*{direccion}" class="form-control"
+					id="direccion" placeholder="..." required="required"> <span
+					th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"
+					class="text-danger"></span>
+			</div>
+
+			<!-- Telefono Del Empleado -->
+			<div class="form-group col-md-6">
+				<label for="telefono" class="col-form-label">Telefono</label> <input
+					type="number" th:field="*{telefono}" class="form-control"
+					id="telefono" placeholder="..." required="required"> <span
+					th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"
+					class="text-danger"></span>
+			</div>
+
+			<!-- Usuario del Empleado -->
+			<div class="form-group col-md-6">
+				<label for="usario" class="col-form-label">Nombre de Usuario
+					del Empleado</label> <input type="text" th:field="*{nombreUsuario}"
+					class="form-control" id="usario" placeholder="..."
+					required="required"> <span
+					th:if="${#fields.hasErrors('nombreUsuario')}"
+					th:errors="*{nombreUsuario}" class="text-danger"></span>
+			</div>
+
+			<!-- Contrasena del Empleado -->
+			<div class="form-group col-md-6">
+				<label for="contrasena" class="col-form-label">Contrasena
+					del Empleado</label> <input type="password" th:field="*{contrasena}"
+					class="form-control" id="contrasena" placeholder="..."
+					required="required"> <span
+					th:if="${#fields.hasErrors('contrasena')}"
+					th:errors="*{contrasena}" class="text-danger"></span>
+			</div>
+
 
 			<button type="submit" class="btn btn-primary"
 				th:value="#{updateEmpleado-btn-update}">Actualizar Empleado</button>
 		</form>
 	</div>
-	
+
 	<br>
 	<br>
 
 	<!-- Fin del Cuerpo de la Pagina -->
-	<!-- Inicio del Footer -->
-	<footer id="sticky-footer" class="py-4 bg-dark text-white-50"
-		style="flex-shrink: none;">
-		<div class="container text-center">
-			<small> &copy; Derechos Reservados : <a
-				href="www.github.com/papugarces">Papu</a>-<a href="">Jose Miguel</a>-<a
-				href="">Sebastian Hidalgo</a></small>
-		</div>
-	</footer>
+	<br>
+	<br>
+	<br>
 
-
+	<!-- Footer -->
+	<div th:replace="Componentes/footer :: footer"></div>
 	<!-- Fin del Footer -->
 	<!-- Scripts de JS de bootstrap  -->
 	<!-- (Orden) jQuery first, then Popper.js, then Bootstrap JS -->

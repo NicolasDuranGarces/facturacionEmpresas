@@ -44,6 +44,7 @@
 			<div class="col-lg-3">
 
 				<h1 class="my-4">Categorias</h1>
+				<hr>
 				<div class="list-group">
 					<a th:href="@{/productos-disponibles}" class="list-group-item">Mostrar
 						Todo</a> <a
@@ -118,18 +119,9 @@
 	<!-- /.container -->
 
 	<!-- Footer -->
-	<footer class="py-5 bg-dark">
-		<div class="container">
-			<p class="m-0 text-center text-white">
-				Copyright &copy; <a href="www.github.com/papugarces">Papu</a>-<a
-					href="">Jose Miguel</a>-<a href="www.github.com/sebasIngSoft">Sebastian
-					Hidalgo</a> 2020
-			</p>
-		</div>
-		<!-- /.container -->
-	</footer>
-
+	<div th:replace="Componentes/footer :: footer"></div>
 	<!-- Fin del Footer -->
+	
 	<!-- Scripts de JS de bootstrap  -->
 	<!-- (Orden) jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

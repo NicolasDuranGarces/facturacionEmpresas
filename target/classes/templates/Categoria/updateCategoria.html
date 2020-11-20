@@ -17,8 +17,9 @@
     <!-- Inicio del Cuerpo de la Pagina -->
 
     <br>
-    <div class="container">
+    <div class="container text-center">
         <h1>Actualizacion de Categoria</h1>
+        <hr>
     </div>
     <br>
     <!-- Inicio del Cuerpo de la Pagina -->
@@ -26,7 +27,7 @@
     <div class="container">
          <form action="#" th:action="@{/updateCategoria/{id_categoriaProducto}(id_categoriaProducto=${categoriaProducto.id_categoriaProducto})}" th:object="${categoriaProducto}" method="post">
 
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-8">
                 <label for="nombreCategoria" class="col-form-label">Nombre de la
                     Categoria</label> <input type="text" th:field="*{nombreCategoria}" class="form-control"
                     id="nombreCategoria" placeholder="..." required="required"> <span th:if="${#fields.hasErrors('nombreCategoria')}"
@@ -42,27 +43,11 @@
 
 	<!-- Fin del Cuerpo de la Pagina -->
 	<br>
-	<!-- Inicio del Footer -->
-
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 	<br>
 	<br>
 
-	<footer id="sticky-footer" class="py-4 bg-dark text-white-50"
-		style="flex-shrink: none;">
-		<div class="container text-center">
-			<small> &copy; Derechos Reservados : <a
-				href="www.github.com/papugarces">Papu</a>-<a href="">Jose Miguel</a>-<a
-				href="">Sebastian Hidalgo</a></small>
-		</div>
-	</footer>
-
-
+	<!-- Footer -->
+	<div th:replace="Componentes/footer :: footer"></div>
 	<!-- Fin del Footer -->
 	<!-- Scripts de JS de bootstrap  -->
 	<!-- (Orden) jQuery first, then Popper.js, then Bootstrap JS -->
