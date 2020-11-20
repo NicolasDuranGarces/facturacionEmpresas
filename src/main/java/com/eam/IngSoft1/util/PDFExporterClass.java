@@ -55,6 +55,9 @@ public class PDFExporterClass {
          
         cell.setPhrase(new Phrase("Marca Producto", font));
         table.addCell(cell);
+        
+        cell.setPhrase(new Phrase("Cantidad", font));
+        table.addCell(cell);
          
         cell.setPhrase(new Phrase("Valor Unitario ", font));
         table.addCell(cell);
@@ -65,31 +68,39 @@ public class PDFExporterClass {
         cell.setPhrase(new Phrase("Valor Total + IVA", font));
         table.addCell(cell);
         
-
-         
-               
+        cell.setPhrase(new Phrase("Valor Total  Factura", font));
+        table.addCell(cell);
+        
     }
      
     private void writeTableData(PdfPTable table) {
         for (int i=0;i<listDetalleFactura.size();i++) {
             table.addCell(listDetalleFactura.get(i).getProducto().getNombreProducto());
             table.addCell(listDetalleFactura.get(i).getProducto().getMarca());
+            table.addCell(String.valueOf(listDetalleFactura.get(i).getCantidadProducto()));
             table.addCell(String.valueOf(listDetalleFactura.get(i).getProducto().getValorUnitario()));
             table.addCell(String.valueOf(listDetalleFactura.get(i).getValorIvaTotal()));
             table.addCell(String.valueOf(listDetalleFactura.get(i).getValorTotal()));
-            
-           
+            table.addCell("");
         }
+        
+        table.addCell("");
+        table.addCell("");
+        table.addCell("");
+        table.addCell("");
+        table.addCell("");
+        table.addCell("");
+        table.addCell(String.valueOf(factura.getPrecioTotal()));
         
     }
      
     public void export(HttpServletResponse response) throws DocumentException, IOException {
-        Document document = new Document(PageSize.A4);
+        Document document = new Document(PageSize.A4.rotate());
         PdfWriter.getInstance(document, response.getOutputStream());
          
         document.open();
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-        font.setSize(18);
+        font.setSize(15);
         font.setColor(Color.BLUE);
          
         Paragraph p = new Paragraph("Factura Compra", font);
@@ -97,9 +108,9 @@ public class PDFExporterClass {
          
         document.add(p);
          
-        PdfPTable table = new PdfPTable(5);
+        PdfPTable table = new PdfPTable(7);
         table.setWidthPercentage(100f);
-        table.setWidths(new float[] {1.5f, 3.5f, 3.0f, 3.0f, 1.5f});
+        table.setWidths(new float[] {3.5f, 2.0f,1.5f, 2.0f, 2.0f, 1.5f , 1.5f });
         table.setSpacingBefore(10);
          
         writeTableHeader(table);
