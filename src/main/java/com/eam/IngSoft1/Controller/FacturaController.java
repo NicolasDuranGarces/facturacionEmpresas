@@ -1,11 +1,16 @@
 package com.eam.IngSoft1.Controller;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,6 +35,7 @@ import com.eam.IngSoft1.domain.Factura;
 import com.eam.IngSoft1.domain.Pedido;
 import com.eam.IngSoft1.domain.Producto;
 import com.eam.IngSoft1.domain.Usuario;
+import com.eam.IngSoft1.util.PDFExporterClass;
 
 @Controller
 public class FacturaController {
@@ -441,5 +447,24 @@ Detallefactura detalleFactura = repositorioDetalle.findById(idDetalle).orElseThr
 			return "redirect:/user/listCarrito";
 			}
 	    }
+		
+		@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO') or hasRole('ROLE_USER')")
+		@GetMapping("/export/pdf/{idFactura}")
+	    public void exportToPDF(HttpServletResponse response , @PathVariable("idFactura") int idFactura) throws DocumentException, IOException {
+	        response.setContentType("application/pdf");
+	        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+	        String currentDateTime = dateFormatter.format(new Date());
+	         
+	        String headerKey = "Content-Disposition";
+	        String headerValue = "attachment; filename=factura_" + currentDateTime + ".pdf";
+	        response.setHeader(headerKey, headerValue);
+	         
+	        List<Detallefactura> listaDetalle = repositorioDetalle.mostrarDetalles(idFactura);
+	        Factura factura = repositorioFactura.findByidFactura(idFactura);
+	         
+	        PDFExporterClass exporter = new PDFExporterClass(listaDetalle,factura);
+	        exporter.export(response);
+	         
+	    } 
 	
 }
