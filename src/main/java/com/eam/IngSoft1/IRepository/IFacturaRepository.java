@@ -56,7 +56,9 @@ public interface IFacturaRepository extends CrudRepository<Factura, Integer> {
 	@Query("SELECT fac FROM Factura fac JOIN Pedido pe ON fac.pedido.idPedido = pe.idPedido WHERE pe.activo = 1") 
 	public ArrayList<Factura> mostrarFacturasActivas();
 	
-	
+	//--------------------------mostrar la factura correspondiente a cierto pedido-----------
+	@Query("SELECT f FROM Factura f JOIN f.pedido p WHERE p.idPedido= ?1") 
+	public Factura traerFacturaPorIdPedido(int idPedido);
 		
 	
 }

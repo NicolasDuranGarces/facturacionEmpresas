@@ -31,7 +31,7 @@ public class Factura implements Serializable {
 	private List<Detallefactura> detallefacturas;
 
 	//bi-directional many-to-one association to Pedido
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="id_pedido")
 	private Pedido pedido;
 

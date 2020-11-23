@@ -35,8 +35,8 @@ public class Pedido implements Serializable {
 	private Date fechaPedido;
 
 	//bi-directional many-to-one association to Factura
-	@OneToMany(mappedBy="pedido")
-	private List<Factura> facturas;
+	//@OneToMany(mappedBy="pedido")
+	//private List<Factura> facturas;
 
 	//bi-directional many-to-one association to Cliente
 	@ManyToOne
@@ -87,7 +87,7 @@ public class Pedido implements Serializable {
 	public void setFechaPedido(Date fechaPedido) {
 		this.fechaPedido = fechaPedido;
 	}
-
+/*
 	public List<Factura> getFacturas() {
 		return this.facturas;
 	}
@@ -109,7 +109,8 @@ public class Pedido implements Serializable {
 
 		return factura;
 	}
-
+*/
+	
 	public Usuario getCliente() {
 		return this.cliente;
 	}
