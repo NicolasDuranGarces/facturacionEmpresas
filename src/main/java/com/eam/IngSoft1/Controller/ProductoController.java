@@ -1,5 +1,6 @@
 package com.eam.IngSoft1.Controller;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -22,6 +23,7 @@ import com.eam.IngSoft1.IRepository.ICategoriaRepository;
 import com.eam.IngSoft1.IRepository.IProductoRepository;
 import com.eam.IngSoft1.IRepository.IProveedorRepository;
 import com.eam.IngSoft1.domain.Producto;
+import com.eam.IngSoft1.util.Pagination;
 import com.eam.IngSoft1.config.CloudinaryConfig;
 
 
@@ -173,21 +175,107 @@ public class ProductoController {
   	
   	
   	// metodo productos disponibles ---------------------------------------------
- 	@GetMapping("/productos-disponibles")
- 	public String traerSoloDisponibles(Model model) {
+ 	@GetMapping("/productos-disponibles/page/{page}")
+ 	public String traerSoloDisponibles(@PathVariable("page") int pageActual, Model model) {
+ 		int numProd = 4;
+ 		int max = numProd*pageActual;
+ 		int min = numProd*(pageActual-1);
+ 		ArrayList<Producto> todos = (ArrayList<Producto>) repositorioProducto.cargarProductosActivos();
+ 		ArrayList<Producto> mostrados = new ArrayList<Producto>();
+ 		ArrayList<Pagination> pages = new ArrayList<Pagination>();
+ 		for (int i = 0; i<todos.size(); i++) {
+ 			if (i>=min && i<max) {
+ 				mostrados.add(todos.get(i));
+ 			}
+ 		}
+ 				/////Paginación///////
+ 		int numPages = (todos.size()/numProd);
+ 		if (todos.size()%numProd!=0) {
+ 			numPages+=1;
+ 		}
+ 		for (int i = 1; i<=(numPages); i++) {
+ 			Pagination page = new Pagination();
+ 			page.setPagina(""+i);
+ 			page.setActiva(false);
+ 			if (i == pageActual) {
+ 				page.setActiva(true);
+ 			}
+ 			
+ 			pages.add(page);
+ 		}
+ 		int prev, next;
+ 		if (pageActual>1) {
+ 			prev = pageActual-1;
+ 		} else {
+ 			prev = pageActual;
+ 		}
  		
- 		model.addAttribute("productos", repositorioProducto.cargarProductosActivos());
+ 		if (pageActual<numPages) {
+ 			next = pageActual+1;
+ 		} else {
+ 			next = pageActual;
+ 		}
+ 		 		
+ 		model.addAttribute("productos", mostrados );
  		model.addAttribute("categorias", categoriaRepository.findAll());
- 		return "homePageUsuario";
+ 		model.addAttribute("pages",pages);
+ 		model.addAttribute("prev", prev);
+ 		model.addAttribute("next", next);
+ 		
+ 		return "explorarProductos";
  	}
  	
  	// metodo filtrar productos por categorias---------------------------------------------
-  	@GetMapping("/categoriaproductos/{nombreCategoria}")
-  	public String traerSoloPorCategoria(@PathVariable("nombreCategoria") String nombre, Model model) {
+  	@GetMapping("/categoriaproductos/{nombreCategoria}/page/{page}")
+  	public String traerSoloPorCategoria(@PathVariable("nombreCategoria") String nombre, @PathVariable("page") int pageActual, Model model) {
  
-  		model.addAttribute("productos", repositorioProducto.mostrarProductoFiltroCategoria(nombre));
-  		model.addAttribute("categorias", categoriaRepository.findAll());
-  		return "homePageUsuario";
+  		int numProd = 2;
+ 		int max = numProd*pageActual;
+ 		int min = numProd*(pageActual-1);
+ 		ArrayList<Producto> todos = (ArrayList<Producto>) repositorioProducto.mostrarProductoFiltroCategoria(nombre);
+ 		ArrayList<Producto> mostrados = new ArrayList<Producto>();
+ 		ArrayList<Pagination> pages = new ArrayList<Pagination>();
+ 		for (int i = 0; i<todos.size(); i++) {
+ 			if (i>=min && i<max) {
+ 				mostrados.add(todos.get(i));
+ 			}
+ 		}
+ 				/////Paginación///////
+ 		int numPages = (todos.size()/numProd);
+ 		if (todos.size()%numProd!=0) {
+ 			numPages+=1;
+ 		}
+ 		for (int i = 1; i<=(numPages); i++) {
+ 			Pagination page = new Pagination();
+ 			page.setPagina(""+i);
+ 			page.setActiva(false);
+ 			if (i == pageActual) {
+ 				page.setActiva(true);
+ 			}
+ 			
+ 			pages.add(page);
+ 		}
+ 		int prev, next;
+ 		if (pageActual>1) {
+ 			prev = pageActual-1;
+ 		} else {
+ 			prev = pageActual;
+ 		}
+ 		
+ 		if (pageActual<numPages) {
+ 			next = pageActual+1;
+ 		} else {
+ 			next = pageActual;
+ 		}
+  		
+ 		model.addAttribute("productos", mostrados );
+ 		model.addAttribute("categorias", categoriaRepository.findAll());
+ 		model.addAttribute("pages",pages);
+ 		model.addAttribute("prev", prev);
+ 		model.addAttribute("next", next);
+ 		model.addAttribute("nomCat", nombre);
+ 		
+  		return "explorarProductosCategoria";
   	}
   	
  // metodo mostrar detalle de producto---------------------------------------------

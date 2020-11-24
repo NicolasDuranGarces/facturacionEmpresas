@@ -46,9 +46,9 @@
 				<h1 class="my-4">Categorias</h1>
 				<hr>
 				<div class="list-group">
-					<a th:href="@{/productos-disponibles}" class="list-group-item">Mostrar
+					<a th:href="@{/productos-disponibles/page/1}" class="list-group-item">Mostrar
 						Todo</a> <a
-						th:href="@{/categoriaproductos/{nombreCategoria}(nombreCategoria=${categoria.nombreCategoria})}"
+						th:href="@{/categoriaproductos/{nombreCategoria}/page/1(nombreCategoria=${categoria.nombreCategoria})}"
 						th:each="categoria : ${categorias}" class="list-group-item"
 						th:text="${categoria.nombreCategoria}"></a>
 				</div>
@@ -82,7 +82,9 @@
 					</div>
 				</div>
 				<!------------------------------------ Inicio de las cartas--------------------------------------- -->
+				<h2>Nuevos artículos:</h2>
 				<div class="row">
+				
 					<div class="col-sm-8 col-md-4 mb-4"
 						th:each="producto : ${productos}">
 						<div class="card h-100">

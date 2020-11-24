@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Shop Homepage</title>
+<title>Explorar Productos</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -56,35 +56,9 @@
 			</div>
 			<!-- /.col-lg-3 -->
 			<div class="col-lg-9">
-				<!-------------------------------------incio del slide----------------------------------------------------------->
-				<div class="row">
-					<div id="carouselExampleInterval" class="carousel slide"
-						data-ride="carousel">
-						<div class="carousel-inner">
-							<div class="carousel-item active" data-interval="1500"
-								id="slide-img">
-								<img src="/imagenes/bienvenido.png" class="d-block" alt="...">
-							</div>
-							<div class="carousel-item" data-interval="1500"
-								th:each="producto : ${productos}" id="slide-img">
-								<img th:src="${producto.urlFoto}" class="d-block" alt="...">
-							</div>
-						</div>
-						<a class="carousel-control-prev" href="#carouselExampleInterval"
-							role="button" data-slide="prev"> <span
-							class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-							class="sr-only">Previous</span>
-						</a> <a class="carousel-control-next" href="#carouselExampleInterval"
-							role="button" data-slide="next"> <span
-							class="carousel-control-next-icon" aria-hidden="true"></span> <span
-							class="sr-only">Next</span>
-						</a>
-					</div>
-				</div>
+				<nav aria-label="Page navigation example">
 				<!------------------------------------ Inicio de las cartas--------------------------------------- -->
-				<h2>Nuevos artículos:</h2>
 				<div class="row">
-				
 					<div class="col-sm-8 col-md-4 mb-4"
 						th:each="producto : ${productos}">
 						<div class="card h-100">
@@ -111,6 +85,20 @@
 				<!------------------------------------ Fin de las cartas--------------------------------------- -->
 				<!-- /.row -->
 
+				
+					<ul class="pagination">
+						<li class="page-item"><a class="page-link" th:href="@{/categoriaproductos/{categoria}/page/{page}(categoria=${nomCat},page=${prev})}"
+							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						</a></li>
+												
+						<li class="page-item" th:classappend="${page.activa} ? active : ''" th:each="page : ${pages}"><a class="page-link" th:text="${page.pagina}" th:href="@{/categoriaproductos/{categoria}/page/{page}(categoria=${nomCat},page=${page.pagina})}"></a></li>
+						
+						<li class="page-item"><a class="page-link" th:href="@{/categoriaproductos/{categoria}/page/{page}(categoria=${nomCat},page=${next})}"
+							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+						</a></li>
+					
+				</nav>
+
 			</div>
 			<!-- /.col-lg-9 -->
 
@@ -123,7 +111,7 @@
 	<!-- Footer -->
 	<div th:replace="Componentes/footer :: footer"></div>
 	<!-- Fin del Footer -->
-	
+
 	<!-- Scripts de JS de bootstrap  -->
 	<!-- (Orden) jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

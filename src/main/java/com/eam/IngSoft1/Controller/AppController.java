@@ -1,6 +1,7 @@
 package com.eam.IngSoft1.Controller;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.validation.Valid;
 
@@ -15,6 +16,10 @@ import co.com.eam.avanzada.domain.Usuario;
 import co.com.eam.avanzada.repository.IUsuarioRepository;
 */
 
+import com.eam.IngSoft1.IRepository.ICategoriaRepository;
+import com.eam.IngSoft1.IRepository.IProductoRepository;
+import com.eam.IngSoft1.domain.Producto;
+
 @Controller
 public class AppController {
 	/*
@@ -25,6 +30,16 @@ public class AppController {
 		this.IusuarioRepository = IusuarioRepository;
 	}
 	*/
+	
+	private final IProductoRepository repositorioProducto;
+	private final ICategoriaRepository categoriaRepository;
+	
+	@Autowired
+	public AppController(IProductoRepository repositorioProducto, ICategoriaRepository categoriaRepository) {
+		super();
+		this.repositorioProducto = repositorioProducto;
+		this.categoriaRepository = categoriaRepository;
+	}
 
 	@GetMapping({"/","/login"})
 	public String login() {
@@ -42,7 +57,14 @@ public class AppController {
 	}
 	
 	@GetMapping({"/home"})
-	public String menu() {
+	public String menu(Model model) {
+		ArrayList<Producto> todos = (ArrayList<Producto>) repositorioProducto.cargarProductosActivos();
+ 		ArrayList<Producto> mostrados = new ArrayList<Producto>();
+ 		for (int i = todos.size()-1; i>=todos.size()-3; i--) {
+ 				mostrados.add(todos.get(i));
+ 		}
+		model.addAttribute("productos", mostrados);
+		model.addAttribute("categorias", categoriaRepository.findAll());
 		return "homePageUsuario";
 	}
 	/*
