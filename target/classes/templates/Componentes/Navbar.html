@@ -26,7 +26,7 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active text-light"><a class="nav-link text-light"
-					th:href="@{/productos-disponibles}">Home <span class="sr-only">(current)</span>
+					th:href="@{/home}">Home <span class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item active "><a class="nav-link mx-3 text-light"
 					href="/admin/home-empleado">Inicio <span class="sr-only">(current)</span>
@@ -52,7 +52,7 @@
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"> Producto </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item " th:href="@{/admin/listadoProducto}">Listar
+						<a class="dropdown-item " th:href="@{/admin/listadoProducto/page/1}">Listar
 							Productos</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item " th:href="@{/admin/ingresoProducto}">Registro
@@ -109,7 +109,7 @@
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"> Facturas </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item " th:href="@{/listadofactura}">Listar
+						<a class="dropdown-item " th:href="@{/listadofactura/page/1}">Listar
 							Facturas</a>
 						<div class="dropdown-divider"></div>
 					</div></li>

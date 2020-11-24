@@ -31,13 +31,21 @@
 		<hr>
 		<div class="row">
 			<div class="col-4"></div>
+			
+			
 			<form th:action="@{/filtrarclientefactura/page/1}" class="form-inline col-8"
 				method="post">
 				<label class="sr-only" for="inlineFormInputName2">DNI</label> <input
 					type="text" th:name="dni" class="form-control mb-2 mr-sm-2"
 					id="dni" placeholder="Cedula Del Cliente" required="required">
 				<button type="submit" class="btn btn-primary mb-2">Buscar</button>
+				
 			</form>
+			<div class="col-5"></div>
+			<a class="btn btn-primary col-2" th:href="@{/listadofactura/page/1}"
+							aria-label="Next">Mostrar todos</a>
+			
+			
 		</div>
 		<div th:switch="${facturas}" class="my-5">
 			<div class="row">
@@ -87,15 +95,27 @@
 					</div>
 					<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
-						<li class="page-item"><a class="page-link" th:href="@{/listadofactura/page/{page}(url=${url},page=${prev})}"
-							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						</a></li>
+						<li class="page-item">
+						<form th:action="@{/{url}/page/{page}(url=${url},page=${prev},dni=(${useDni} ? ${dni} : null))}" class=""
+				method="post">
+						<button type="submit" class="page-link" th:action="@{/{url}/page/{page}(url=${url},page=${prev},dni=(${useDni} ? ${dni} : null))}"
+							aria-label="Previous"> <span aria-hidden="true">&laquo;</span></button>
+							
+						</form></li>
 												
-						<li class="page-item" th:classappend="${page.activa} ? active : ''" th:each="page : ${pages}"><a class="page-link" th:text="${page.pagina}" th:href="@{/listadofactura/page/{page}(page=${page.pagina})}"></a></li>
+						<li class="page-item" th:classappend="${page.activa} ? active : ''" th:each="page : ${pages}">
+						<form th:action="@{/{url}/page/{page}(url=${url},page=${page.pagina},dni=(${useDni} ? ${dni} : null))}" class=""
+				method="post">
+						<button type="submit" class="page-link" th:text="${page.pagina}" th:href="@{/{url}/page/{page}(url=${url},page=${page.pagina},dni=(${useDni} ? ${dni} : null))}"></button>
+						</form></li>
 						
-						<li class="page-item"><a class="page-link" th:href="@{/listadofactura/page/{page}(page=${next})}"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-						</a></li>
+						<li class="page-item">
+						<form th:action="@{/{url}/page/{page}(url=${url},page=${next},dni=(${useDni} ? ${dni} : null))}" class=""
+				method="post">
+						<button type="submit" class="page-link" th:action="@{/{url}/page/{page}(url=${url},page=${next},dni=(${useDni} ? ${dni} : null))}"
+							aria-label="Previous"> <span aria-hidden="true">&raquo;</span></button>
+							
+						</form></li>
 					</ul>
 				</nav>
 				</div>

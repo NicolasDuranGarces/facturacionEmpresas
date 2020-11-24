@@ -167,9 +167,51 @@ public class ProductoController {
   
     //Listado de Producto
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
-  	@GetMapping("/admin/listadoProducto")
-  	public String list(Producto producto, Model model) {
-  		model.addAttribute("productos", repositorioProducto.findAll());
+  	@GetMapping("/admin/listadoProducto/page/{page}")
+  	public String list(Producto producto, @PathVariable("page") int pageActual, Model model) {
+    	int numProd = 5;
+ 		int max = numProd*pageActual;
+ 		int min = numProd*(pageActual-1);
+ 		ArrayList<Producto> todos = (ArrayList<Producto>) repositorioProducto.findAll();
+ 		ArrayList<Producto> mostrados = new ArrayList<Producto>();
+ 		ArrayList<Pagination> pages = new ArrayList<Pagination>();
+ 		for (int i = 0; i<todos.size(); i++) {
+ 			if (i>=min && i<max) {
+ 				mostrados.add(todos.get(i));
+ 			}
+ 		}
+ 				/////Paginación///////
+ 		int numPages = (todos.size()/numProd);
+ 		if (todos.size()%numProd!=0) {
+ 			numPages+=1;
+ 		}
+ 		for (int i = 1; i<=(numPages); i++) {
+ 			Pagination page = new Pagination();
+ 			page.setPagina(""+i);
+ 			page.setActiva(false);
+ 			if (i == pageActual) {
+ 				page.setActiva(true);
+ 			}
+ 			
+ 			pages.add(page);
+ 		}
+ 		int prev, next;
+ 		if (pageActual>1) {
+ 			prev = pageActual-1;
+ 		} else {
+ 			prev = pageActual;
+ 		}
+ 		
+ 		if (pageActual<numPages) {
+ 			next = pageActual+1;
+ 		} else {
+ 			next = pageActual;
+ 		}
+ 		 		
+ 		model.addAttribute("productos", mostrados );
+ 		model.addAttribute("pages",pages);
+ 		model.addAttribute("prev", prev);
+ 		model.addAttribute("next", next);
         return "Producto/listadoProducto";
   	}
   	

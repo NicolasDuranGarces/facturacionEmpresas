@@ -36,6 +36,7 @@ import com.eam.IngSoft1.domain.Pedido;
 import com.eam.IngSoft1.domain.Producto;
 import com.eam.IngSoft1.domain.Usuario;
 import com.eam.IngSoft1.util.PDFExporterClass;
+import com.eam.IngSoft1.util.Pagination;
 
 @Controller
 public class FacturaController {
@@ -169,7 +170,7 @@ public class FacturaController {
 			Factura facturaConPrecio = repositorioFactura.findByidFactura(detallefactura.getFactura().getIdFactura());
 			facturaConPrecio.setPrecioTotal(sumaTotal);
 			repositorioFactura.save(facturaConPrecio);
-			return "/homePageUsuario";
+			return "redirect:/home";
 			
 		} else {
 			
@@ -183,18 +184,109 @@ public class FacturaController {
 
 	// metodo para listado factura 
 	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
-	@GetMapping("/listadofactura")
-	public String list(Factura factura, Model model) {
-		model.addAttribute("facturas", repositorioFactura.mostrarFacturas());
+	@GetMapping("/listadofactura/page/{page}")
+	public String list(Factura factura, @PathVariable("page") int pageActual, Model model) {
+		
+		int numFac = 5;
+ 		int max = numFac*pageActual;
+ 		int min = numFac*(pageActual-1);
+ 		ArrayList<Factura> todos = (ArrayList<Factura>) repositorioFactura.mostrarFacturas();
+ 		ArrayList<Factura> mostrados =  new ArrayList<Factura>();
+ 		ArrayList<Pagination> pages = new ArrayList<Pagination>();
+ 		for (int i = 0; i<todos.size(); i++) {
+ 			if (i>=min && i<max) {
+ 				mostrados.add(todos.get(i));
+ 			}
+ 		}
+ 				/////Paginación///////
+ 		int numPages = (todos.size()/numFac);
+ 		if (todos.size()%numFac!=0) {
+ 			numPages+=1;
+ 		}
+ 		for (int i = 1; i<=(numPages); i++) {
+ 			Pagination page = new Pagination();
+ 			page.setPagina(""+i);
+ 			page.setActiva(false);
+ 			if (i == pageActual) {
+ 				page.setActiva(true);
+ 			}
+ 			
+ 			pages.add(page);
+ 		}
+ 		int prev, next;
+ 		if (pageActual>1) {
+ 			prev = pageActual-1;
+ 		} else {
+ 			prev = pageActual;
+ 		}
+ 		
+ 		if (pageActual<numPages) {
+ 			next = pageActual+1;
+ 		} else {
+ 			next = pageActual;
+ 		}
+		
+		model.addAttribute("facturas", mostrados);
+		model.addAttribute("pages",pages);
+ 		model.addAttribute("prev", prev);
+ 		model.addAttribute("next", next);
+ 		model.addAttribute("url", "listadofactura");
+ 		model.addAttribute("useDni", false);
+ 		model.addAttribute("dni", null);
 		return "Factura/listaFactura";
 	}
 	
 	//metodo para filtrar factura por un cliente en especifico
 	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
-	@PostMapping("/filtrarclientefactura")
-	public String flitrarFactura(@RequestParam(value = "dni") int idCliente, Model model) {
-		model.addAttribute("facturas", repositorioFactura.mostrarFacturaFiltroCliente(idCliente));
-		return "Factura/listaFactura";
+	@PostMapping("/filtrarclientefactura/page/{page}")
+	public String flitrarFactura(@RequestParam(value = "dni") int idCliente, @PathVariable("page") int pageActual, Model model) {
+		
+		int numFac = 2;
+ 		int max = numFac*pageActual;
+ 		int min = numFac*(pageActual-1);
+ 		ArrayList<Factura> todos = (ArrayList<Factura>) repositorioFactura.mostrarFacturaFiltroCliente(idCliente);
+ 		ArrayList<Factura> mostrados =  new ArrayList<Factura>();
+ 		ArrayList<Pagination> pages = new ArrayList<Pagination>();
+ 		for (int i = 0; i<todos.size(); i++) {
+ 			if (i>=min && i<max) {
+ 				mostrados.add(todos.get(i));
+ 			}
+ 		}
+ 				/////Paginación///////
+ 		int numPages = (todos.size()/numFac);
+ 		if (todos.size()%numFac!=0) {
+ 			numPages+=1;
+ 		}
+ 		for (int i = 1; i<=(numPages); i++) {
+ 			Pagination page = new Pagination();
+ 			page.setPagina(""+i);
+ 			page.setActiva(false);
+ 			if (i == pageActual) {
+ 				page.setActiva(true);
+ 			}
+ 			
+ 			pages.add(page);
+ 		}
+ 		int prev, next;
+ 		if (pageActual>1) {
+ 			prev = pageActual-1;
+ 		} else {
+ 			prev = pageActual;
+ 		}
+ 		
+ 		if (pageActual<numPages) {
+ 			next = pageActual+1;
+ 		} else {
+ 			next = pageActual;
+ 		}
+ 		model.addAttribute("facturas", mostrados);
+		model.addAttribute("pages",pages);
+ 		model.addAttribute("prev", prev);
+ 		model.addAttribute("next", next);
+ 		model.addAttribute("url", "filtrarclientefactura");
+ 		model.addAttribute("useDni", true);
+ 		model.addAttribute("dni", idCliente);
+		return "Factura/listaFacturaFiltroCliente";
 	}
 
 	// metodo para listado facturas del usuario
