@@ -28,9 +28,6 @@
 				<li class="nav-item active text-light"><a class="nav-link text-light"
 					th:href="@{/home}">Home <span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item active "><a class="nav-link mx-3 text-light"
-					href="/admin/home-empleado">Inicio <span class="sr-only">(current)</span>
-				</a></li>
 
 				<!-- Inicio de Desplegable de Categorias-->
 				<li class="nav-item dropdown mx-3"><a
@@ -111,6 +108,19 @@
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item " th:href="@{/listadofactura/page/1}">Listar
 							Facturas</a>
+						<div class="dropdown-divider"></div>
+					</div></li>
+
+				<!-- Fin de Desplegable de Factura-->
+				
+				<!-- Inicio de Desplegable de Pedido-->
+				<li class="nav-item dropdown mx-3"><a
+					class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Pedidos </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item " th:href="@{/admin/pedidos/todos}">Listar
+							Pedido</a>
 						<div class="dropdown-divider"></div>
 					</div></li>
 

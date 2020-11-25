@@ -29,6 +29,7 @@ import com.eam.IngSoft1.domain.Producto;
 import com.eam.IngSoft1.domain.Usuario;
 
 
+
 @Controller
 public class PedidoController {
 	private final IPedidoRepository repositorioPedido;
@@ -97,7 +98,7 @@ public class PedidoController {
 	
 	//Método para listar todos los pedidos realizados por un cliente
 	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
-    @GetMapping("/admin/pedidos/cliente/{dni}")
+    @PostMapping("/admin/pedidos/cliente")
 	public String listarPedidosCliente(@RequestParam(value = "dni") int idCliente, Model model) {
 		model.addAttribute("pedidos", repositorioPedido.mostrarPedidosRealizadosCliente(idCliente));
 		return "Pedido/listaPedidos";
