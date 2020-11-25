@@ -1,6 +1,7 @@
 package com.eam.IngSoft1.Controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -24,6 +25,7 @@ import com.eam.IngSoft1.IRepository.IProductoRepository;
 import com.eam.IngSoft1.IRepository.IProveedorRepository;
 import com.eam.IngSoft1.domain.Producto;
 import com.eam.IngSoft1.util.Pagination;
+import com.eam.IngSoft1.util.Notifications;
 import com.eam.IngSoft1.config.CloudinaryConfig;
 
 
@@ -333,6 +335,30 @@ public class ProductoController {
    	public String traerProductosBodega(@PathVariable("idBodega") int idBodega, Model model) {
   
    		model.addAttribute("productos", repositorioProducto.mostrarProductoFiltroBodega(idBodega));
+   		
+   		return "Bodega/listadoProductosBodega";
+   	}
+   	
+   	
+  // Metodo productos disponibles ---------------------------------------------
+   	
+   	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
+   	@GetMapping("/admin/notificaciones")
+   	public String notificaciones( Model model) {
+   		List<Producto> productos = (List<Producto>) repositorioProducto.findAll();
+   		List<Notifications> productoNotificacionesList = null;
+   		
+   		for (int i = 0; i < productos.size(); i++) {
+			if (productos.get(i).getCantidadActual()<=productos.get(i).getMinimoInventario()) {
+				Notifications notificacionesNotifications = new Notifications();
+				notificacionesNotifications.setProducto(productos.get(i));
+				notificacionesNotifications.setMensaje("Este Producto tiene su minimo de Inventario - Inventario : "+ productos.get(i).getCantidadActual());
+				productoNotificacionesList.add(notificacionesNotifications);
+			}
+		}
+   		
+   		//Aca se supone que debemos debo de mandar las cosas al HTML
+   		model.addAttribute("notificaciones",productoNotificacionesList);
    		
    		return "Bodega/listadoProductosBodega";
    	}
