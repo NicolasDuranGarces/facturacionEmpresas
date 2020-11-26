@@ -22,6 +22,7 @@ import com.eam.IngSoft1.IRepository.IDetalleFacturaRepository;
 import com.eam.IngSoft1.IRepository.IFacturaRepository;
 import com.eam.IngSoft1.IRepository.IPedidoRepository;
 import com.eam.IngSoft1.IRepository.IProductoRepository;
+import com.eam.IngSoft1.domain.Categoriaproducto;
 import com.eam.IngSoft1.domain.Detallefactura;
 import com.eam.IngSoft1.domain.Factura;
 import com.eam.IngSoft1.domain.Pedido;
@@ -53,21 +54,28 @@ public class PedidoController {
    		Pedido pedido = repositorioPedido.findById(idPedido).orElseThrow(() -> new IllegalArgumentException("Invalido Pedido id:" + idPedido));
    		Factura factura = repositorioFactura.traerFacturaPorIdPedido(idPedido);
    		Iterable<Detallefactura> detalles = repositorioDetalle.mostrarDetalles(factura.getIdFactura());
-   		model.addAttribute("pedido", pedido);
-   		model.addAttribute("detallefactura",detalles);
-   		model.addAttribute("despachado", pedido.getDespachado());
+   		int precio = factura.getPrecioTotal();
+   		model.addAttribute("detalles", detalles);
+		model.addAttribute("totalfactura", precio);
+		model.addAttribute("pedido",pedido);
+		
    		return "Pedido/detallePedido";
    	}
 	
 	//Método para despachar un pedido
-	@PostMapping("/despacharPedido/{idPedido}")
-    public String updateMercanciaProducto(@PathVariable("idPedido") int idPedido, BindingResult result, Model model ) {
+	@GetMapping("/despacharPedido/{idPedido}")
+    public String updateMercanciaProducto(@PathVariable("idPedido") int idPedido, Model model ) {
 		Pedido pedido = repositorioPedido.findById(idPedido).orElseThrow(() -> new IllegalArgumentException("Invalido Pedido id:" + idPedido));
 		pedido.setDespachado(true);
 		repositorioPedido.save(pedido);
-		model.addAttribute("pedido", pedido);
-		model.addAttribute("despachado", pedido.getDespachado());
-		return "Pedido/detallePedido";
+		
+		Factura factura = repositorioFactura.traerFacturaPorIdPedido(idPedido);
+   		Iterable<Detallefactura> detalles = repositorioDetalle.mostrarDetalles(factura.getIdFactura());
+   		int precio = factura.getPrecioTotal();
+   		model.addAttribute("detalles", detalles);
+		model.addAttribute("totalfactura", precio);
+		model.addAttribute("pedido",pedido);
+		return "redirect:/admin/pedidos/detallePedido/"+pedido.getIdPedido();
 	}
 	
 	
@@ -78,6 +86,7 @@ public class PedidoController {
 		model.addAttribute("pedidos", repositorioPedido.traerTodosLosPedidos());
 		return "Pedido/listaPedidos";
 	}
+	
 	
 	//Método para listar todos los pedidos que están sin despachar
 	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")

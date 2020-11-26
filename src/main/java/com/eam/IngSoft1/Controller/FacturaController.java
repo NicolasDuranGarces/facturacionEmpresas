@@ -529,7 +529,9 @@ public class FacturaController {
 			return "redirect:/user/listCarrito";
 		}
 	}
-
+	
+	
+	//Metodo par exportar dpf
 	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO') or hasRole('ROLE_USER')")
 	@GetMapping("/export/pdf/{idFactura}")
 	public void exportToPDF(HttpServletResponse response, @PathVariable("idFactura") int idFactura)

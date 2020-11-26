@@ -27,18 +27,33 @@
 	<br>
 	<br>
 	<div class="container">
-		<h2 class="col-lg-12 text-center">Listado De Pedidos</h2>
-		<hr>
+		<div class="col-12">
+			<h2 class="col-lg-12 text-center">Listado De Pedidos</h2>
+			<hr>
+		</div>
 		<div class="row">
 			<div class="col-4"></div>
-			<form th:action="@{/admin/pedidos/cliente}" class="form-inline col-8"
-				method="post">
-				<label class="sr-only" for="inlineFormInputName2">DNI</label> <input
-					type="text" th:name="dni" class="form-control mb-2 mr-sm-2"
-					id="dni" placeholder="Cedula Del Cliente" required="required">
-				<button type="submit" class="btn btn-primary mb-2">Buscar</button>
-			</form>
+			<div class="col-4">
+				<form th:action="@{/admin/pedidos/cliente}" class="form-inline"
+					method="post">
+					<label class="sr-only" for="inlineFormInputName2">DNI</label> <input
+						type="text" th:name="dni" class="form-control mb-2 mr-sm-2"
+						id="dni" placeholder="Cedula Del Cliente" required="required">
+					<button type="submit" class="btn btn-primary mb-2">Buscar</button>
+				</form>
+			</div>
+			<div class="col-4">
+				<select class="custom-select col-6"
+					th:onchange="location=this.value;">
+					<option selected>Filtrar Por Estado</option>
+					<option value="/admin/pedidos/despachados">Despachado</option>
+					<option value="/admin/pedidos/por-despachar">Sin Despachar</option>
+					<option value="/admin/pedidos/todos">Todos</option>
+				</select>
+			</div>
+
 		</div>
+
 		<div th:switch="${pedidos}" class="my-5">
 			<div class="row">
 				<div class="col-1"></div>
@@ -53,7 +68,7 @@
 									<th>Cédula</th>
 									<th>Estado</th>
 									<th>Fecha De Pedido</th>
-									
+
 									<th>Ver detalle</th>
 								</tr>
 							</thead>
@@ -70,18 +85,21 @@
 									<td><a
 										th:href="@{/admin/pedidos/detallePedido/{idPedido}(idPedido=${pedido.idPedido})}"
 										class="btn btn-info"><i class="fas fa-eye ml-3 mr-3"></i></a></td>
+
+
 								</tr>
 
 							</tbody>
 						</table>
 					</div>
 				</div>
-
 				<div class="col-1"></div>
 
 			</div>
 		</div>
 	</div>
+
+
 	!-- Footer -->
 	<div th:replace="Componentes/footer :: footer"></div>
 	<!-- Fin del Footer -->
