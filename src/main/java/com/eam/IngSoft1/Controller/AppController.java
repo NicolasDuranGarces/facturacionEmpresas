@@ -41,7 +41,7 @@ public class AppController {
 		this.categoriaRepository = categoriaRepository;
 	}
 
-	@GetMapping({"/","/login"})
+	@GetMapping({"/login"})
 	public String login() {
 		return "login";
 	}
@@ -56,7 +56,7 @@ public class AppController {
 		return "index";
 	}
 	
-	@GetMapping({"/home"})
+	@GetMapping({"/","/home"})
 	public String menu(Model model) {
 		ArrayList<Producto> todos = (ArrayList<Producto>) repositorioProducto.cargarProductosActivos();
  		ArrayList<Producto> mostrados = new ArrayList<Producto>();
