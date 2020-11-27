@@ -53,7 +53,9 @@
 									<td th:text="${usuario.nombre}"></td>
 									<td th:text="${usuario.apellido}"></td>
 									<td th:text="${usuario.nombreUsuario}"></td>
-									<td th:text="${usuario.authority}"></td>
+									<td th:each="auth : ${usuario.authority}" th:if="${auth.authority=='ROLE_ADMIN'}" th:text="Administrador"></td>
+									<td th:each="auth : ${usuario.authority}" th:if="${auth.authority=='ROLE_EMPLEADO'}" th:text="Empleado"></td>
+									<td th:each="auth : ${usuario.authority}" th:if="${auth.authority=='ROLE_USER'}" th:text="Cliente"></td>
 									<td th:text="${usuario.direccion}"></td>
 									<td th:text="${usuario.telefono}"></td>
 

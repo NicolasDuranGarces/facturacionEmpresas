@@ -41,7 +41,7 @@
 							<tr>
 								
 								<th>Fecha</th>
-								<th>Despachado</th>
+								<th>Estado del pedido</th>
 								<th>Precio Total</th>
 								
 								<th>DESCARGAR PDF</th>
@@ -52,12 +52,12 @@
 						<tbody>
 							<tr th:each="facturas : ${facturas}">
 								<td th:text="${facturas.pedido.fechaPedido}"></td>
-								<td th:text="${facturas.pedido.despachado}"></td>
+								<td th:text="${facturas.pedido.despachado} ? 'Despachado' : 'Sin despachar'"></td>
 								<td th:text="${facturas.precioTotal}"></td>
 								
 								<td><a
 									th:href="@{/export/pdf/{idFactura}(idFactura=${facturas.idFactura})}"
-									class="btn btn-success"><i class="fas fa-download"></i></a></td>
+									class="btn btn-success"><i class="fas fa-download ml-5 mr-5"></i></a></td>
 							
 							</tr>
 
