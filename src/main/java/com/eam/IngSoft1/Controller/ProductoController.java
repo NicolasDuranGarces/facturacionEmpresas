@@ -118,7 +118,7 @@ public class ProductoController {
         
         repositorioProducto.save(producto);
         model.addAttribute("productos", repositorioProducto.findAll());
-        return "redirect:/admin/listadoProducto";
+        return "redirect:/admin/listadoProducto/page/1";
     }
     
     
@@ -340,19 +340,20 @@ public class ProductoController {
    	}
    	
    	
-  // Metodo productos disponibles ---------------------------------------------
+  // -------------------Notificaciones---------------------------------------------
    	
    	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')")
    	@GetMapping("/admin/notificaciones")
    	public String notificaciones( Model model) {
    		List<Producto> productos = (List<Producto>) repositorioProducto.findAll();
-   		List<Notifications> productoNotificacionesList = null;
+   		List<Notifications> productoNotificacionesList = new ArrayList<Notifications>();
    		
    		for (int i = 0; i < productos.size(); i++) {
-			if (productos.get(i).getCantidadActual()<=productos.get(i).getMinimoInventario()) {
+			if (productos.get(i).getCantidadActual()<productos.get(i).getMinimoInventario()) {
 				Notifications notificacionesNotifications = new Notifications();
 				notificacionesNotifications.setProducto(productos.get(i));
-				notificacionesNotifications.setMensaje("Este Producto tiene su minimo de Inventario - Inventario : "+ productos.get(i).getCantidadActual());
+				notificacionesNotifications.setMensaje("Al Producto: \""+productos.get(i).getNombreProducto()
+						+"\"\n - Le quedan pocas unidades \n - Unidades en stock: "+ productos.get(i).getCantidadActual());
 				productoNotificacionesList.add(notificacionesNotifications);
 			}
 		}
@@ -360,7 +361,7 @@ public class ProductoController {
    		//Aca se supone que debemos debo de mandar las cosas al HTML
    		model.addAttribute("notificaciones",productoNotificacionesList);
    		
-   		return "Bodega/listadoProductosBodega";
+   		return "index";
    	}
   	
   
