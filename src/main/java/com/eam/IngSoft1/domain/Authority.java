@@ -25,21 +25,6 @@ public class Authority implements Serializable {
 	
 	@Column(unique = true)
 	private String authority;
-			
-
-	
-
-	public String getAuthority() {
-		return authority;
-	}
-
-	public void setAuthority(String authority) {
-		this.authority = authority;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 	public Integer getId() {
 		return id;
@@ -48,6 +33,13 @@ public class Authority implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	
+
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
+			
 }

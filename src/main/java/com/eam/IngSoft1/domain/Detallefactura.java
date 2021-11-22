@@ -89,4 +89,14 @@ public class Detallefactura implements Serializable {
 		this.producto = producto;
 	}
 
+	public int getValorIvaTotal() {
+		return valorIvaTotal;
+	}
+
+	public void setValorIvaTotal(int valorIvaTotal) {
+		this.valorIvaTotal = valorIvaTotal;
+	}
+	
+	
+
 }

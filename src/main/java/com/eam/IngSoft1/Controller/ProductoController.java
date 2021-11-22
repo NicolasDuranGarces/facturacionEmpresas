@@ -77,7 +77,7 @@ public class ProductoController {
         
         repositorioProducto.save(producto);
         model.addAttribute("productos", repositorioProducto.findAll());
-        return "redirect:/admin/listadoProducto";
+        return "redirect:/admin/listadoProducto/page/1";
     }
       
     
@@ -118,6 +118,7 @@ public class ProductoController {
         
         repositorioProducto.save(producto);
         model.addAttribute("productos", repositorioProducto.findAll());
+        System.out.println("HOLAAAA");
         return "redirect:/admin/listadoProducto/page/1";
     }
     
@@ -152,7 +153,7 @@ public class ProductoController {
     	producto.setCantidadActual(producto.getCantidadActual()+cantidadNueva);
         repositorioProducto.save(producto);
         model.addAttribute("productos", repositorioProducto.findAll());
-        return "redirect:/admin/listadoProducto";
+        return "redirect:/admin/listadoProducto/page/1";
     }
      
     
@@ -163,7 +164,7 @@ public class ProductoController {
     	Producto producto = repositorioProducto.findById(idProducto).orElseThrow(() -> new IllegalArgumentException("Invalido Producto id:" + idProducto));
         repositorioProducto.delete(producto);
         model.addAttribute("productos", repositorioProducto.findAll());
-        return "redirect:/admin/listadoProducto";
+        return "redirect:/admin/listadoProducto/page/1";
     }
     
   

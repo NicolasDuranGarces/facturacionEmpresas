@@ -60,8 +60,10 @@ public class AppController {
 	public String menu(Model model) {
 		ArrayList<Producto> todos = (ArrayList<Producto>) repositorioProducto.cargarProductosActivos();
  		ArrayList<Producto> mostrados = new ArrayList<Producto>();
- 		for (int i = todos.size()-1; i>=todos.size()-3; i--) {
+ 		if(mostrados.size()>=1) {
+ 			for (int i = todos.size()-1; i>=todos.size()-3; i--) {
  				mostrados.add(todos.get(i));
+ 			}
  		}
 		model.addAttribute("productos", mostrados);
 		model.addAttribute("categorias", categoriaRepository.findAll());

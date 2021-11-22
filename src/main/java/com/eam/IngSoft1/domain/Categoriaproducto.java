@@ -84,5 +84,6 @@ public class Categoriaproducto implements Serializable {
 	}
 	
 	
+	
 
 }

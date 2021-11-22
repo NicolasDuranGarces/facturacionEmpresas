@@ -128,4 +128,17 @@ public class Pedido implements Serializable {
 		this.cliente = cliente;
 	}
 
+	public int getDNI_Encargado() {
+		return DNI_Encargado;
+	}
+
+	public void setDNI_Encargado(int dNI_Encargado) {
+		DNI_Encargado = dNI_Encargado;
+	}
+
+	public void setCliente(Usuario cliente) {
+		this.cliente = cliente;
+	}
+
+	
 }

@@ -145,6 +145,11 @@ public class Usuario implements Serializable {
 		this.telefono = telefono;
 	}
 
+	
+	public String getNombreUsuario() {
+		return nombreUsuario;
+	}
+	
 	public String getUsuario() {
 		return this.nombreUsuario;
 	}
@@ -152,7 +157,11 @@ public class Usuario implements Serializable {
 	public void setUsuario(String usuario) {
 		this.nombreUsuario = usuario;
 	}
-	
+
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
+	}
+
 	public List<Pedido> getPedidos() {
 		return this.pedidos;
 	}
@@ -174,6 +183,16 @@ public class Usuario implements Serializable {
 
 		return pedido;
 	}
+
+	public Set<Authority> getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(Set<Authority> authority) {
+		this.authority = authority;
+	}
+	
+	
 
 
 }
