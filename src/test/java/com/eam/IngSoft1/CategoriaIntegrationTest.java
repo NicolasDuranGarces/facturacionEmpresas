@@ -36,13 +36,13 @@ class CategoriaIntegrationTest {
 
 	@Test
 	public void should_find_all_CategoriaProductos() {
-		Categoriaproducto categoria1 = new Categoriaproducto("Categoria#1");
+		Categoriaproducto categoria1 = new Categoriaproducto("Categoria A");
 		entityManager.persist(categoria1);
 
-		Categoriaproducto categoria2 = new Categoriaproducto("Categoria#2");
+		Categoriaproducto categoria2 = new Categoriaproducto("Categoria B");
 		entityManager.persist(categoria2);
 
-		Categoriaproducto categoria3 = new Categoriaproducto("Categoria#3");
+		Categoriaproducto categoria3 = new Categoriaproducto("Categoria C");
 		entityManager.persist(categoria3);
 
 		Iterable<Categoriaproducto> users = repository.findAll();
@@ -52,10 +52,10 @@ class CategoriaIntegrationTest {
 
 	@Test
 	public void should_find_CategoriaProducto_by_id() {
-		Categoriaproducto categoria1 = new Categoriaproducto("Categoria#1");
+		Categoriaproducto categoria1 = new Categoriaproducto("Categoria A");
 		entityManager.persist(categoria1);
 
-		Categoriaproducto categoria2 = new Categoriaproducto("Categoria#2");
+		Categoriaproducto categoria2 = new Categoriaproducto("Categoria B");
 		entityManager.persist(categoria2);
 
 		Categoriaproducto foundUser = repository.findById(categoria2.getId_categoriaProducto()).get();
@@ -66,13 +66,13 @@ class CategoriaIntegrationTest {
 	
 	@Test
 	  public void should_update_Categoriaproducto_by_id() {
-		Categoriaproducto categoria1 = new Categoriaproducto("Categoria#1");
+		Categoriaproducto categoria1 = new Categoriaproducto("Categoria A");
 		entityManager.persist(categoria1);
 
-		Categoriaproducto categoria2 = new Categoriaproducto("Categoria#2");
+		Categoriaproducto categoria2 = new Categoriaproducto("Categoria B");
 		entityManager.persist(categoria2);
 
-		Categoriaproducto updatedCategori = new Categoriaproducto("Categoria Tut#2");
+		Categoriaproducto updatedCategori = new Categoriaproducto("Categoria Tut B");
 
 		Categoriaproducto categoria = repository.findById(categoria2.getId_categoriaProducto()).get();
 		categoria.setNombreCategoria(updatedCategori.getNombreCategoria());
@@ -88,13 +88,13 @@ class CategoriaIntegrationTest {
 
 	  @Test
 	  public void should_delete_Categoriaproducto_by_id() {
-		  Categoriaproducto categoria1 = new Categoriaproducto("Categoria#1");
+		  Categoriaproducto categoria1 = new Categoriaproducto("Categoria A");
 			entityManager.persist(categoria1);
 
-			Categoriaproducto categoria2 = new Categoriaproducto("Categoria#2");
+			Categoriaproducto categoria2 = new Categoriaproducto("Categoria B");
 			entityManager.persist(categoria2);
 
-			Categoriaproducto categoria3 = new Categoriaproducto("Categoria#3");
+			Categoriaproducto categoria3 = new Categoriaproducto("Categoria C");
 			entityManager.persist(categoria3);
 
 	    repository.deleteById(categoria2.getId_categoriaProducto());
